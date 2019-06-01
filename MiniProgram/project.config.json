@@ -13,8 +13,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.6.4",
-	"appid": "wx79d0eef6b5e76bd4",
-	"projectname": "LittleProgram",
+	"appid": "wx810d62bb75805f6d",
+	"projectname": "MiniProgram",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
