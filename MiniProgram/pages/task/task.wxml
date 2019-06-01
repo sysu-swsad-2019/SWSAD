@@ -1,0 +1,9 @@
+<view class="task">
+  <view class="task-item">
+    <text class="task-item-title">{{task_title}}</text>
+    <text class="task-item-content">{{user_name}}: {{phone}}</text>
+  </view>
+  <view class="task-item">
+  lala
+  </view>
+</view>
