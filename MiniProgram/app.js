@@ -35,5 +35,18 @@ App({
   },
   globalData: {
     userInfo: null
-  }
+  },
+  getUserInfo: function (cb) {
+    var _this = this;
+    //获取微信用户信息
+    wx.getUserInfo({
+      success: function (res) {
+        typeof cb == "function" && cb(res);
+      },
+      fail: function (res) {
+        _this.showErrorModal('拒绝授权将导致无法关联学校帐号并影响使用，请重新授权！', '授权失败');
+        _this.g_status = '未授权';
+      }
+    });
+  },
 })
