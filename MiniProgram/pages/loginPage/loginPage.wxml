@@ -1,6 +1,6 @@
 <!--pages/loginPage/loginPage.wxml-->
 <view class="container">
-  <image class="userAvatar" src="../../images/avatar.png"/>
+    <image class='avatarImage' src="../../images/avatar.png"/>
     <view class="usernameInputView">
       <image class="usernameIcon" src="../../images/usernameIcon.png"></image>
       <input class="usernameInput" placeholder="请输入用户名" bindinput="usernameInput"></input>
