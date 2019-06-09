@@ -1,12 +1,12 @@
 <!--pages/loginPage/loginPage.wxml-->
 <view class="container">
-  <image class="userAvatar" src="../images/avatar.png"/>
+  <image class="userAvatar" src="../../images/avatar.png"/>
     <view class="usernameInputView">
-      <image class="usernameIcon" src="../images/usernameIcon.png"></image>
+      <image class="usernameIcon" src="../../images/usernameIcon.png"></image>
       <input class="usernameInput" placeholder="请输入用户名" bindinput="usernameInput"></input>
     </view>
     <view class="passwordInputView">
-      <image class="passwordIcon" src="../images/passwordIcon.png"></image>
+      <image class="passwordIcon" src="../../images/passwordIcon.png"></image>
       <input class="passwordInput" password="true" placeholder="请输入密码" bindinput="passwordInput"></input>
     </view>
     <button type="primary" class="loginButton"  bindtap='loginButtonTap'>登录
