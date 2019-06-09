@@ -1,0 +1,9 @@
+<view class="task">
+  <text class="task-title">任务标题</text>
+  <scroll-view scroll-y class="task-content">
+    <text>fdfsfsf\nfsdfdssd\nfds\nfds\nfsfd\nfsd\nfs\nfd
+    po\npo\npo\npo\npo\npo\npo\npo\npo\npo\npo\npo\npo\n</text>
+  </scroll-view>
+  <text class="task-host"></text>
+  <view class='task-button'></view>
+</view>
