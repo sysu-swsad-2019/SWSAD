@@ -1,0 +1,27 @@
+/* pages/registerPage/registerPage.wxss */
+.usernameIcon, .passwordIcon, .confirmIcon{
+  width: 64rpx;
+  height: 64rpx;
+  margin: 20rpx
+  
+}
+.usernameInput, .passwordInput, .confirmInput{
+  margin: 20rpx
+}
+
+.usernameInputView, .passwordInputView, .confirmInputView{
+  display: flex;
+  flex-direction: row;
+  width: 500rpx;
+  height: 100rpx;
+  background-color: lightgray;
+  border-radius: 100rpx;
+  margin-bottom: 30rpx
+}
+
+.registerButton{
+  margin: 10rpx;
+  width: 500rpx;
+  height: 100rpx;
+  border-radius: 100rpx;
+}

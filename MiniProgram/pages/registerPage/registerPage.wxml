@@ -1,0 +1,18 @@
+<!--pages/registerPage/registerPage.wxml-->
+<view class='container'>
+    <view class="usernameInputView">
+      <image class="usernameIcon" src="../images/usernameIcon.png"></image>
+      <input class="usernameInput" placeholder="请输入用户名" bindinput="usernameInput"></input>
+    </view>
+    <view class="passwordInputView">
+      <image class="passwordIcon" src="../images/passwordIcon.png"></image>
+      <input class="passwordInput" password="true" placeholder="请输入密码" bindinput="passwordInput"></input>
+    </view>
+    <view class="confirmInputView">
+      <image class="confirmIcon" src="../images/confirmIcon.png"></image>
+      <input class="confirmInput" password="true" placeholder="请再次输入密码" bindinput="confirmInput"></input>
+    </view>
+    <button type="primary" class="registerButton"  bindtap='registerButtonTap'>注册
+    </button>
+
+</view>
