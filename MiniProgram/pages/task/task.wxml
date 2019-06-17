@@ -1,9 +1,25 @@
 <view class="task">
-  <view class="task-item">
-    <text class="task-item-title">{{task_title}}</text>
-    <text class="task-item-content">{{user_name}}: {{phone}}</text>
+  <!--
+  <view class="task-item" wx:for="{{content}}" bindtap="tapfunc">
+    <text class="task-item-title">{{item.task_title}}</text>
+    <text class="task-item-content">{{item.user_name}}: {{item.phone}}
+    </text>
   </view>
-  <view class="task-item">
-  lala
+  -->
+
+  <view class="header" hidden="{{hidetop}}">
+    <view style="text-align: center;">网络异常</view>
+  </view>
+
+  <view class="task-list">
+    <view class="task-item" wx:for="{{contentlist}}" wx:key="index" bindtap="tapfunc">
+      <view class="task-item-title">{{item.task_title}}</view>
+      <view class="task-item-content">{{item.user_name}}: {{item.phone}}
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom" hidden="{{hidebottom}}">
+  已到底部
   </view>
 </view>
