@@ -47,10 +47,13 @@ Page({
     });
   },
   removeImage(e) {
+    //删除图片
     var _this = this;
     const idx = e.target.dataset.idx
+    var _imgs = _this.data.imgs;
+    _imgs.splice(idx,1);
     _this.setData({
-      imgs: _this.data.imgs.splice(idx, 1)
+      imgs: _imgs
     });
   },
   previewPhoto: function (e) {
