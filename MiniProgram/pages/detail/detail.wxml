@@ -4,6 +4,9 @@
     <text>fdfsfsf\nfsdfdssd\nfds\nfds\nfsfd\nfsd\nfs\nfd
     po\npo\npo\npo\npo\npo\npo\npo\npo\npo\npo\npo\npo\n</text>
   </scroll-view>
-  <text class="task-host"></text>
-  <view class='task-button'></view>
+  <text class="task-host">发布者：15106058800</text>
+  <view class='task-button'>
+    <button class="buttons" size="mini" hover-class="button-hover" style="position: absolute; left: 50rpx;">领取任务</button>
+    <button class="buttons" size="mini" hover-class="button-hover" style="position: absolute;right: 50rpx;">放弃任务</button>
+  </view>
 </view>
