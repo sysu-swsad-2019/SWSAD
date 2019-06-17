@@ -1,38 +1,15 @@
 {
   "pages": [ 
-    "pages/detail/detail", 
-    "pages/task/task",  
+    "pages/task/task",
+    "pages/release/release",
+    "pages/detail/detail",  
     "pages/loginPage/loginPage",
     "pages/registerPage/registerPage",
-    "pages/release/release",
-    "pages/index/index",
-    "pages/logs/logs",
-    "pages/home/home",
-    "pages/list/list"
-    
+    "pages/home/home"
   ],
-  "tabBar": {
-    "selectedColor": "#000000",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "发布任务"
-      },
-      {
-        "pagePath": "pages/task/task",
-        "text": "任务列表",
-        "iconPath": "images/bar-chart--line.png",
-        "selectedIconPath": "images/bar-chart-fill.png"
-      },
-      {
-        "pagePath": "pages/logs/logs",
-        "text": "首页"
-      }
-    ]
-  },
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#BB89A7",
     "navigationBarTitleText": "Make Money",
     "navigationBarTextStyle": "black"
   },
@@ -50,7 +27,7 @@
         "text": "发布任务"
       },
       {
-        "pagePath": "pages/list/list",
+        "pagePath": "pages/task/task",
         "iconPath": "images/list.png",
         "selectedIconPath": "images/list.png",
         "text": "任务列表"

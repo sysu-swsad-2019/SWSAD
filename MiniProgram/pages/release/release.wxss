@@ -246,7 +246,7 @@
     height: 80rpx;
     border-radius: 3px;
     text-align: center;
-    background-color: #7acfa6;
+    background-color: #BB89A7;
     color: #fff;
     font-size: 12pt;
     line-height: 150%;
