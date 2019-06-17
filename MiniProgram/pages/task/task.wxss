@@ -29,7 +29,7 @@ page {
 }
 .task-item-title { 
   width: 100%;
-  text-align: center;
+  text-align: left;
 }
 .task-item-content {
   position: absolute;
