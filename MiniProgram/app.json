@@ -1,34 +1,47 @@
 {
-  "pages": [
-    "pages/task/task",
-    "pages/detail/detail",   
+  "pages": [ 
+    "pages/home/home",
+    "pages/detail/detail", 
+    "pages/task/task",  
+    "pages/loginPage/loginPage",
+    "pages/registerPage/registerPage",
+    "pages/release/release",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/list/list"
+    
   ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Make Money",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
   "tabBar": {
-    "selectedColor": "#000000",
+    "color": "#9B9DB1",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/release/release",
+        "iconPath": "images/release.png",
+        "selectedIconPath": "images/release.png",
         "text": "发布任务"
       },
       {
         "pagePath": "pages/task/task",
-        "text": "任务列表",
-        "iconPath": "images/bar-chart--line.png",
-        "selectedIconPath": "images/bar-chart-fill.png"
+        "iconPath": "images/list.png",
+        "selectedIconPath": "images/list.png",
+        "text": "任务列表"
       },
       {
-        "pagePath": "pages/logs/logs",
-        "text": "首页"
+        "pagePath": "pages/home/home",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home.png",
+        "text": "我的首页"
       }
     ]
-  },
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
-  },
-  "sitemapLocation": "sitemap.json"
+  }
 }
