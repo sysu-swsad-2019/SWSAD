@@ -1,0 +1,8 @@
+<!--pages/groupdetail/groupdetail.wxml-->
+<view class='container'>
+  <view class='main-info'>
+    <image class='group_img' src="{{imgurl}}"/>
+    <view class='group_name'>{{name}}</view>
+  </view>
+  <view class='group_description'>{{description}}</view>
+</view>
