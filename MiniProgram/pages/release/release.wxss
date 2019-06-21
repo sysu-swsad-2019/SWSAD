@@ -246,7 +246,7 @@
     height: 80rpx;
     border-radius: 3px;
     text-align: center;
-    background-color: #7acfa6;
+    background-color: #BB89A7;
     color: #fff;
     font-size: 12pt;
     line-height: 150%;
@@ -258,4 +258,23 @@
 }
 .submit-btn:active{
     opacity: .7;
+}
+
+.delete-btn {
+    position: absolute;
+    top: -11rpx;
+    right: -11rpx;
+    color: #fff;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: rgb(255, 240, 240);
+    border-width: 5rpx;
+    width: 40rpx;
+    height: 40rpx;
+    z-index: 2;
+    line-height: 35rpx;
+    text-align: center;
+    font-weight: 5rpx;
+    vertical-align: center;
+    background-color: #f00;
 }

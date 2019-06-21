@@ -8,13 +8,10 @@
     "pages/loginPage/loginPage",
     "pages/registerPage/registerPage",
     "pages/release/release",
-    "pages/index/index",
-    "pages/logs/logs",
-    "pages/list/list"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#BB89A7",
     "navigationBarTitleText": "Make Money",
     "navigationBarTextStyle": "black"
   },
