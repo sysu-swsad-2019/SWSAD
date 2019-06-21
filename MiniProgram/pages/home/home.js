@@ -10,13 +10,13 @@ Page({
     projectSource: '',
     userListInfo: [{
       icon: '../../images/footer-icon-04.png',
-      text: '我的任务',
+      text: '领取的任务',
     }, {
       icon: '../../images/iconfont-dingdan.png',
       text: '发布的任务',
     }, {
       icon: '../../images/footer-icon-01.png',
-      text: '金币余额',
+      text: '我的闲钱币',
     }, {
       icon: '../../images/iconfont-kefu.png',
       text: '联系客服'

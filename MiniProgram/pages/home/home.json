@@ -1,3 +1,5 @@
 {
+  "navigationBarTitleText": "我的首页",
+  "navigationBarTextStyle": "white",
   "usingComponents": {}
 }

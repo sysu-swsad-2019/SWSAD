@@ -47,10 +47,13 @@ Page({
     });
   },
   removeImage(e) {
+    //删除图片
     var _this = this;
     const idx = e.target.dataset.idx
+    var _imgs = _this.data.imgs;
+    _imgs.splice(idx,1);
     _this.setData({
-      imgs: _this.data.imgs.splice(idx, 1)
+      imgs: _imgs
     });
   },
   previewPhoto: function (e) {
@@ -89,7 +92,7 @@ Page({
           }
           app.showLoadToast();
           wx.request({
-            url: app._server + '/api/feedback.php',
+            url: app._server,
             data: app.key({
               openid: app._user.openid,
               title: title,
@@ -98,9 +101,9 @@ Page({
             method: 'POST',
             success: function (res) {
               if (res.data.status === 200) {
-                var text = '反馈成功，您可通过访问 ' + res.data.data.html_url + ' 了解反馈动态';
+                var text = '提交成功';
                 wx.showModal({
-                  title: '反馈成功',
+                  title: '提交成功',
                   content: text,
                   showCancel: false,
                   success: function (res) {

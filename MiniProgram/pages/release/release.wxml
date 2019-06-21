@@ -10,15 +10,14 @@
     </view>
 
     <block>
-      <text class="release-label">选择图片（可选）</text>
+      <text class="release-label">选择图片（最多3张）</text>
       <view class="release-img-panel {{(showError&&uploading)?'error':''}}">
         <view class="release-photo-item add-photo" bindtap="choosePhoto"></view>
-        <view class="release-photo-item" wx:for="{{imgs}}" wx:key="*this">
+        <view class="release-photo-item" wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
           <!-- 图片缩略图  -->
-          <image src="{{item}}?imageView2/2/w/250/interlace/1/q/88" mode="aspectFill" data-index="{{index}}" bindtap="previewPhoto"></image>
+          <image src="{{item}}" mode="aspectFill" data-index="{{index}}" bindtap="previewPhoto"></image>
           <!-- 移除图片的按钮  -->
-          <!-- <view data-idx="{{index}}" bindtap="removeImage">删除</view> -->
-
+          <view class="delete-btn" data-idx="{{index}}" bindtap="removeImage">×</view>
         </view>
       </view>
     </block>

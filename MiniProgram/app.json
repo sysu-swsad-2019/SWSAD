@@ -1,19 +1,15 @@
 {
   "pages": [ 
-    "pages/home/home",
-    "pages/detail/detail", 
-    "pages/task/task",  
+    "pages/task/task",
+    "pages/release/release",
+    "pages/detail/detail",  
     "pages/loginPage/loginPage",
     "pages/registerPage/registerPage",
-    "pages/release/release",
-    "pages/index/index",
-    "pages/logs/logs",
-    "pages/list/list"
-    
+    "pages/home/home"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#BB89A7",
     "navigationBarTitleText": "Make Money",
     "navigationBarTextStyle": "black"
   },
