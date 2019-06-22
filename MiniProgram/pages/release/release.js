@@ -1,6 +1,7 @@
 // pages/release/release.js
 //获取应用实例
 var app = getApp();
+var dateTimePicker = require('../../utils/dateTimePicker.js');
 Page({
 
   /**
@@ -12,14 +13,88 @@ Page({
     title: '', //标题内容
     content: '', //正文内容
     imgs: [],
-    showError: false
+    showError: false,
+    date: '2018-10-01',
+    time: '12:00',
+    dateTimeArray: null,
+    dateTime: null,
+    startYear: 2000,
+    endYear: 2050,
+    limitations: [
+      { "type": "不限制" },
+      { "gender": "不限制" },
+      { "grade": "不限制" },
+      { "score": "不限制" },
+      { "group": "不限制" },
+    ],
+    selectArray1: [
+      { "text": "不限制" },
+      { "text": "取快递" },
+      { "text": "拿外卖" },
+      { "text": "找资料" },
+      { "text": "填问卷" },
+      { "text": "征集简历" },
+      { "text": "找人组队" },
+      { "text": "其他" },
+    ],
+    selectArray2: [
+      { "text": "不限制" },
+      { "text": "男" },
+      { "text": "女" },
+    ],
+    selectArray3: [
+      { "text": "不限制" },
+      { "text": "大一" },
+      { "text": "大二" },
+      { "text": "大三" },
+      { "text": "大四" },
+      { "text": "研一" },
+      { "text": "研二" },
+      { "text": "研三" },
+    ],
+    selectArray4: [
+      { "text": "不限制" },
+      { "text": "100分" },
+      { "text": "95分及以上" },
+      { "text": "90分及以上" },
+    ],
+    selectArray5: [
+      { "text": "不限制" },
+      { "text": "运动健将" },
+      { "text": "快乐肥宅" },
+      { "text": "高分学霸" },
+      { "text": "社交达人" },
+    ],
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 获取完整的年月日 时分秒，以及默认显示的数组
+    var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
+    var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
+    // 精确到分的处理，将数组的秒去掉
+    var lastArray = obj.dateTimeArray.pop();
+    var lastTime = obj.dateTime.pop();
 
+    this.setData({
+      dateTime: obj.dateTime,
+      dateTimeArray: obj.dateTimeArray,
+    });
+  },
+  changeDateTime(e) {
+    this.setData({ dateTime: e.detail.value });
+  },
+  changeDateTimeColumn(e) {
+    var arr = this.data.dateTime, dateArr = this.data.dateTimeArray;
+
+    arr[e.detail.column] = e.detail.value;
+    dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
+
+    this.setData({
+      dateTimeArray: dateArr,
+      dateTime: arr
+    });
   },
   listenerTitle(e) {
     this.setData({
@@ -63,6 +138,32 @@ Page({
       current: _this.data.imgs[e.target.dataset.index],  // 当前预览的图片
       urls: _this.data.imgs  // 所有要预览的图片
     });
+  },
+  getType:function(e) {
+    this.setData({
+      "limitations.type": e.detail.text
+    });
+  },
+  getGender: function (e) {
+    this.setData({
+      "limitations.gender": e.detail.text
+    });
+  },
+  getGrade: function (e) {
+    this.setData({
+      "limitations.grade": e.detail.text
+    });
+  },
+  getScore: function (e) {
+    this.setData({
+      "limitations.score": e.detail.text
+    });
+  },
+  getGroup: function (e) {
+    this.setData({
+      "limitations.group": e.detail.text
+    });
+    console.log(this.data.limitations);
   },
   submit: function () {
     var _this = this, title = '', content = '', imgs = '';

@@ -140,7 +140,7 @@
     font-size: 10pt;
     line-height: 100%;
     color: #999;
-    margin: 25rpx 20rpx 15rpx;
+    margin: 20rpx 20rpx 15rpx;
 }
 .release-panel{
     display: flex;
@@ -278,3 +278,20 @@
     vertical-align: center;
     background-color: #f00;
 }
+
+.tui-picker-content {
+
+    font-size: 10pt;
+    color: #999;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    padding: 15rpx 20rpx 15rpx;
+}
+
+/* #line1 {
+  display: flex;
+}
+
+#type-select {
+  width: 40%;
+} */

@@ -1,12 +1,12 @@
 <!--pages/release/release.wxml-->
-<view class="container">
+<scroll-view scroll-y="true" class="container">
 
   <block>
     <view class="release-panel">
       <view class="release-input {{(showError&&!title)?'error':''}}">
-        <input maxlength="40" placeholder="请输入任务标题" bindinput="listenerTitle" />
+        <input maxlength="40" placeholder="请输入任务标题(40个字符)" bindinput="listenerTitle" />
       </view>
-      <textarea maxlength="500" class="release-textarea {{(showError&&!content)?'error':''}}" cursor-spacing="50" placeholder="请输入任务描述" bindinput="listenerTextarea"></textarea>
+      <textarea maxlength="500" class="release-textarea {{(showError&&!content)?'error':''}}" cursor-spacing="50" placeholder="请输入任务描述（500个字符）" bindinput="listenerTextarea"></textarea>
     </view>
 
     <block>
@@ -22,9 +22,54 @@
       </view>
     </block>
 
+    <block>
+      <text class="release-label">任务结束时间</text>
+      <view class="tui-picker-content">
+        <picker mode="multiSelector" value="{{dateTime}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+          <view class="tui-picker-detail">{{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}
+          </view>
+        </picker>
+      </view>
+    </block>
+
+    <block>
+      <text class="release-label">任务类型</text>
+      <view id='type-select'>
+        <Select prop-array='{{selectArray1}}' bind:myget='getType'></Select>
+      </view>
+    </block>
+
+    <block>
+      <text class="release-label">性别要求</text>
+      <view id='type-select'>
+        <Select prop-array='{{selectArray2}}' bind:myget='getGender'></Select>
+      </view>
+    </block>
+
+    <block>
+      <text class="release-label">年级要求</text>
+      <view id='type-select'>
+        <Select prop-array='{{selectArray3}}' bind:myget='getGrade'></Select>
+      </view>
+    </block>
+
+    <block>
+      <text class="release-label">信誉分要求</text>
+      <view id='type-select'>
+        <Select prop-array='{{selectArray4}}' bind:myget='getScore'></Select>
+      </view>
+    </block>
+
+    <block>
+      <text class="release-label">兴趣小组</text>
+      <view id='type-select'>
+        <Select prop-array='{{selectArray5}}' bind:myget='getGroup'></Select>
+      </view>
+    </block>
+
     <view class="submit-btn" bindtap="submit">
       提交任务
     </view>
-
+    
   </block>
-</view>
+</scroll-view>

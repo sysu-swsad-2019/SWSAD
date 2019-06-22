@@ -1,7 +1,7 @@
 {
-  "pages": [ 
-    "pages/task/task",
+  "pages": [
     "pages/release/release",
+    "pages/task/task",
     "pages/detail/detail",  
     "pages/loginPage/loginPage",
     "pages/registerPage/registerPage",
