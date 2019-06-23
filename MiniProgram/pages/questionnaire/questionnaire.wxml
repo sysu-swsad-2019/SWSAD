@@ -1,0 +1,22 @@
+<view class="qs">
+  <view>
+    <button type="primary" class="qs-button" size="default" bindtap="addfunc">创建问卷</button>
+  </view>
+  <view class="qs-list">
+    <view class="qs-item"  wx:for="{{contents}}">
+      <view class="qs-item-head">
+        <view style="width:50%;overflow:hidden;">{{item.title}}</view>
+        <view style="color:grey;font-size:12px;">{{item.status}}</view>
+        <view style="color:red;font-size:12px;">{{item.date}}</view>
+      </view>
+      <view class="qs-item-body">
+        <view style="color:green;font-size:12px;" bindtap='editfunc'>编辑</view>
+        <view style="color:grey;font-size:12px;">发布</view>
+        <view style="color:grey;font-size:12px;">统计</view>
+        <view style="color:CadetBlue;font-size:12px;" bindtap="deletefunc" data-index="{{item.id}}">删除</view>
+        <view style="color:BlueViolet;font-size:15px;">答卷：{{item.answers}}</view>
+      </view>
+    </view>
+  </view>
+
+</view>
