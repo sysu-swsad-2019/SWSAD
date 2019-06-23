@@ -20,6 +20,10 @@ Page({
     dateTime: null,
     startYear: 2000,
     endYear: 2050,
+    number: 1,
+    disable1: false,
+    disable2: false,
+    longTime: null,
     limitations: [
       { "type": "不限制" },
       { "gender": "不限制" },
@@ -107,6 +111,53 @@ Page({
       'content': e.detail.value,
       contentCount: e.detail.value.length
     });
+  },
+  prevNum1() {
+    this.setData({
+      number: this.data.number >= 500 ? 500 : this.data.number + 1,
+      disabled1: this.data.number !== 0 ? false : true,
+      disabled2: this.data.number !== 500 ? false : true
+    });
+    // console.log(this.data.number);
+  },
+  nextNum1() {
+    this.setData({
+      number: this.data.number <= 0 ? 0 : this.data.number - 1,
+      disabled1: this.data.number !== 0 ? false : true,
+      disabled2: this.data.number !== 500 ? false : true
+    });
+    // console.log(this.data.number);
+  },
+  reducelongTap: function (e) {
+    this.data.longTime = setInterval(() => {
+      if (this.data.number == 0) {
+        clearInterval(this.data.longTime)
+        return;
+      }
+      this.setData({
+        number: this.data.number <= 0 ? 0 : this.data.number - 1,
+        disabled1: this.data.number !== 0 ? false : true,
+        disabled2: this.data.number !== 500 ? false : true
+      });
+      // console.log(this.data.number);
+    }, 50)
+  },
+  addlongTap: function (e) {
+    this.data.longTime = setInterval(() => {
+      if (this.data.number >= 500) {
+        clearInterval(this.data.longTime)
+        return;
+      }
+      this.setData({
+        number: this.data.number >= 500 ? 500 : this.data.number + 1,
+        disabled1: this.data.number !== 0 ? false : true,
+        disabled2: this.data.number !== 500 ? false : true
+      });
+      // console.log(this.data.number);
+    }, 50)
+  },
+  leave: function (e) {
+    clearInterval(this.data.longTime);
   },
   choosePhoto: function () {
     var _this = this;

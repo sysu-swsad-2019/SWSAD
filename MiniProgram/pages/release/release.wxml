@@ -10,6 +10,25 @@
     </view>
 
     <block>
+      <text class="release-label">任务结束时间</text>
+      <view class="tui-picker-content">
+        <picker mode="multiSelector" value="{{dateTime}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+          <view class="tui-picker-detail">{{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}
+          </view>
+        </picker>
+      </view>
+    </block>
+
+    <view class="tui-gallery-list">
+      <view class="release-label">任务数量（最大500份）</view>
+      <view class="tui-number-group">
+        <button class="tui-number-cell" bindtap="nextNum1" bindlongpress="reducelongTap" bindtouchend="leave" disabled='{{disabled1}}'>-</button>
+        <input class="tui-number-cell" type="number" value='{{number}}'></input>
+        <button class="tui-number-cell" bindtap="prevNum1" bindlongpress="addlongTap" bindtouchend="leave" disabled='{{disabled2}}'>+</button>
+      </view>
+    </view>
+
+    <block>
       <text class="release-label">选择图片（最多3张）</text>
       <view class="release-img-panel {{(showError&&uploading)?'error':''}}">
         <view class="release-photo-item add-photo" bindtap="choosePhoto"></view>
@@ -19,16 +38,6 @@
           <!-- 移除图片的按钮  -->
           <view class="delete-btn" data-idx="{{index}}" bindtap="removeImage">×</view>
         </view>
-      </view>
-    </block>
-
-    <block>
-      <text class="release-label">任务结束时间</text>
-      <view class="tui-picker-content">
-        <picker mode="multiSelector" value="{{dateTime}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
-          <view class="tui-picker-detail">{{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}
-          </view>
-        </picker>
       </view>
     </block>
 
