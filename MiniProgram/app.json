@@ -2,6 +2,7 @@
   "pages": [
     "pages/home/home",
     "pages/group/group",
+    "pages/userdetail/userdetail",
     "pages/groupdetail/groupdetail",
     "pages/detail/detail",
     "pages/task/task",
