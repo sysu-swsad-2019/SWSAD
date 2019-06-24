@@ -1,0 +1,22 @@
+<!--pages/group/group.wxml-->
+  <view class="container">
+    <view class="group-items" wx:for="{{contentlist}}" wx:key="index" bindtap="listItemTap">
+        <view class='one-item'>
+          <image class="group_img" src="{{item.imgurl}}"/>
+          <view class='text-view'>
+            <view class="group_name">{{item.name}}</view>
+            <view class="group_description" style='color:gray'>{{item.description}}</view>
+          </view>
+          <view>
+            <view class='small_info'>
+              <image class="small_icon" src='../../images/群组.png'/>
+              <view class='small_text' style='color:gray'>{{item.memberNum}}人</view>
+            </view>
+            <view class='small_info'>
+              <image class='small_icon' src='../../images/任务.png'/>
+              <view class='small_text' style='color:gray'>{{item.taskNum}}任务</view>
+            </view>
+          </view>
+        </view>
+    </view>
+  </view>

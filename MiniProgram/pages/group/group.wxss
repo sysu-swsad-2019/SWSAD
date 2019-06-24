@@ -1,0 +1,40 @@
+/* pages/group/group.wxss */
+.container{
+  width: 100%;
+}
+.one-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.small_icon{
+  width: 25rpx;
+  height: 25rpx;
+}
+.group_img{
+  width: 150rpx;
+  height: 150rpx;
+  margin: 10rpx;
+}
+.group_description{
+  font-size: 32rpx;
+  width: 450rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.small_info{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
+.small_text{
+  font-size: 25rpx;
+  margin-left: 5rpx;
+}
+.text_view{
+  margin: 10rpx;
+}
