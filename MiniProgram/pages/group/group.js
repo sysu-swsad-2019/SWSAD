@@ -7,7 +7,7 @@ Page({
   data: {
     contentlist:[
       {
-        name:'小程序学习小组',
+        name:'小程序学习小组ceshichangwenceshichangwenceshichangwencesh',
         description:'欢迎大家的加入！changwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshi',
         imgurl:'../../images/defaultGroupImg.jpg',
         memberNum:100,
@@ -71,7 +71,11 @@ Page({
       }
     ]
   },
-
+  listItemTap:function(e){
+    wx.navigateTo({
+      url: '../groupdetail/groupdetail',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

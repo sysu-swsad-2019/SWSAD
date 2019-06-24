@@ -1,5 +1,6 @@
 <!--pages/registerPage/registerPage.wxml-->
 <view class='container'>
+    <image class='avatarImage' src="{{img_url}}" bindtap='Img_tap'/>
     <view class="usernameInputView">
       <image class="usernameIcon" src="../../images/usernameIcon.png"></image>
       <input class="usernameInput" placeholder="请输入用户名" bindinput="usernameInput"></input>
@@ -12,7 +13,7 @@
       <image class="confirmIcon" src="../../images/confirmIcon.png"></image>
       <input class="confirmInput" password="true" placeholder="请再次输入密码" bindinput="confirmInput"></input>
     </view>
-    <button type="primary" class="registerButton"  bindtap='registerButtonTap'>注册
+    <button class="registerButton"  bindtap='registerButtonTap'>注册
     </button>
 
 </view>

@@ -1,6 +1,6 @@
 /* pages/registerPage/registerPage.wxss */
 .container{
-  margin-top: 35%;
+  margin-top: 20%;
   height: 100%;
   width: 100%;
   display: flex;
@@ -9,11 +9,18 @@
   align-items: center;
 }
 
+.avatarImage{
+  margin-bottom: 50rpx;
+  width: 192rpx;
+  height: 192rpx;
+  border-color: lightgray;
+  border-style: dotted;
+}
+
 .usernameIcon, .passwordIcon, .confirmIcon{
   width: 64rpx;
   height: 64rpx;
   margin-left: 20rpx
-  
 }
 .usernameInput, .passwordInput, .confirmInput{
   margin-left: 20rpx
@@ -35,5 +42,7 @@
   margin-top: 10rpx;
   width: 500rpx;
   height: 100rpx;
-  border-radius: 100rpx;
+  border-radius: 20rpx;
+  background-color: #33a3dc;
+  color: white
 }

@@ -18,6 +18,12 @@
   height: 150rpx;
   margin: 10rpx;
 }
+.group_name{
+  width: 425rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 .group_description{
   font-size: 32rpx;
   width: 450rpx;

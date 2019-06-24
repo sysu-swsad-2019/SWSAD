@@ -3,5 +3,211 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: 
+  align-items: center;
 }
+.main-info{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center
+}
+
+.small_info{
+  margin: 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
+
+.small_text{
+  font-size: 25rpx;
+  margin-left: 5rpx;
+}
+.small_icon{
+  width: 25rpx;
+  height: 25rpx;
+  margin-left: 20rpx;
+}
+.group_img{
+  width: 150rpx;
+  height: 150rpx;
+  margin: 10rpx;
+  border-radius: 75rpx;
+}
+
+.big_seperate{
+  width: 750rpx;
+  height: 20rpx;
+  background-color: #d3d7d4;
+}
+
+.label_text{
+  color: gray;
+  margin: 15rpx;
+  font-size: 32rpx;
+}
+
+.label_line{
+  background-color:black;
+  width: 120rpx;
+  height: 3rpx;
+}
+
+.label{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.labels_view{
+  width: 750rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.small_seperate{
+  width: 750rpx;
+  height: 3rpx;
+  background-color: #c3c4c3;
+}
+
+.group_description{
+  width: 700rpx;
+  word-break: break-all;
+  margin: 20rpx;
+}
+
+.one_task{
+  width: 700rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 15rpx;
+}
+
+.task_img{
+  width: 150rpx;
+  height: 150rpx;
+  margin: 10rpx;
+}
+.task_info{
+  display: flex;
+  flex-direction: column;
+}
+.task_name{
+  font-size: 32rpx;
+  width: 425rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.task_state{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 8rpx;
+  margin-bottom: 8rpx;
+}
+.state_text{
+  font-size: 24rpx;
+  color: gray;
+  margin-left: 8rpx;
+}
+.state_img{
+  width:25rpx;
+  height: 25rpx;
+}
+
+.task_description{
+  font-size: 32rpx;
+  width: 450rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: gray;
+}
+
+.applyTask_button{
+  background-color: #33a3dc;
+  font-size: 32rpx;
+  margin-left: 20rpx;
+  color: white;
+  width: 150rpx;
+  height: 50rpx;
+  text-align: center;
+  border-radius: 10rpx;
+}
+
+.one_user{
+  width: 700rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 15rpx;
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+}
+
+.user_img{
+  width: 100rpx;
+  height: 100rpx;
+  margin: 10rpx;
+  border-radius: 75rpx;
+}
+.username{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.role_text{
+  background-color: gray;
+  color: white;
+  padding: 5rpx;
+  margin: 10rpx;
+  font-size: 30rpx;
+}
+
+.user_main_info{
+  width: 400rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.user_other_info{
+  width: 200rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.gender_img{
+  width: 32rpx;
+  height: 32rpx;
+  margin-left: 10rpx;
+}
+.money_img{
+  width: 32rpx;
+  height: 32rpx;
+}
+.money_text{
+  font-size: 30rpx;
+  color: gray;
+  margin-right: 10rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.table_line{
+  width: 725rpx;
+  height: 3rpx;
+  background-color:lightgray 
+}
+
