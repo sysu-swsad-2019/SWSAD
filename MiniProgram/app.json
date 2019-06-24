@@ -11,14 +11,14 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#BB89A7",
+    "navigationBarBackgroundColor": "#33a3dc",
     "navigationBarTitleText": "Make Money",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {
     "color": "#9B9DB1",
-    "selectedColor": "#3cc51f",
+    "selectedColor": "#33a3dc",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
