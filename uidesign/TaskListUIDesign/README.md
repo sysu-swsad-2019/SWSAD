@@ -10,3 +10,6 @@ proto.io & Mockplus
 
 这是Mockplus编辑的，但是要充钱才能导出HTML，所以又改用proto.io
 
+## 打开
+
+用浏览器打开`frame.html`即可
