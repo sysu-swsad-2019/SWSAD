@@ -7,7 +7,26 @@ Page({
   data: {
     username: '',
     password: '',
-    confirm: ''
+    confirm: '',
+    img_url: "../../images/加号.png"
+  },
+
+  // 选择图片上传
+
+  Img_tap:function(e){
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],  //可选择原图或压缩后的图片
+      sourceType: ['album', 'camera'], //可选择性开放访问相册、相机
+      success: res => {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
+        var tempFilePaths = res.tempFilePaths;
+        for (var i = 0, h = tempFilePaths.length; i < h; i++) {
+          wx.uploadFile({
+          })
+        }
+      }
+    })
   },
 
   usernameInput: function (e) {

@@ -40,7 +40,9 @@
   margin-top: 10rpx;
   width: 500rpx;
   height: 100rpx;
-  border-radius: 100rpx;
+  border-radius: 20rpx;
+  background-color: #33a3dc;
+  color: white
 }
 
 .forgetPasswordText{
