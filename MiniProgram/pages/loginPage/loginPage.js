@@ -1,4 +1,5 @@
 // pages/loginPage/loginPage.js
+var Util = require('../../utils/util.js');
 Page({
 
   /**
@@ -30,9 +31,55 @@ Page({
       })
     }
     else{
-      wx.showToast({
-        title: '登录成功',
-        duration: 2000
+      wx.request({
+        url: "http://172.26.17.164:8080/login",
+        header: {
+          "content-type": "application/x-www-form-urlencoded"
+        },
+        method: "POST",
+        data: Util.json2Form({ username: this.data.username, password: this.data.password }),
+        complete: function (res) {
+          if(res.data.code == 200){
+
+            if (res && res.header && res.header['Set-Cookie']) {
+              wx.setStorageSync('cookieKey', res.header['Set-Cookie']);   //保存Cookie到Storage
+            }
+            // cookie
+            let cookie = wx.getStorageSync('cookieKey');//取出Cookie
+            let header = { 'Content-Type': 'application/x-www-form-urlencoded' };
+            if (cookie) {
+              header.Cookie = cookie;
+            }
+            console.log(cookie)
+
+            wx.showToast({
+              title: '登录成功',
+              icon: 'success',
+              duration: 2000
+            })
+
+            //测试cookie
+            wx.request({
+              url: "http://172.26.17.164:8080/userinfo/getUserInfo",
+              header: {
+                "content-type": "application/x-www-form-urlencoded",
+                'cookie': wx.getStorageSync('cookieKey')
+              },
+              method: "POST",
+              complete: function (res) {
+                console.log(res.data)
+              }
+            })
+           
+          }
+          else{
+            wx.showToast({
+              title: res.data.message,
+              icon:'none',
+              duration: 2000
+            })
+          }
+        }
       })
     }
   },
