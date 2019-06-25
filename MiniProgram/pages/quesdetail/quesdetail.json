@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "设置问卷",
-  "navigationBarBackgroundColor": "#BB89A7",
-  "navigationBarTextStyle": "white",
-  "usingComponents": {},
-  "backgroundTextStyle": "dark",
-  "enablePullDownRefresh": true,
-  "backgroundColor": "#EEEEEE"
-}

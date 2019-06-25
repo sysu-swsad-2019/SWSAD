@@ -4,19 +4,95 @@ Page({
    * 页面的初始数据
    */
   data: {
-    content: [{
-        id: '0',
-        task_title: "外卖代拿",
-        user_name: "老张",
-        phone: "15106058800"
+    tasklist: [{
+        tid: 1,
+        name: '帮忙取个快递哈哈哈哈哈',
+        coin: 50,
+        people: 100,
+        type: 0,
+        pic_url: '../../images/快递.png', //两个url在请求时分别根据type和state获得，type对应见文档，state：0：yellow，1：green，2：gray，3：red
+        state: 0,
+        state_url: '../../images/yellow_circle.png',
+        state_text: '正在进行',
+        description: '蜂巢5号柜，取件码11111，送到xxx谢谢！！',
       },
       {
-        id: '1',
-        task_title: "外卖代拿",
-        user_name: "老张",
-        phone: "15106058800"
+        tid: 2,
+        name: '帮忙买个麦当劳',
+        coin: 60,
+        people: 200,
+        type: 1,
+        pic_url: '../../images/外卖.png', //两个url在请求时分别根据type和state获得，type对应见文档，state：0：yellow，1：green，2：gray，3：red
+        state: 2,
+        state_url: '../../images/gray_circle.png',
+        state_text: '尚未开始',
+        description: '买个xxx套餐送到xxx谢谢！',
+      },
+      {
+        tid: 3,
+        name: '帮忙找下资料',
+        coin: 70,
+        people: 300,
+        type: 2,
+        pic_url: '../../images/资料.png', //两个url在请求时分别根据type和state获得，type对应见文档，state：0：yellow，1：green，2：gray，3：red
+        state: 1,
+        state_url: '../../images/green_circle.png',
+        state_text: '已完成',
+        description: '各位帮忙找下微信小程序的学习视频！！！挺急的，感谢！！',
+      },
+      {
+        tid: 4,
+        name: '帮忙填个问卷',
+        coin: 80,
+        people: 400,
+        type: 3,
+        pic_url: '../../images/问卷.png', //两个url在请求时分别根据type和state获得，type对应见文档，state：0：yellow，1：green，2：gray，3：red
+        state: 0,
+        state_url: '../../images/yellow_circle.png',
+        state_text: '正在进行',
+        description: '链接在此：http://xxxxxxx.com',
+      },
+      {
+        tid: 5,
+        name: '简历征集',
+        coin: 90,
+        people: 100,
+        type: 4,
+        pic_url: '../../images/投简历.png', //两个url在请求时分别根据type和state获得，type对应见文档，state：0：yellow，1：green，2：gray，3：red
+        state: 3,
+        state_url: '../../images/red_circle.png',
+        state_text: '超过时限',
+        description: '现收集应届毕业生简历50份，模板见http://xxxxxxx.com',
+      },
+      {
+        tid: 6,
+        name: '组队跑步去~',
+        people: 10,
+        coin: 20,
+        type: 5,
+        pic_url: '../../images/组队请求.png', //两个url在请求时分别根据type和state获得，type对应见文档，state：0：yellow，1：green，2：gray，3：red
+        state: 0,
+        state_url: '../../images/yellow_circle.png',
+        state_text: '正在进行',
+        description: '找个人一块跑步挣章啦！！',
+      },
+      {
+        tid: 7,
+        name: '我是充数的changwenceshichangwenceshichangwenceshi',
+        coin: 100,
+        people: 1,
+        type: 6,
+        pic_url: '../../images/其他.png', //两个url在请求时分别根据type和state获得，type对应见文档，state：0：yellow，1：green，2：gray，3：red
+        state: 0,
+        state_url: '../../images/yellow_circle.png',
+        state_text: '正在进行',
+        description: '不知道写啥就谢谢在座的各位吧',
       }
     ],
+
+    colors: ["yellow", "green", "grey", "red"],
+    coin_url: "../../images/money_icon.png",
+    people_url: "../../images/用户.png",
     count: 20,
     hideHeader: true,
     hideBottom: true,
@@ -59,9 +135,13 @@ Page({
         console.log(typeof networkType);
         console.log(networkType);
         if (networkType == "none") {
-          that.setData({ hidetop: false });
+          that.setData({
+            hidetop: false
+          });
         } else {
-          that.setData({ hidetop: true });
+          that.setData({
+            hidetop: true
+          });
         }
       },
       fail(res) {
