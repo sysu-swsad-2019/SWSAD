@@ -9,6 +9,7 @@
       <image class='small_icon' src='../../images/任务.png'/>
       <view class='small_text' style='color:gray'>{{taskNum}}任务</view>
     </view>
+    <view class='applyGroup_button'>申请加入</view>
     <view class='small_seperate'></view>
     <view class='labels_view'>
       <view class='label' bindtap='labelTap1'>
@@ -39,7 +40,7 @@
         </view>
         <view class='task_description'>{{item.description}}</view>
       </view>
-      <view class='applyTask_button'>接受</view>
+      <view class='applyTask_button'>申请</view>
     </view>
     <view class='table_line'/>
   </view>
