@@ -8,7 +8,6 @@ Page({
   data: {
     userInfo: {},
     projectSource: '',
-    isLogin: false,
     tagShow1: false,
     tagShow2: true,
     userListInfo: [{
@@ -30,6 +29,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
+    console.log("onLoad")
+    /*
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -55,15 +56,14 @@ Page({
           })
         }
       })
-    }
+      
+    }*/
   },
+
   clickLogin:function(e) {
+    
     wx.navigateTo({
       url: '../loginPage/loginPage?id=1'
-    })
-    this.setData({
-      tagShow1: true,
-      tagShow2: false
     })
   }
   ,
@@ -78,7 +78,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
+    console.log("onShow")
+    if (wx.getStorageSync('isLogin')) {
+      this.setData({
+        tagShow1: true,
+        tagShow2: false,
+      })
+      wx.request({
+        url: "http://172.26.17.164:8080/userinfo/getUserInfo",
+        header: {
+          "content-type": "application/x-www-form-urlencoded",
+          'cookie': wx.getStorageSync('cookieKey')
+        },
+        method: "POST",
+        complete: function (res) {
+          console.log(res.data)
+        }
+      })
+    }
   },
 
   /**

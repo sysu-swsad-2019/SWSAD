@@ -1,0 +1,18 @@
+<!--pages/editUserInfo/editUserInfo.wxml-->
+<view class='container'>
+  <view class='big_seperate'></view>
+  <view class="list-items" wx:for="{{selection_list}}" wx:key="index" bindtap="listItemTap">
+    <view class='one-item'>
+      <view class='title_view'>{{item.title}}</view>
+      <view class='right_block'>
+        <view class='text_view' wx:if='{{index!=0}}'>{{item.text}}</view>
+        <image class='pic_view' wx:if='{{index==0}}' src='{{item.img_url}}'></image>
+        <image class='next_view' src='../../images/next.png'></image>
+      </view>
+    </view>
+    <view class='big_seperate' wx:if='{{index==2}}'></view>
+    <view class='table_line'/>
+  </view>
+
+
+</view>

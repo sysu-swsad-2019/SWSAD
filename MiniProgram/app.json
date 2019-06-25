@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/editUserInfo/editUserInfo",
+    "pages/home/home",
     "pages/loginPage/loginPage",
     "pages/task/task",
     "pages/group/group",
@@ -8,8 +10,6 @@
     "pages/groupdetail/groupdetail",
     "pages/questionnaire/questionnaire",
     "pages/registerPage/registerPage",
-    
-    "pages/home/home",
     "pages/release/release"
   ],
   "window": {
