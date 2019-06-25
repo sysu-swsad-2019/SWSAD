@@ -4,7 +4,28 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    taskInfo: [{
+      title: '../../images/time.png',
+      content: '结束时间：',
+    }, {
+      title: '../../images/iconfont-dingdan.png',
+      content: '发布数量：',
+    }, {
+      title: '../../images/type.png',
+      content: '任务类型：',
+    }, {
+      title: '../../images/gender.png',
+      content: '性别要求：'
+    }, {
+      title: '../../images/grade.png',
+      content: '年级要求：'
+    }, {
+      title: '../../images/score.png',
+      content: '信誉要求：'
+    }, {
+      title: '../../images/group.png',
+      content: '兴趣小组：'
+    }]
   },
 
   /**
