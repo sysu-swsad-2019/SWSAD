@@ -1,13 +1,14 @@
 {
   "pages": [
+    "pages/loginPage/loginPage",
     "pages/task/task",
     "pages/group/group",
     "pages/userdetail/userdetail",
     "pages/detail/detail",
     "pages/groupdetail/groupdetail",
     "pages/questionnaire/questionnaire",
-    "pages/loginPage/loginPage",
     "pages/registerPage/registerPage",
+    
     "pages/home/home",
     "pages/release/release"
   ],

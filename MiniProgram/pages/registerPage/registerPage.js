@@ -1,4 +1,5 @@
 // pages/registerPage/registerPage.js
+var Util = require('../../utils/util.js');
 Page({
 
   /**
@@ -56,10 +57,31 @@ Page({
       })
     }
     else{
-      wx.showToast({
-        title: '注册成功      ',
-        icon: 'none',
-        duration: 2000
+      wx.request({
+        url: "http://172.26.17.164:8080/regist",
+        header: {
+          "content-type": "application/x-www-form-urlencoded"
+        },
+        method: "POST",
+        data: Util.json2Form({ username: this.data.username, password: this.data.password }),
+        complete: function (res) {
+          console.log(res.data)
+          if (res.data.code == 200) {
+            wx.showToast({
+              title: '注册成功',
+              icon: 'success',
+              duration: 2000
+            })
+          }
+          else {
+            console.log(res.data.message)
+            wx.showToast({
+              title: res.data.message,
+              icon:'none',
+              duration: 2000
+            })
+          }
+        }
       })
     }
   },
