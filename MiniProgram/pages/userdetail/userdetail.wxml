@@ -1,0 +1,86 @@
+<!--pages/userdetail/userdetail.wxml-->
+<view class='container'>
+  <view class='main-info'>
+    <view class='row_view'>
+      <image class='userimg' src="{{pic_url}}" bindtap='user_img_preview'/>
+      <view class='col_view'>
+        <view class='name_view'>
+          <view class='username'>{{username}}</view>
+          <image class='gender_img' src="{{gender_url}}"></image>
+        </view>
+        <view class='money_view'>
+          <image class='money_img' src="../../images/money_icon.png"></image>
+          <view class='money_text'>{{money}}金币</view>
+        </view>
+        <view class='credit_view'>
+          <image class='credit_img' src="../../images/信用.png"></image>
+          <view class='credit_text'>{{credit}}信用分</view>
+        </view>
+      </view>
+    </view>
+    <view class='small_seperate'></view>
+    <view class='labels_view'>
+      <view class='label' bindtap='labelTap1'>
+        <view class='label_text'>个人简介</view>
+        <view class='label_line' hidden='{{tag==1?false:true}}'></view>
+      </view>
+      <view class='label' bindtap='labelTap2'>
+        <view class='label_text'>参与任务</view>
+        <view class='label_line' hidden='{{tag==2?false:true}}'></view>
+      </view>
+      <view class='label' bindtap='labelTap3'>
+        <view class='label_text' hover-class='select'>参与小组</view>
+        <view class='label_line' hidden='{{tag==3?false:true}}'></view>
+      </view>
+    </view>
+    <view class='small_seperate'></view>
+    <view class='big_seperate'></view>
+
+  </view>
+  <view class='personal_info' hidden='{{tag==1?false:true}}'>
+    <view class='info_text'>大学： {{university}}</view>
+    <view class='small_seperate'></view>
+    <view class='info_text'>学院： {{academy}}</view>
+    <view class='small_seperate'></view>
+    <view class='info_text'>年级： {{grade_text}}</view>
+    <view class='small_seperate'></view>
+  </view>
+  <view class="task_items" wx:for="{{tasklist}}" wx:key="index" bindtap="taskItemTap" hidden='{{tag==2?false:true}}'>
+    <view class='one_task'>
+      <image class='task_img' src='{{item.pic_url}}'/>
+      <view class='task_info'>
+        <view class='task_name'>{{item.name}}</view>
+        <view class='task_state'>
+          <image class='state_img' src='{{item.state_url}}'/>
+          <view class='state_text'>{{item.state_text}}</view>
+        </view>
+        <view class='task_description'>{{item.description}}</view>
+      </view>
+      <view class='applyTask_button'>申请</view>
+    </view>
+    <view class='table_line'/>
+  </view>
+
+  <view class="group-items" wx:for="{{grouplist}}" wx:key="index" bindtap="groupItemTap" hidden='{{tag==3?false:true}}'>
+    <view class='one-item'>
+      <image class="group_img" src="{{item.imgurl}}"/>
+       <view class='text-view'>
+         <view class="group_name">{{item.name}}</view>
+         <view class="group_description" style='color:gray'>{{item.description}}</view>
+       </view>
+       <view>
+         <view class='small_info'>
+           <image class="small_icon" src='../../images/群组.png'/>
+           <view class='small_text' style='color:gray'>{{item.memberNum}}人</view>
+         </view>
+        <view class='small_info'>
+          <image class='small_icon' src='../../images/任务.png'/>
+          <view class='small_text' style='color:gray'>{{item.taskNum}}任务</view>
+        </view>
+       </view>
+     </view>
+    <view class='table_line'/>
+  </view>
+
+
+</view>

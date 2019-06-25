@@ -1,13 +1,18 @@
 /* pages/group/group.wxss */
-.container{
-  width: 100%;
+
+.group-items{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
+
 .one-item{
+  width: 725;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 20rpx;
 }
 .small_icon{
   width: 25rpx;
@@ -43,4 +48,10 @@
 }
 .text_view{
   margin: 10rpx;
+}
+
+.table_line{
+  width: 725rpx;
+  height: 3rpx;
+  background-color:lightgray 
 }

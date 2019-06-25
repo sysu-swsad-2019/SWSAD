@@ -2,13 +2,14 @@
   "pages": [
     "pages/task/task",
     "pages/group/group",
-    "pages/release/release",
+    "pages/userdetail/userdetail",
     "pages/detail/detail",
     "pages/groupdetail/groupdetail",
     "pages/questionnaire/questionnaire",
     "pages/loginPage/loginPage",
     "pages/registerPage/registerPage",
-    "pages/home/home"
+    "pages/home/home",
+    "pages/release/release"
   ],
   "window": {
     "backgroundTextStyle": "light",

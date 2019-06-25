@@ -8,6 +8,9 @@ Page({
   data: {
     userInfo: {},
     projectSource: '',
+    isLogin: false,
+    tagShow1: false,
+    tagShow2: true,
     userListInfo: [{
       icon: '../../images/footer-icon-04.png',
       text: '领取的任务',
@@ -54,7 +57,16 @@ Page({
       })
     }
   },
-
+  clickLogin:function(e) {
+    wx.navigateTo({
+      url: '../loginPage/loginPage?id=1'
+    })
+    this.setData({
+      tagShow1: true,
+      tagShow2: false
+    })
+  }
+  ,
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

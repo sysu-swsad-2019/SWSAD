@@ -18,5 +18,6 @@
             </view>
           </view>
         </view>
+        <view class='table_line'/>
     </view>
   </view>
