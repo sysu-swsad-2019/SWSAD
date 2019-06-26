@@ -6,25 +6,46 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
+    defaultUserIcon:'../../images/avatar.png',
+    userInfo: null,
     projectSource: '',
     tagShow1: false,
     tagShow2: true,
     userListInfo: [{
       icon: '../../images/footer-icon-04.png',
       text: '领取的任务',
+      tap:'acceptTaskTap'
     }, {
       icon: '../../images/iconfont-dingdan.png',
       text: '发布的任务',
+      tap: 'releaseTaskTap'
     }, {
       icon: '../../images/footer-icon-01.png',
       text: '我的闲钱币',
+      tap: 'coinTap'
     }, {
+      icon: '../../images/修改资料.png',
+      text: '完善资料',
+      tap: 'modifyInfoTap'
+    },{
       icon: '../../images/iconfont-kefu.png',
       text: '联系客服'
     }]
   },
-
+  modifyInfoTap: function(){
+    if(app.globalData.userInfo.isLogin){
+      wx.navigateTo({
+        url: '../editUserInfo/editUserInfo'
+      })
+    }
+    else{
+      wx.showToast({
+        title: '请先登录',
+        icon:'none'
+      })
+    }
+   
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -78,9 +99,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    var that = this
     console.log("onShow")
-    if (wx.getStorageSync('isLogin')) {
+    if (app.globalData.userInfo.isLogin) {
       this.setData({
         tagShow1: true,
         tagShow2: false,
@@ -93,7 +114,13 @@ Page({
         },
         method: "POST",
         complete: function (res) {
+          // {"money":null,"phone":null,"university":null,"sex":"0","grade":null,"nickname":"91d213c3bbd24787ba97c73bac785ac7","credit":null,"uuid":"91d213c3bbd24787ba97c73bac785ac7","email":null,"iconpath":null,"academy":null,"username":"q"}
+          app.globalData.userInfo.moreInfo = res.data
           console.log(res.data)
+          console.log(app.globalData.userInfo.moreInfo.username)
+          that.setData({
+            userInfo: res.data
+          })
         }
       })
     }

@@ -56,3 +56,8 @@
   height: 3rpx;
   background-color:lightgray 
 }
+
+.inputText{
+  border: solid;
+  border-color: lightgray;
+}

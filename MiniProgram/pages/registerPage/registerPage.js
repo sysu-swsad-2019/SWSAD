@@ -70,6 +70,9 @@ Page({
               icon: 'success',
               duration: 2000
             })
+            wx.navigateBack({//返回
+              delta: 1
+            })
           }
           else {
             console.log(res.data.message)

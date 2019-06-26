@@ -1,4 +1,5 @@
 // pages/loginPage/loginPage.js
+var app = getApp()
 var Util = require('../../utils/util.js');
 Page({
 
@@ -51,7 +52,7 @@ Page({
               header.Cookie = cookie;
             }
             console.log(cookie)
-            wx.setStorageSync('isLogin',true)
+            app.globalData.userInfo.isLogin = true;
 
             wx.showToast({
               title: '登录成功',
