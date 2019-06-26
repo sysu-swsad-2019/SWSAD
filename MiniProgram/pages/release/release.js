@@ -8,14 +8,15 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userInfo: {},
     titleCount: 0, //标题字数
     contentCount: 0, //正文字数
     title: '', //标题内容
     content: '', //正文内容
     imgs: [],
     showError: false,
-    date: '2018-10-01',
-    time: '12:00',
+    startTime: null,
+    endTime: null,
     dateTimeArray: null,
     dateTime: null,
     startYear: 2000,
@@ -23,14 +24,15 @@ Page({
     number: 1,
     disable1: false,
     disable2: false,
+    disable3: false,
+    disable4: false,
     longTime: null,
-    limitations: [
-      { "type": "不限制" },
-      { "gender": "不限制" },
-      { "grade": "不限制" },
-      { "score": "不限制" },
-      { "group": "不限制" },
-    ],
+    reward: 1,
+    type: 0,
+    gender: 0,
+    grade: 0,
+    score: 0,
+    group: 0,
     selectArray1: [
       { "text": "不限制" },
       { "text": "取快递" },
@@ -74,6 +76,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.data.reward.toFixed(1);
     // 获取完整的年月日 时分秒，以及默认显示的数组
     var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
     var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
@@ -85,9 +88,51 @@ Page({
       dateTime: obj.dateTime,
       dateTimeArray: obj.dateTimeArray,
     });
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else if (this.data.canIUse) {
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
   },
   changeDateTime(e) {
-    this.setData({ dateTime: e.detail.value });
+    var time = require('../../utils/util.js');
+    var start = new Date();
+    // 除以1000取消毫秒的影响
+    var sjc = Date.parse(time.formatTime(start));
+    this.setData({
+      startTime: sjc
+    });
+    // console.log(this.data.startTime);
+    var end = new Date(this.data.dateTimeArray[0][this.data.dateTime[0]], this.data.dateTimeArray[1][this.data.dateTime[1]] - 1, this.data.dateTimeArray[2][this.data.dateTime[2]], this.data.dateTimeArray[3][this.data.dateTime[3]], this.data.dateTimeArray[4][this.data.dateTime[4]]);
+    // 除以1000取消毫秒的影响
+    sjc = Date.parse(time.formatTime(end));
+    this.setData({
+      dateTime: e.detail.value,
+      endTime: sjc
+    });
+    console.log(end);
+    console.log(this.data.endTime);
   },
   changeDateTimeColumn(e) {
     var arr = this.data.dateTime, dateArr = this.data.dateTimeArray;
@@ -115,15 +160,15 @@ Page({
   prevNum1() {
     this.setData({
       number: this.data.number >= 500 ? 500 : this.data.number + 1,
-      disabled1: this.data.number !== 0 ? false : true,
+      disabled1: this.data.number !== 1 ? false : true,
       disabled2: this.data.number !== 500 ? false : true
     });
     // console.log(this.data.number);
   },
   nextNum1() {
     this.setData({
-      number: this.data.number <= 0 ? 0 : this.data.number - 1,
-      disabled1: this.data.number !== 0 ? false : true,
+      number: this.data.number <= 1 ? 1 : this.data.number - 1,
+      disabled1: this.data.number !== 1 ? false : true,
       disabled2: this.data.number !== 500 ? false : true
     });
     // console.log(this.data.number);
@@ -135,8 +180,8 @@ Page({
         return;
       }
       this.setData({
-        number: this.data.number <= 0 ? 0 : this.data.number - 1,
-        disabled1: this.data.number !== 0 ? false : true,
+        number: this.data.number <= 1 ? 1 : this.data.number - 1,
+        disabled1: this.data.number !== 1 ? false : true,
         disabled2: this.data.number !== 500 ? false : true
       });
       // console.log(this.data.number);
@@ -150,10 +195,58 @@ Page({
       }
       this.setData({
         number: this.data.number >= 500 ? 500 : this.data.number + 1,
-        disabled1: this.data.number !== 0 ? false : true,
+        disabled1: this.data.number !== 1 ? false : true,
         disabled2: this.data.number !== 500 ? false : true
       });
       // console.log(this.data.number);
+    }, 50)
+  },
+  prevNum2() {
+    this.setData({
+      reward: this.data.reward >= 99 ? 99 : this.data.reward + 1,
+      // reward: this.data.reward.toFixed(1),
+      disabled3: this.data.reward !== 1 ? false : true,
+      disabled4: this.data.reward !== 99 ? false : true
+    });
+    // console.log(this.data.reward);
+  },
+  nextNum2() {
+    this.setData({
+      reward: this.data.reward <= 1 ? 1 : this.data.reward - 1,
+      // reward: this.data.reward.toFixed(1),
+      disabled3: this.data.reward !== 1 ? false : true,
+      disabled4: this.data.reward !== 99 ? false : true
+    });
+    // console.log(this.data.number);
+  },
+  reducelongTap1: function (e) {
+    this.data.longTime = setInterval(() => {
+      if (this.data.reward == 1) {
+        clearInterval(this.data.longTime)
+        return;
+      }
+      this.setData({
+        reward: this.data.reward <= 1 ? 1 : this.data.reward - 1,
+        // reward: this.data.reward.toFixed(1),
+        disabled3: this.data.reward !== 1 ? false : true,
+        disabled4: this.data.reward !== 99 ? false : true
+      });
+      // console.log(this.data.reward);
+    }, 50)
+  },
+  addlongTap1: function (e) {
+    this.data.longTime = setInterval(() => {
+      if (this.data.reward >= 99) {
+        clearInterval(this.data.longTime)
+        return;
+      }
+      this.setData({
+        reward: this.data.reward >= 99 ? 99. : this.data.reward + 1,
+        // reward: this.data.reward.toFixed(1),
+        disabled3: this.data.reward !== 1 ? false : true,
+        disabled4: this.data.reward !== 99 ? false : true
+      });
+      // console.log(this.data.reward);
     }, 50)
   },
   leave: function (e) {
@@ -192,29 +285,29 @@ Page({
   },
   getType:function(e) {
     this.setData({
-      "limitations.type": e.detail.text
+      type: e.detail.id
     });
+    // console.log(e.detail.id);
   },
   getGender: function (e) {
     this.setData({
-      "limitations.gender": e.detail.text
+      gender: e.detail.id
     });
   },
   getGrade: function (e) {
     this.setData({
-      "limitations.grade": e.detail.text
+      grade: e.detail.id
     });
   },
   getScore: function (e) {
     this.setData({
-      "limitations.score": e.detail.text
+      score: e.detail.id
     });
   },
   getGroup: function (e) {
     this.setData({
-      "limitations.group": e.detail.text
+      group: e.detail.id
     });
-    console.log(this.data.limitations);
   },
   submit: function () {
     var _this = this, title = '', content = '', imgs = '';
@@ -234,37 +327,55 @@ Page({
       content: '是否确认提交任务？',
       success: function (res) {
         if (res.confirm) {
-          title = '【' + app._user.wx.nickName + '】' + _this.data.title;
-          content = _this.data.content + '\r\n\r\n' + _this.data.content;
-          if (_this.data.imgs.length) {
-            _this.data.imgs.forEach(function (e) {
-              imgs += '\r\n\r\n' + '![img](' + e + '?imageView2/2/w/750/interlace/0/q/88|watermark/2/text/V2Xph43pgq4=/font/5b6u6L2v6ZuF6buR/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10)';
-            });
-            content += imgs;
-          }
-          app.showLoadToast();
+          // title = '【' + app._user.wx.nickName + '】' + _this.data.title;
+          // content = _this.data.content + '\r\n\r\n' + _this.data.content;
+          // if (_this.data.imgs.length) {
+          //   _this.data.imgs.forEach(function (e) {
+          //     imgs += '\r\n\r\n' + '![img](' + e + '?imageView2/2/w/750/interlace/0/q/88|watermark/2/text/V2Xph43pgq4=/font/5b6u6L2v6ZuF6buR/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10)';
+          //   });
+          //   content += imgs;
+          // }
+          // app.showLoadToast();
+          // console.log(_this.data.endTime);
           wx.request({
-            url: app._server,
-            data: app.key({
-              openid: app._user.openid,
-              title: title,
-              body: content
-            }),
+            url: "http://172.26.17.164:8080/task/insertTask",
+            data: {
+              taskname: _this.data.title,
+              starttime: _this.data.startTime,
+              endtime: _this.data.endTime,
+              type: _this.data.type,
+              releaseUser: 1233456,
+              acceptNumLimit: _this.data.number,
+              hasTargetLimit: 1,
+              description: _this.data.content,
+              sex: _this.data.gender,
+              grade: _this.data.grade,
+              creditMin: _this.data.score,
+              groupId: 1,
+              reward: _this.data.reward,
+              state: 0
+            },
             method: 'POST',
+            header: { 
+              'content-type': 'application/json',
+              'cookie': wx.getStorageSync('cookieKey')
+            },
             success: function (res) {
-              if (res.data.status === 200) {
-                var text = '提交成功';
-                wx.showModal({
-                  title: '提交成功',
-                  content: text,
-                  showCancel: false,
-                  success: function (res) {
-                    wx.navigateBack();
-                  }
-                });
-              } else {
-                app.showErrorModal(res.data.message, '提交失败');
-              }
+              // if (res.data.status === 200) {
+              //   var text = '提交成功';
+              //   wx.showModal({
+              //     title: '提交成功',
+              //     content: text,
+              //     showCancel: false,
+              //     success: function (res) {
+              //       wx.navigateBack();
+              //     }
+              //   });
+              // } else {
+              //   app.showErrorModal(res.data.message, '提交失败');
+              // }
+              app.showErrorModal(res.data.message, '提交成功');
+              wx.navigateBack();
             },
             fail: function (res) {
               app.showErrorModal(res.errMsg, '提交失败');

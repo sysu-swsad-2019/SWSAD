@@ -1,8 +1,8 @@
 {
-  "pages": ["pages/home/home",
+  "pages": [
+    "pages/home/home",
     "pages/loginPage/loginPage",
     "pages/editUserInfo/editUserInfo",
-    
     "pages/task/task",
     "pages/group/group",
     "pages/userdetail/userdetail",

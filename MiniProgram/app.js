@@ -54,4 +54,11 @@ App({
       }
     });
   },*/
+  showErrorModal: function (content, title) {
+    wx.showModal({
+      title: title || '加载失败',
+      content: content || '未知错误',
+      showCancel: false
+    });
+  },
 })
