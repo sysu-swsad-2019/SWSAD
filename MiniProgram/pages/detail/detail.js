@@ -4,14 +4,57 @@ Page({
    * 页面的初始数据
    */
   data: {
+    taskInfo: [
+      {
+        title: "../../images/footer-icon-04.png",
+        content: "发布者："
+      },
 
+      {
+      title: '../../images/ios-shijian.png',
+      content: '结束时间：',
+    }, {
+      title: '../../images/bianhao.png',
+      content: '发布数量：',
+    }, {
+      title: '../../images/type.png',
+      content: '任务类型：',
+    }, {
+      title: '../../images/gender.png',
+      content: '性别要求：'
+    }, {
+      title: '../../images/647.png',
+      content: '年级要求：'
+    }, {
+      title: '../../images/credit.png',
+      content: '信誉要求：'
+    }, {
+      title: '../../images/group.png',
+      content: '兴趣小组：'
+    }],
+    contents: {
+      uerInfo: {},
+
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.request({
+      url: 'test.php', //仅为示例，并非真实的接口地址
+      data: {
+        x: '',
+        y: ''
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        console.log(res.data)
+      }
+    })
   },
 
   /**

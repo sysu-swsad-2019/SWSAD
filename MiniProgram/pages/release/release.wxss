@@ -246,7 +246,7 @@
     height: 80rpx;
     border-radius: 3px;
     text-align: center;
-    background-color: #BB89A7;
+    background-color: #33a3dc;
     color: #fff;
     font-size: 12pt;
     line-height: 150%;
@@ -297,6 +297,7 @@
     overflow: hidden;
     margin-left: 10rpx;
     margin-right: 10rpx;
+    background: #fff;
 }
 
 .tui-number-cell{
@@ -304,6 +305,7 @@
     color: #ccc;
     line-height: 1.7;
     border-radius: 0;
+    background: #fff;
 }
 
 button::after{
