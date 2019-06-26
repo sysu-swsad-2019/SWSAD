@@ -352,7 +352,8 @@ Page({
               grade: _this.data.grade,
               creditMin: _this.data.score,
               groupId: 1,
-              reward: _this.data.reward
+              reward: _this.data.reward,
+              state: 0
             },
             method: 'POST',
             header: { 
@@ -360,20 +361,21 @@ Page({
               'cookie': wx.getStorageSync('cookieKey')
             },
             success: function (res) {
-              console.log(res.data.status);
-              if (res.data.status === 200) {
-                var text = '提交成功';
-                wx.showModal({
-                  title: '提交成功',
-                  content: text,
-                  showCancel: false,
-                  success: function (res) {
-                    wx.navigateBack();
-                  }
-                });
-              } else {
-                app.showErrorModal(res.data.message, '提交失败');
-              }
+              // if (res.data.status === 200) {
+              //   var text = '提交成功';
+              //   wx.showModal({
+              //     title: '提交成功',
+              //     content: text,
+              //     showCancel: false,
+              //     success: function (res) {
+              //       wx.navigateBack();
+              //     }
+              //   });
+              // } else {
+              //   app.showErrorModal(res.data.message, '提交失败');
+              // }
+              app.showErrorModal(res.data.message, '提交成功');
+              wx.navigateBack();
             },
             fail: function (res) {
               app.showErrorModal(res.errMsg, '提交失败');
