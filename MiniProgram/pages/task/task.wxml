@@ -13,12 +13,12 @@
 
   <view class="task-list">
     <view class="task-item" wx:for="{{tasklist}}" wx:key="index" bindtap="tapfunc">
-      <image class="task-img" src="{{item.pic_url}}"></image>
+      <image class="task-img" src="{{pic_urls[item.type]}}"></image>
       <view class="task-content">
         <view class="task-title">{{item.name}}</view>
         <view class="task-state">
-          <image class="task-state-img" src="{{item.state_url}}"></image>
-          <view class="task-state-text" style="color: {{colors[item.state]}}">{{item.state_text}}</view>
+          <image class="task-state-img" src="{{state_urls[item.state]}}"></image>
+          <view class="task-state-text" style="color: {{colors[item.state]}}">{{state_texts[item.state]}}</view>
         </view>
         <view class="task-detail">{{item.description}}</view>
       </view>
@@ -31,7 +31,8 @@
           <image class="task-people-img" src="{{people_url}}"></image>
           <view class="task-people-number">{{item.people}}人</view>
         </view>
-        <view class="task-button">接受</view>
+        <view wx:if="{{0}}" class="task-button" style="background-color:  #33a3dc;" bindtap="">领取</view>
+        <view wx:if="{{1}}" class="task-button" style="background-color:grey;">领取</view>
       </view>
     </view>
   </view>

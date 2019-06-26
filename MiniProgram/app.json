@@ -1,16 +1,15 @@
 {
   "pages": [
-    "pages/loginPage/loginPage",
     "pages/task/task",
+    "pages/release/release",
+    "pages/detail/detail",
+    "pages/loginPage/loginPage",
     "pages/group/group",
     "pages/userdetail/userdetail",
-    "pages/detail/detail",
     "pages/groupdetail/groupdetail",
     "pages/questionnaire/questionnaire",
     "pages/registerPage/registerPage",
-    
-    "pages/home/home",
-    "pages/release/release"
+    "pages/home/home"
   ],
   "window": {
     "backgroundTextStyle": "light",
