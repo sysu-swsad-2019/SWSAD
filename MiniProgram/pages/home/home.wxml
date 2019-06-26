@@ -1,13 +1,13 @@
 <!--pages/home/home.wxml-->
 <view class="container">
   <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover" wx:if="{{tagShow1}}"></image>
+    <image class="userinfo-avatar" src="{{userInfo.iconpath==null?defaultUserIcon:userInfo.iconpath}}" background-size="cover" wx:if="{{tagShow1}}"></image>
     <button id="login-btn" open-type="getUserInfo" class="userinfo-avatar" wx:if="{{tagShow2}}" bindtap="clickLogin">登 录</button>
-    <text wx:if="{{tagShow1}}" class="userinfo-nickname">{{userInfo.nickName}}</text>
+    <text wx:if="{{tagShow1}}" class="userinfo-nickname">{{userInfo.username}}</text>
   </view>
   <view class="info_list">
     <block wx:for="{{userListInfo}}">
-        <view class="weui_cell">
+        <view class="weui_cell" bindtap='{{item.tap}}'>
             <view class="weui_cell_hd"><image src="{{item.icon}}"></image></view>
             <view class="weui_cell_bd">
                 <view class="weui_cell_bd_p"> {{item.text}} </view>
