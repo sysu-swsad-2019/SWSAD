@@ -10,7 +10,7 @@
         <image class='next_view' src='../../images/next.png'></image>
       </view>
     </view>
-    <view class='big_seperate' wx:if='{{index==3||index==5}}'></view>
+    <view class='big_seperate' wx:if='{{index==2||index==4}}'></view>
     <view class='table_line'/>
   </view>
   <modal hidden="{{hiddenmodalInput}}" title="请输入修改信息" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
