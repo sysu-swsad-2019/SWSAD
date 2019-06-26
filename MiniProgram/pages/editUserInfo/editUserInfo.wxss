@@ -1,0 +1,63 @@
+/* pages/editUserInfo/editUserInfo.wxss */
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.one-item{
+  width: 725rpx;
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.pic_view{
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+}
+
+.right_block{
+  width: 550rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.text_view{
+  color: gray;
+  font-size: 32rpx;
+}
+
+.next_view{
+  width: 25rpx;
+  height: 25rpx;
+  margin-left: 30rpx;
+}
+
+.big_seperate{
+  width: 750rpx;
+  height: 25rpx;
+  background-color: #dbe0dd;
+}
+
+.title_view{
+  width: 150rpx;
+  margin-left: 30rpx;
+}
+
+.table_line{
+  width: 750rpx;
+  height: 3rpx;
+  background-color:lightgray 
+}
+
+.inputText{
+  border: solid;
+  border-color: lightgray;
+}

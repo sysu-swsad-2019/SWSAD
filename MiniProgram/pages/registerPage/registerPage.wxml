@@ -1,6 +1,5 @@
 <!--pages/registerPage/registerPage.wxml-->
 <view class='container'>
-    <image class='avatarImage' src="{{img_url}}" bindtap='Img_tap'/>
     <view class="usernameInputView">
       <image class="usernameIcon" src="../../images/usernameIcon.png"></image>
       <input class="usernameInput" placeholder="请输入用户名" bindinput="usernameInput"></input>

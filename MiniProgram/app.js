@@ -34,8 +34,13 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: {
+      isLogin:false,
+      moreInfo:null,
+    }
+
   },
+  /*
   getUserInfo: function (cb) {
     var _this = this;
     //获取微信用户信息
@@ -47,6 +52,13 @@ App({
         _this.showErrorModal('拒绝授权将导致无法关联学校帐号并影响使用，请重新授权！', '授权失败');
         _this.g_status = '未授权';
       }
+    });
+  },*/
+  showErrorModal: function (content, title) {
+    wx.showModal({
+      title: title || '加载失败',
+      content: content || '未知错误',
+      showCancel: false
     });
   },
 })

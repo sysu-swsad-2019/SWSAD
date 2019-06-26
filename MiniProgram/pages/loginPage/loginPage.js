@@ -1,4 +1,5 @@
 // pages/loginPage/loginPage.js
+var app = getApp()
 var Util = require('../../utils/util.js');
 Page({
 
@@ -51,6 +52,7 @@ Page({
               header.Cookie = cookie;
             }
             console.log(cookie)
+            app.globalData.userInfo.isLogin = true;
 
             wx.showToast({
               title: '登录成功',
@@ -58,6 +60,11 @@ Page({
               duration: 2000
             })
 
+            wx.navigateBack({//返回
+              delta: 1
+            })
+
+/*
             //测试cookie
             wx.request({
               url: "http://172.26.17.164:8080/userinfo/getUserInfo",
@@ -70,7 +77,7 @@ Page({
                 console.log(res.data)
               }
             })
-           
+           */
           }
           else{
             wx.showToast({
