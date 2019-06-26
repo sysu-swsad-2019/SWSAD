@@ -24,14 +24,15 @@ Page({
     number: 1,
     disable1: false,
     disable2: false,
+    disable3: false,
+    disable4: false,
     longTime: null,
-    type: "不限制",
-    limitations: [
-      { "gender": "不限制" },
-      { "grade": "不限制" },
-      { "score": "不限制" },
-      { "group": "不限制" },
-    ],
+    reward: 1,
+    type: 0,
+    gender: 0,
+    grade: 0,
+    score: 0,
+    group: 0,
     selectArray1: [
       { "text": "不限制" },
       { "text": "取快递" },
@@ -75,6 +76,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.data.reward.toFixed(1);
     // 获取完整的年月日 时分秒，以及默认显示的数组
     var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
     var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
@@ -117,19 +119,20 @@ Page({
     var time = require('../../utils/util.js');
     var start = new Date();
     // 除以1000取消毫秒的影响
-    var sjc = Date.parse(time.formatTime(start)) / 1000;
+    var sjc = Date.parse(time.formatTime(start));
     this.setData({
       startTime: sjc
     });
     // console.log(this.data.startTime);
-    var end = new Date(this.data.dateTimeArray[0][this.data.dateTime[0]], this.data.dateTimeArray[1][this.data.dateTime[1]], this.data.dateTimeArray[2][this.data.dateTime[2]], this.data.dateTimeArray[3][this.data.dateTime[3]], this.data.dateTimeArray[4][this.data.dateTime[4]]);
+    var end = new Date(this.data.dateTimeArray[0][this.data.dateTime[0]], this.data.dateTimeArray[1][this.data.dateTime[1]] - 1, this.data.dateTimeArray[2][this.data.dateTime[2]], this.data.dateTimeArray[3][this.data.dateTime[3]], this.data.dateTimeArray[4][this.data.dateTime[4]]);
     // 除以1000取消毫秒的影响
-    sjc = Date.parse(time.formatTime(end)) / 1000;
+    sjc = Date.parse(time.formatTime(end));
     this.setData({
       dateTime: e.detail.value,
       endTime: sjc
     });
-    // console.log(this.data.endTime);
+    console.log(end);
+    console.log(this.data.endTime);
   },
   changeDateTimeColumn(e) {
     var arr = this.data.dateTime, dateArr = this.data.dateTimeArray;
@@ -198,6 +201,54 @@ Page({
       // console.log(this.data.number);
     }, 50)
   },
+  prevNum2() {
+    this.setData({
+      reward: this.data.reward >= 99 ? 99 : this.data.reward + 1,
+      // reward: this.data.reward.toFixed(1),
+      disabled3: this.data.reward !== 1 ? false : true,
+      disabled4: this.data.reward !== 99 ? false : true
+    });
+    // console.log(this.data.reward);
+  },
+  nextNum2() {
+    this.setData({
+      reward: this.data.reward <= 1 ? 1 : this.data.reward - 1,
+      // reward: this.data.reward.toFixed(1),
+      disabled3: this.data.reward !== 1 ? false : true,
+      disabled4: this.data.reward !== 99 ? false : true
+    });
+    // console.log(this.data.number);
+  },
+  reducelongTap1: function (e) {
+    this.data.longTime = setInterval(() => {
+      if (this.data.reward == 1) {
+        clearInterval(this.data.longTime)
+        return;
+      }
+      this.setData({
+        reward: this.data.reward <= 1 ? 1 : this.data.reward - 1,
+        // reward: this.data.reward.toFixed(1),
+        disabled3: this.data.reward !== 1 ? false : true,
+        disabled4: this.data.reward !== 99 ? false : true
+      });
+      // console.log(this.data.reward);
+    }, 50)
+  },
+  addlongTap1: function (e) {
+    this.data.longTime = setInterval(() => {
+      if (this.data.reward >= 99) {
+        clearInterval(this.data.longTime)
+        return;
+      }
+      this.setData({
+        reward: this.data.reward >= 99 ? 99. : this.data.reward + 1,
+        // reward: this.data.reward.toFixed(1),
+        disabled3: this.data.reward !== 1 ? false : true,
+        disabled4: this.data.reward !== 99 ? false : true
+      });
+      // console.log(this.data.reward);
+    }, 50)
+  },
   leave: function (e) {
     clearInterval(this.data.longTime);
   },
@@ -234,30 +285,29 @@ Page({
   },
   getType:function(e) {
     this.setData({
-      type: e.detail.text
+      type: e.detail.id
     });
-    // console.log(this.data.type);
+    // console.log(e.detail.id);
   },
   getGender: function (e) {
     this.setData({
-      "limitations.gender": e.detail.text
+      gender: e.detail.id
     });
   },
   getGrade: function (e) {
     this.setData({
-      "limitations.grade": e.detail.text
+      grade: e.detail.id
     });
   },
   getScore: function (e) {
     this.setData({
-      "limitations.score": e.detail.text
+      score: e.detail.id
     });
   },
   getGroup: function (e) {
     this.setData({
-      "limitations.group": e.detail.text
+      group: e.detail.id
     });
-    console.log(this.data.limitations);
   },
   submit: function () {
     var _this = this, title = '', content = '', imgs = '';
@@ -286,6 +336,7 @@ Page({
           //   content += imgs;
           // }
           // app.showLoadToast();
+          // console.log(_this.data.endTime);
           wx.request({
             url: "http://172.26.17.164:8080/task/insertTask",
             data: {
@@ -293,18 +344,23 @@ Page({
               starttime: _this.data.startTime,
               endtime: _this.data.endTime,
               type: _this.data.type,
-              releaseUser: _this.data.userInfo.nickName,
+              releaseUser: 1233456,
               acceptNumLimit: _this.data.number,
               hasTargetLimit: 1,
               description: _this.data.content,
               sex: _this.data.gender,
               grade: _this.data.grade,
               creditMin: _this.data.score,
-              groupId: 1
+              groupId: 1,
+              reward: _this.data.reward
             },
             method: 'POST',
-            header: { 'content-type': 'application/x-www-form-urlencoded' },
+            header: { 
+              'content-type': 'application/json',
+              'cookie': wx.getStorageSync('cookieKey')
+            },
             success: function (res) {
+              console.log(res.data.status);
               if (res.data.status === 200) {
                 var text = '提交成功';
                 wx.showModal({
