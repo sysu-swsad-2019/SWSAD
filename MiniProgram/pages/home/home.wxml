@@ -3,7 +3,7 @@
   <view  bindtap="bindViewTap" class="userinfo">
     <image class="userinfo-avatar" src="{{userInfo.iconpath==null?defaultUserIcon:userInfo.iconpath}}" background-size="cover" wx:if="{{tagShow1}}"></image>
     <button id="login-btn" open-type="getUserInfo" class="userinfo-avatar" wx:if="{{tagShow2}}" bindtap="clickLogin">登 录</button>
-    <text wx:if="{{tagShow1}}" class="userinfo-nickname">{{userInfo.username}}</text>
+    <text wx:if="{{tagShow1}}" class="userinfo-nickname">{{userInfo.nickname}}</text>
   </view>
   <view class="info_list">
     <block wx:for="{{userListInfo}}">
