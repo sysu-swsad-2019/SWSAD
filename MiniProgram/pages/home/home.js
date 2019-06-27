@@ -36,7 +36,7 @@ Page({
   acceptTaskTap: function (e) {
     if (app.globalData.userInfo.isLogin) {
       wx.navigateTo({
-        url: '../tasks/tasks?param=0',
+        url: '../taskaccept/taskaccept',
       })
     }
     else {
@@ -52,7 +52,7 @@ Page({
 
     if (app.globalData.userInfo.isLogin) {
       wx.navigateTo({
-        url: '../tasks/tasks?param=1',
+        url: '../taskrelease/taskrelease',
       })
     // console.log(e);
     }
