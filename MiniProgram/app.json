@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/task/task",
-    "pages/taskaccept/taskaccept",
     "pages/home/home",
     "pages/acTaskDetail/acTaskDetail",
     "pages/reTaskDetail/reTaskDetail",
