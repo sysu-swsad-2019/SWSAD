@@ -5,7 +5,9 @@
   justify-content: flex-start;
   align-items: center;
 }
-
+.list-items{
+  height: 90%
+}
 .one-item{
   width: 725rpx;
   height: 100rpx;

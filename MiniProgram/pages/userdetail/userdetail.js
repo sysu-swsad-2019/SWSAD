@@ -5,17 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    username:'testUser',
-    pic_url: '../../images/用户.png',
-    gender: 1,
     gender_url: '../../images/性别男.png',  //用户未填写就设为'../../images/white.png'
-    money: 25,
-    credit:100,
-    grade:0,  //0代表未填写该信息
-    grade_text: '未填',  //用户没有写这些信息就设为‘未填’
-    university: 'sysu', //用户没有写这些信息就设为‘未填’
-    academy:'软件工程学院', //用户没有写这些信息就设为‘未填’
-
+    grade:'',
+    userInfo:null,
     tag:1,
 
     // 参加的小组
@@ -196,7 +188,58 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var user = app.globalData.userInfo.moreInfo
 
+    if(user.sex == '0'){
+      this.setData({
+        gender_url: '../../images/性别女.png'
+      })
+    }
+    else if(user.sex == '1'){
+      this.setData({
+        gender_url: '../../images/性别男.png'
+      })
+    }
+    else if(user.sex == '-1'){
+      this.setData({
+        gender_url: '../../images/white.png'
+      })
+    }
+    if (user.grade == '-1') {
+      this.setData({
+        grade: '未填'
+      })
+    } else
+    if (user.grade == '1') {
+      this.setData({
+        grade: '大一'
+      })
+    } else
+      if (user.grade == '2') {
+        this.setData({
+          grade: '大二'
+        })
+      } else
+        if (user.grade == '3') {
+          this.setData({
+            grade: '大三'
+          })
+        } else
+          if (user.grade == '4') {
+            this.setData({
+              grade: '大四'
+            })
+          } else
+            if (user.grade == '5') {
+              this.setData({
+                grade: '研一'
+              })
+            } else
+              if (user.grade == '6') {
+                this.setData({
+                  grade: '研二'
+                })
+              }
   },
 
   /**

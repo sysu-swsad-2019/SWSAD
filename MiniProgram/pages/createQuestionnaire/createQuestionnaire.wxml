@@ -3,7 +3,12 @@
   <input class='QuestionnaireName' placeholder='问卷标题（最多20个字）' minlength='1' maxlength='20' bindinput='QuestionnaireNameInput'></input>
   <textarea class='QuestionnaireDescription' placeholder='问卷描述（最多100个字）' minlength='1' maxlength='100' bindinput='QuestionnaireDescriptionInput'></textarea>
   <view class='outside_text'>问卷题目：</view>
-
+  <view class='question'  wx:for="{{question}}" wx:key="index">
+    <view class='question_title'>{{item.title}}</view>
+    <view class='question_description'>{{item.description}}</view>
+    <textarea class='question_answer' hidden='{{item.type == 1?true:false}}'></textarea>
+    
+  </view>
   <view class='add_view'>
     <image src='../../images/加号.png' class='add_image'></image>
   </view>

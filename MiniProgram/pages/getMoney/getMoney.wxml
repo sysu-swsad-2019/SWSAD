@@ -1,0 +1,9 @@
+<!--pages/getMoney/getMoney.wxml-->
+<view class='container'>
+  <image class='image' src='../../images/getmoney.jpg'></image>
+  <view class='coin_view'>
+    <image class='coin_image' src='../../images/money_icon.png'></image>
+    <view class='text'>{{money}}币</view>
+  </view>
+  <view class='btn' bindtap='addMoney'>金币充值</view>
+</view>

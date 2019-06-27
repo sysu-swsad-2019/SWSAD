@@ -5,16 +5,16 @@
       <image class='userimg' src="{{pic_url}}" bindtap='user_img_preview'/>
       <view class='col_view'>
         <view class='name_view'>
-          <view class='username'>{{username}}</view>
+          <view class='username'>{{userInfo.nickname}}</view>
           <image class='gender_img' src="{{gender_url}}"></image>
         </view>
         <view class='money_view'>
           <image class='money_img' src="../../images/money_icon.png"></image>
-          <view class='money_text'>{{money}}金币</view>
+          <view class='money_text'>{{userInfo.money}}金币</view>
         </view>
         <view class='credit_view'>
           <image class='credit_img' src="../../images/信用.png"></image>
-          <view class='credit_text'>{{credit}}信用分</view>
+          <view class='credit_text'>{{userInfo.credit}}信用分</view>
         </view>
       </view>
     </view>
@@ -38,11 +38,15 @@
 
   </view>
   <view class='personal_info' hidden='{{tag==1?false:true}}'>
-    <view class='info_text'>大学： {{university}}</view>
+    <view class='info_text'>电话： {{userInfo.phone}}</view>
     <view class='small_seperate'></view>
-    <view class='info_text'>学院： {{academy}}</view>
+    <view class='info_text'>邮箱 {{userInfo.emaily}}</view>
     <view class='small_seperate'></view>
-    <view class='info_text'>年级： {{grade_text}}</view>
+    <view class='info_text'>大学： {{userInfo.university}}</view>
+    <view class='small_seperate'></view>
+    <view class='info_text'>学院： {{userInfo.academy}}</view>
+    <view class='small_seperate'></view>
+    <view class='info_text'>年级： {{grade}}</view>
     <view class='small_seperate'></view>
   </view>
   <view class="task_items" wx:for="{{tasklist}}" wx:key="index" bindtap="taskItemTap" hidden='{{tag==2?false:true}}'>
