@@ -57,7 +57,7 @@ Page({
     }
     else{
       wx.request({
-        url: app.globalData.server +"regist",
+        url: "http://172.26.17.164:8080/regist",
         header: {
           "content-type": "application/x-www-form-urlencoded"
         },

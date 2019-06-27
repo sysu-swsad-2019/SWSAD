@@ -32,6 +32,20 @@ Page({
       text: '联系客服'
     }]
   },
+
+  getReceivedTasks: function (e) {
+    wx.navigateTo({
+      url: '../tasks/tasks?param=0',
+    })
+    console.log(e);
+  },
+  getReleasedTasks: function (e) {
+    wx.navigateTo({
+      url: '../tasks/tasks?param=1',
+    })
+    // console.log(e);
+  },
+
   modifyInfoTap: function(){
     if(app.globalData.userInfo.isLogin){
       wx.navigateTo({

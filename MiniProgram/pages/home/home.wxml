@@ -6,14 +6,15 @@
     <text wx:if="{{tagShow1}}" class="userinfo-nickname">{{userInfo.nickname}}</text>
   </view>
   <view class="info_list">
-    <block wx:for="{{userListInfo}}">
-        <view class="weui_cell" bindtap='{{item.tap}}'>
+    <block>
+        <view class="weui_cell" wx:for='{{userListInfo}}' wx:key='index'>
+          <view class='cell_view' bindtap='{{item.tap}}'>
             <view class="weui_cell_hd"><image src="{{item.icon}}"></image></view>
             <view class="weui_cell_bd">
-                <view class="weui_cell_bd_p"> {{item.text}} </view>
+                <view class="weui_cell_bd_p" >{{item.text}}</view>
             </view>
-            <view wx:if="{{item.isunread}}" class="badge">{{item.unreadNum}}</view>
-            <view class="with_arrow"></view>
+            <image class="with_arrow" src='../../images/icon-arrowdown.png'></image>
+          </view>
         </view>
     </block>
   </view>

@@ -1,17 +1,17 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/loginPage/loginPage",
     "pages/task/task",
+    "pages/questionnaire/questionnaire",
+    "pages/createQuestionnaire/createQuestionnaire",
+    "pages/userdetail/userdetail",
+    "pages/loginPage/loginPage",
     "pages/group/group",
     "pages/getMoney/getMoney",
     "pages/editUserInfo/editUserInfo",
     "pages/creategroup/creategroup",
-    "pages/userdetail/userdetail",
     "pages/detail/detail",
     "pages/groupdetail/groupdetail",
-    "pages/questionnaire/questionnaire",
-    "pages/createQuestionnaire/createQuestionnaire",
     "pages/registerPage/registerPage",
     "pages/release/release"
   ],
