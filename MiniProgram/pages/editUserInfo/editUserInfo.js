@@ -436,7 +436,7 @@ Page({
   },
 
   setListData:function(){
-    var user = app.globalData.userInfo.moreInfo
+    let user = app.globalData.userInfo.moreInfo
     if (user.grade == '-1') {
       this.setData({
         grade : '未填'
@@ -487,7 +487,7 @@ Page({
         sex: '未填'
       })
     }
-
+    console.log(user.iconpath)
     this.setData({
       selection_list: [
         {
@@ -599,32 +599,29 @@ function upload(page, path) {
       url: "http://172.26.17.164:8080/userinfo/setUserIcon",
       filePath: path[0],
       name: 'file',
-      header: { "Content-Type": "multipart/form-data" },
-      formData: {
+      header: { 
+        "Content-Type": "multipart/form-data;charset=utf-8" ,
         'cookie': wx.getStorageSync('cookieKey')
       },
-      success: function (res) {
-        console.log(res);
-        if (res.statusCode != 200) {
-          wx.showModal({
-            title: '提示',
-            content: '上传失败',
-            showCancel: false
-          })
-          return;
-        }
+      complete: function (res) {
         
-      },
-      fail: function (e) {
-        console.log(e);
-        wx.showModal({
-          title: '提示',
-          content: '上传失败',
-          showCancel: false
-        })
-      },
-      complete: function () {
-        wx.hideToast();  //隐藏Toast
+        var data = JSON.parse(res.data);
+        console.log(data)
+        if(res.statusCode == 200){
+          app.globalData.userInfo.moreInfo.iconpath = "http://172.26.17.164:8080/"+data.data.iconURL
+          page.setListData()
+          console.log(app.globalData.userInfo.moreInfo.iconpath)
+          wx.showToast({
+            title:'修改成功',
+            icon:'none'
+          })
+        }
+        else{
+          wx.showToast({
+            title: '修改失败',
+            icon: 'none'
+          })
+        }
       }
     })
 }

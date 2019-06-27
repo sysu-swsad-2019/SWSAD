@@ -4,6 +4,7 @@
     "pages/loginPage/loginPage",
     "pages/task/task",
     "pages/group/group",
+    "pages/getMoney/getMoney",
     "pages/editUserInfo/editUserInfo",
     "pages/creategroup/creategroup",
     "pages/userdetail/userdetail",

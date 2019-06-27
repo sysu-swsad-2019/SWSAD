@@ -1,4 +1,5 @@
 // pages/registerPage/registerPage.js
+var app = getApp()
 var Util = require('../../utils/util.js');
 Page({
 
@@ -56,7 +57,7 @@ Page({
     }
     else{
       wx.request({
-        url: "http://172.26.17.164:8080/regist",
+        url: app.globalData.server +"regist",
         header: {
           "content-type": "application/x-www-form-urlencoded"
         },

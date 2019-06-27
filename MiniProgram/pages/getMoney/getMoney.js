@@ -1,66 +1,58 @@
-// pages/creategroup/creategroup.js
+// pages/getMoney/getMoney.js
+var app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    name:'',
-    description:''
-  },
-
-  GroupNameInput:function(e){
-    this.setData({
-      name: e.detail.value
-    })
-  },
-
-  GroupDescriptionInput:function(e){
-    this.setData({
-      description:e.detail.value
-    })
-  },
-
-  createGroupTap:function(){
-    wx.request({
-      url: "http://172.26.17.164:8080/group/insertGroup",
-      header: {
-        "content-type": "application/json",
-        'cookie': wx.getStorageSync('cookieKey')
-      },
-      method: "POST",
-      data: {
-        name:this.data.name,
-        description:this.data.description
-      },
-      complete: function (res) {
-        if(res.data.code == 200){
-          wx.showToast({
-            title: '创建成功',
-            icon:'none'
-          })
-        }
-        else{
-          wx.showToast({
-            title: '创建失败',
-            icon:'none'
-          })
-        }
-        wx.navigateBack({
-          delta:1
-        })
-
-      }
-    })
+    money:1000,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      money: app.globalData.userInfo.moreInfo.money
+    })
   },
 
+  addMoney: function(){
+    let tmp = Number(this.data.money) + Number(100)
+    this.setData({
+      money: tmp
+    })
+    app.globalData.userInfo.moreInfo.money = this.data.money
+    var that = this
+    wx.request({
+      url: "http://172.26.17.164:8080/userinfo/setUserInfo",
+      header: {
+        "content-type": "application/json",
+        'cookie': wx.getStorageSync('cookieKey')
+      },
+      method: "POST",
+      data: {
+        money: that.data.money
+      },
+      complete: function (res) {
+        if (res.data.code == 200) {
+
+          wx.showToast({
+            title: '充值成功',
+            icon: 'none'
+          })
+        }
+        else {
+          wx.showToast({
+            title: '充值失败',
+            icon: 'none'
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

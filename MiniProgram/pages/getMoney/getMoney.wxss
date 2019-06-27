@@ -1,0 +1,34 @@
+/* pages/getMoney/getMoney.wxss */
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text{
+  color: gold;
+  font-size: 80rpx;
+}
+
+.coin_view{
+  display: flex;
+  margin-top: 50rpx;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.coin_image{
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.btn{
+  color: white;
+  background-color: #33a3dc;
+  width: 500rpx;
+  margin-top: 100rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  font-size: 50rpx;
+}
