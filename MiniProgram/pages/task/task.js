@@ -22,7 +22,8 @@ Page({
     theight: 1050,
     hidetop: true,
     hidebottom: true,
-    first: true // 是否第一次加载
+    first: true, // 是否第一次加载
+    haveTask: false
   },
 
   /**
@@ -38,7 +39,7 @@ Page({
       refreshTime: date.toLocaleTimeString(),
       hidebottom: true,
     });
-    console.log(date.toLocaleTimeString());
+    //console.log(date.toLocaleTimeString());
     var id = [];
     var that = this;
     var contents = [];
@@ -46,12 +47,12 @@ Page({
       wx.request({
         url: 'http://172.26.17.164:8080/task/getAllTask', //仅为示例，并非真实的接口地址
         header: {
-          'content-type': "application/x-www-form-urlencoded" // 默认值
+          'content-type': "application/x-www-form-urlencoded", // 默认值
         },
         success(res) {
           contents = res.data.data.list;
-          console.log(contents.length);
-          console.log(contents[2]);
+          //console.log(contents.length);
+          //console.log(contents[2]);
           that.setData({ contentlist: contents });
           var size = contents.length;
           if (size < 10)
@@ -65,29 +66,66 @@ Page({
       });
   },
 
-  getTaskById: function (tid) {
-    wx.request({
-      url: 'http://172.26.17.164:8080/task/getTaskById', //仅为示例，并非真实的接口地址
-      data: {
-        id: tid
-      },
-      async: true,
-      header: {
-        'content-type': "application/x-www-form-urlencoded" // 默认值
-      },
-      success(res) {
-        return res.data.data.task;
-      },
-      fail(err) {
-      }
-    });
-  },
-
   tapfunc: function (e) {
     var taskid = e.target.dataset.tid;
-    wx.navigateTo({
-      url: '../detail/detail?tid='+ taskid
-    });
+    var number = e.target.dataset.num;
+    //console.log(getApp().globalData.userInfo.isLogin);
+    if (getApp().globalData.userInfo.isLogin == true) {
+      var userInfo = getApp().globalData.userInfo.moreInfo;
+      wx.request({
+        url: 'http://172.26.17.164:8080/task/findAllUserInTask', //仅为示例，并非真实的接口地址
+        data: {
+          taskId: taskid
+        },
+        header: {
+          'content-type': "application/x-www-form-urlencoded", // 默认值
+          'cookie': wx.getStorageSync('cookieKey')
+        },
+        success(res) {
+          var userlist = res.data.data.list;
+          var curnumber = res.data.data.list.length;
+          var haveuser = userlist.findIndex(function(s){
+            s.username == userInfo.username;
+          });
+          if (haveuser == -1) {
+            if (curnumber <= number) {
+              wx.navigateTo({
+                url: '../detail/detail?tid=' + taskid
+              });
+            } else {
+              wx.showToast({
+                title: '人数已满',
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          } else {
+            wx.showToast({
+              title: '已领取',
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        },
+        fail(err) {
+        }
+      });
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '请先登陆',
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定');
+            wx.navigateTo({
+              url: '../loginPage/loginPage'
+            });
+          } else if (res.cancel) {
+            console.log('用户点击取消');
+          }
+        }
+      })
+    }
   },
 
   mask: function (number) {

@@ -25,7 +25,7 @@
     </view>
     <view style="height: 150rpx;"></view>
     <view class="transparent">
-      <button class="submit" type="primary">领取任务</button>
+      <button class="submit" type="primary" catchtap="tapfunc">领取任务</button>
     </view>
   </scroll-view>
   <!--

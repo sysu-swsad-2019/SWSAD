@@ -46,8 +46,8 @@ Page({
     sexInfo: ["不限制", "男", "女"],
     gradeInfo: ["不限制", "大一", "大二", "大三", "大四", "研一", "研二", "研三"],
     creditInfo: ["不限制", "100分", "95分及以上", "90分及以上"],
-    groupInfo: ["不限制", "运动健将", "快乐肥宅", "高分学霸", "社交达人"]
-
+    groupInfo: ["不限制", "运动健将", "快乐肥宅", "高分学霸", "社交达人"],
+    task_id: 0
   },
 
   numtostr: function (num) {
@@ -61,7 +61,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //var taskid = 1;
     var taskid = options.tid;
+    this.setData({task_id: taskid});
     var that = this;
     wx.request({
       url: 'http://172.26.17.164:8080/task/getTaskById', //仅为示例，并非真实的接口地址
@@ -72,13 +74,13 @@ Page({
         'content-type': "application/x-www-form-urlencoded" // 默认值
       },
       success(res) {
-        console.log(res.data.data.task);
+        //console.log(res.data.data.task);
         var taskcontent = res.data.data.task;
         var datenum = taskcontent.endtime;
         var date = new Date(datenum);
         var str = "";
         str = date.getFullYear() + "." + (date.getMonth() + 1) + "." + date.getDate()  + " " + that.numtostr(date.getHours()) + ":" + that.numtostr(date.getMinutes()) + ":" + that.numtostr(date.getSeconds());
-        console.log(str);
+        //console.log(str);
         var task_info = that.data.taskInfo;
         task_info[1].text = str;
         task_info[2].text = taskcontent.acceptNumLimit;
@@ -88,9 +90,51 @@ Page({
         task_info[6].text = that.data.creditInfo[taskcontent.creditMin];
         task_info[7].text = that.data.groupInfo[taskcontent.groupId];
         that.setData({taskInfo: task_info});
-        that.setData({ content: taskcontent });
+        that.setData({ contents: taskcontent });
       }
     });
+  },
+
+  tapfunc: function() {
+    var that = this;
+    var userInfo = getApp().globalData.userInfo.moreInfo;
+    var itemlist = this.data.contents;
+    //console.log("haha");
+    //console.log(userInfo);
+    console.log(itemlist);
+    if (userInfo.sex != itemlist.sex && itemlist.sex != 0) {
+      wx.showToast({
+        title: '性别不符合要求',
+        icon: 'none',
+        duration: 2000
+      });
+    } else if (userInfo.grade != itemlist.grade && itemlist.grade != 0) {
+      wx.showToast({
+        title: '年级不符合要求',
+        icon: 'none',
+        duration: 2000
+      });
+    } else if (userInfo.credit < itemlist.creditMin && itemlist.creditMin != 0) {
+      wx.showToast({
+        title: '信誉不符合要求',
+        icon: 'none',
+        duration: 2000
+      });
+    } else {
+      wx.request({
+        url: 'http://172.26.17.164:8080/task/addUserInTask', //仅为示例，并非真实的接口地址
+        data: {
+          taskId: that.data.task_id
+        },
+        header: {
+          'content-type': "application/x-www-form-urlencoded", // 默认值
+          'cookie': wx.getStorageSync('cookieKey')
+        },
+        success(res) {
+          console.log(res.data);
+        }
+      });
+    }
   },
 
   /**
