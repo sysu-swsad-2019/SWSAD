@@ -12,22 +12,27 @@ Page({
     tagShow1: false,
     tagShow2: true,
     userListInfo: [{
+      id: 0,
       icon: '../../images/footer-icon-04.png',
       text: '领取的任务',
       tap:'acceptTaskTap'
     }, {
+      id: 1,
       icon: '../../images/iconfont-dingdan.png',
       text: '发布的任务',
       tap: 'releaseTaskTap'
     }, {
+      id: 2,
       icon: '../../images/footer-icon-01.png',
       text: '我的闲钱币',
       tap: 'coinTap'
     }, {
+      id: 3,
       icon: '../../images/修改资料.png',
       text: '完善资料',
       tap: 'modifyInfoTap'
     },{
+      id: 4,
       icon: '../../images/iconfont-kefu.png',
       text: '联系客服'
     }]
@@ -86,6 +91,29 @@ Page({
     wx.navigateTo({
       url: '../loginPage/loginPage?id=1'
     })
+    this.setData({
+      tagShow1: true,
+      tagShow2: false
+    })
+  },
+  getReceivedTasks:function(e) {
+    wx.navigateTo({
+      url: '../tasks/tasks?param=0',
+    })
+    console.log(e);
+  },
+  getReleasedTasks: function (e) {
+    wx.navigateTo({
+      url: '../tasks/tasks?param=1',
+    })
+    // console.log(e);
+  },
+  getMyCoins: function (e) {
+    // console.log(e);
+  },
+  contactCustomerService: function (e) {
+    // console.log(e);
+
   }
   ,
   /**

@@ -1,0 +1,43 @@
+<view class="task">
+  <!--
+  <view class="task-item" wx:for="{{content}}" bindtap="tapfunc">
+    <text class="task-item-title">{{item.task_title}}</text>
+    <text class="task-item-content">{{item.user_name}}: {{item.phone}}
+    </text>
+  </view>
+  -->
+
+  <view class="header" hidden="{{hidetop}}">
+    <view style="text-align: center;">网络异常</view>
+  </view>
+
+  <view class="task-list">
+    <view class="task-item" wx:for="{{tasklist}}" wx:key="index" bindtap="tapfunc">
+      <image class="task-img" src="{{pic_urls[item.type]}}"></image>
+      <view class="task-content">
+        <view class="task-title">{{item.name}}</view>
+        <view class="task-state">
+          <image class="task-state-img" src="{{state_urls[item.state]}}"></image>
+          <view class="task-state-text" style="color: {{colors[item.state]}}">{{state_texts[item.state]}}</view>
+        </view>
+        <view class="task-detail">{{item.description}}</view>
+      </view>
+      <view class="task-right">
+        <view class="task-coin">
+          <image class="task-coin-img" src="{{coin_url}}"></image>
+          <view class="task-coin-number">{{item.coin}}币</view>
+        </view>
+        <view class="task-people">
+          <image class="task-people-img" src="{{people_url}}"></image>
+          <view class="task-people-number">{{item.people}}人</view>
+        </view>
+        <view wx:if="{{0}}" class="task-button" style="background-color:  #33a3dc;" bindtap="">领取</view>
+        <view wx:if="{{1}}" class="task-button" style="background-color:grey;">领取</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom" hidden="{{hidebottom}}">
+    已到底部
+  </view>
+</view>
