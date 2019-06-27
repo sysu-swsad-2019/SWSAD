@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/task/task",
     "pages/release/release",
     "pages/detail/detail",
@@ -8,8 +9,7 @@
     "pages/userdetail/userdetail",
     "pages/groupdetail/groupdetail",
     "pages/questionnaire/questionnaire",
-    "pages/registerPage/registerPage",
-    "pages/home/home"
+    "pages/registerPage/registerPage"
   ],
   "window": {
     "backgroundTextStyle": "light",
