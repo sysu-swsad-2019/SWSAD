@@ -2,17 +2,20 @@
   "pages": [
     "pages/task/task",
     "pages/taskaccept/taskaccept",
+    "pages/home/home",
     "pages/acTaskDetail/acTaskDetail",
     "pages/reTaskDetail/reTaskDetail",
     "pages/taskrelease/taskrelease",
-    "pages/home/home",
+    "pages/taskaccept/taskaccept",
     "pages/detail/detail",
     "pages/questionnaire/questionnaire",
     "pages/createQuestionnaire/createQuestionnaire",
     "pages/userdetail/userdetail",
     "pages/loginPage/loginPage",
-    "pages/editUserInfo/editUserInfo",
     "pages/group/group",
+    "pages/getMoney/getMoney",
+    "pages/editUserInfo/editUserInfo",
+    "pages/creategroup/creategroup",
     "pages/groupdetail/groupdetail",
     "pages/registerPage/registerPage",
     "pages/release/release"
@@ -31,16 +34,16 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/release/release",
-        "iconPath": "images/release.png",
-        "selectedIconPath": "images/release.png",
-        "text": "发布任务"
-      },
-      {
         "pagePath": "pages/task/task",
         "iconPath": "images/list.png",
         "selectedIconPath": "images/list.png",
         "text": "任务列表"
+      },
+      {
+        "pagePath": "pages/release/release",
+        "iconPath": "images/release.png",
+        "selectedIconPath": "images/release.png",
+        "text": "发布任务"
       },
       {
         "pagePath": "pages/home/home",

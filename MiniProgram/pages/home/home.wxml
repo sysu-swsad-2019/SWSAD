@@ -7,44 +7,15 @@
   </view>
   <view class="info_list">
     <block>
-        <view class="weui_cell" bindtap="getReceivedTasks">
-            <view class="weui_cell_hd"><image src="../../images/footer-icon-04.png"></image></view>
+        <view class="weui_cell" wx:for='{{userListInfo}}' wx:key='index'>
+          <view class='cell_view' bindtap='{{item.tap}}'>
+            <view class="weui_cell_hd"><image src="{{item.icon}}"></image></view>
             <view class="weui_cell_bd">
-                <view class="weui_cell_bd_p"> 领取的任务 </view>
+                <view class="weui_cell_bd_p" >{{item.text}}</view>
             </view>
-            <view class="with_arrow"></view>
+            <image class="with_arrow" src='../../images/icon-arrowdown.png'></image>
+          </view>
         </view>
     </block>
-
-    <block>
-        <view class="weui_cell" bindtap="getReleasedTasks">
-            <view class="weui_cell_hd"><image src="../../images/iconfont-dingdan.png"></image></view>
-            <view class="weui_cell_bd">
-                <view class="weui_cell_bd_p"> 发布的任务 </view>
-            </view>
-            <view class="with_arrow"></view>
-        </view>
-    </block>
-
-    <block>
-        <view class="weui_cell" bindtap="getMyCoins">
-            <view class="weui_cell_hd"><image src="../../images/footer-icon-01.png"></image></view>
-            <view class="weui_cell_bd">
-                <view class="weui_cell_bd_p"> 我的闲钱币 </view>
-            </view>
-            <view class="with_arrow"></view>
-        </view>
-    </block>
-
-    <block>
-        <view class="weui_cell" bindtap="contactCustomerService">
-            <view class="weui_cell_hd"><image src="../../images/iconfont-kefu.png"></image></view>
-            <view class="weui_cell_bd">
-                <view class="weui_cell_bd_p"> 联系客服 </view>
-            </view>
-            <view class="with_arrow"></view>
-        </view>
-    </block>
-
   </view>
 </view>

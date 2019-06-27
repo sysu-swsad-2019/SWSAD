@@ -310,6 +310,12 @@ Page({
     });
   },
   submit: function () {
+    if (!app.globalData.userInfo.isLogin){
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+    }
     var _this = this, title = '', content = '', imgs = '';
     if (app.g_status) {
       app.showErrorModal(app.g_status, '提交失败');

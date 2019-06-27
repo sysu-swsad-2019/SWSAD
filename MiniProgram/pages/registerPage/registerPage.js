@@ -1,4 +1,5 @@
 // pages/registerPage/registerPage.js
+var app = getApp()
 var Util = require('../../utils/util.js');
 Page({
 

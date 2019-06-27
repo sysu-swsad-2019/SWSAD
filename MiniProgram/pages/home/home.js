@@ -12,31 +12,58 @@ Page({
     tagShow1: false,
     tagShow2: true,
     userListInfo: [{
-      id: 0,
       icon: '../../images/footer-icon-04.png',
       text: '领取的任务',
       tap:'acceptTaskTap'
     }, {
-      id: 1,
       icon: '../../images/iconfont-dingdan.png',
       text: '发布的任务',
       tap: 'releaseTaskTap'
     }, {
-      id: 2,
       icon: '../../images/footer-icon-01.png',
       text: '我的闲钱币',
       tap: 'coinTap'
     }, {
-      id: 3,
       icon: '../../images/修改资料.png',
       text: '完善资料',
       tap: 'modifyInfoTap'
     },{
-      id: 4,
       icon: '../../images/iconfont-kefu.png',
       text: '联系客服'
     }]
   },
+
+  acceptTaskTap: function (e) {
+    if (app.globalData.userInfo.isLogin) {
+      wx.navigateTo({
+        url: '../tasks/tasks?param=0',
+      })
+    }
+    else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+    }
+
+    console.log(e);
+  },
+  releaseTaskTap: function (e) {
+
+    if (app.globalData.userInfo.isLogin) {
+      wx.navigateTo({
+        url: '../tasks/tasks?param=1',
+      })
+    // console.log(e);
+    }
+    else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+    }
+  },
+
   modifyInfoTap: function(){
     if(app.globalData.userInfo.isLogin){
       wx.navigateTo({
@@ -51,6 +78,22 @@ Page({
     }
    
   },
+
+  coinTap:function(){
+
+    if (app.globalData.userInfo.isLogin) {
+      wx.navigateTo({
+        url: '../getMoney/getMoney',
+      })
+    }
+    else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+    }
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -91,29 +134,6 @@ Page({
     wx.navigateTo({
       url: '../loginPage/loginPage?id=1'
     })
-    this.setData({
-      tagShow1: true,
-      tagShow2: false
-    })
-  },
-  getReceivedTasks:function(e) {
-    wx.navigateTo({
-      url: '../tasks/tasks?param=0',
-    })
-    console.log(e);
-  },
-  getReleasedTasks: function (e) {
-    wx.navigateTo({
-      url: '../tasks/tasks?param=1',
-    })
-    // console.log(e);
-  },
-  getMyCoins: function (e) {
-    // console.log(e);
-  },
-  contactCustomerService: function (e) {
-    // console.log(e);
-
   }
   ,
   /**
@@ -134,23 +154,30 @@ Page({
         tagShow1: true,
         tagShow2: false,
       })
-      wx.request({
-        url: "http://172.26.17.164:8080/userinfo/getUserInfo",
-        header: {
-          "content-type": "application/x-www-form-urlencoded",
-          'cookie': wx.getStorageSync('cookieKey')
-        },
-        method: "POST",
-        complete: function (res) {
-          // {"money":null,"phone":null,"university":null,"sex":"0","grade":null,"nickname":"91d213c3bbd24787ba97c73bac785ac7","credit":null,"uuid":"91d213c3bbd24787ba97c73bac785ac7","email":null,"iconpath":null,"academy":null,"username":"q"}
-          app.globalData.userInfo.moreInfo = res.data
-          console.log(res.data)
-          console.log(app.globalData.userInfo.moreInfo.username)
-          that.setData({
-            userInfo: res.data
-          })
-        }
-      })
+      if (app.globalData.userInfo.moreInfo==null){
+        wx.request({
+          url: "http://172.26.17.164:8080/userinfo/getUserInfo",
+          header: {
+            "content-type": "application/x-www-form-urlencoded",
+            'cookie': wx.getStorageSync('cookieKey')
+          },
+          method: "POST",
+          complete: function (res) {
+            // {"money":null,"phone":null,"university":null,"sex":"0","grade":null,"nickname":"91d213c3bbd24787ba97c73bac785ac7","credit":null,"uuid":"91d213c3bbd24787ba97c73bac785ac7","email":null,"iconpath":null,"academy":null,"username":"q"}
+            app.globalData.userInfo.moreInfo = res.data
+            console.log(res.data)
+            console.log(app.globalData.userInfo.moreInfo.username)
+            that.setData({
+              userInfo: res.data
+            })
+          }
+        })
+      }else{
+        that.setData({
+          userInfo: app.globalData.userInfo.moreInfo
+        })
+      }
+
     }
   },
 

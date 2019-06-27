@@ -9,11 +9,26 @@ Page({
       {
         title:'问题1',
         description:'问题描述1',
-        
+        type:1,
+        select:0,
+        must:1,
+        option:[
+          {
+            optionText:'选项1'
+          },
+          {
+            optionText: '选项2'
+          }
+        ],
+
       },
+      {
+        title: '问题1',
+        description: '问题描述1',
+        type: '2',
+        option: [],
 
-
-
+      },
     ]
 
   },

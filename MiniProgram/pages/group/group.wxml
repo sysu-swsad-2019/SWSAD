@@ -1,5 +1,6 @@
 <!--pages/group/group.wxml-->
   <view class="container">
+    <view class='create_btn' bindtap='create_tap'>创建兴趣小组</view>
     <view class="group-items" wx:for="{{contentlist}}" wx:key="index" bindtap="listItemTap">
         <view class='one-item'>
           <image class="group_img" src="{{item.imgurl}}"/>

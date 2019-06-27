@@ -3,7 +3,6 @@ page{
    background-color: #EEEEEE;
 }
 .container{
- 
   display: flex;
   flex-direction: column;
   justify-content: center;

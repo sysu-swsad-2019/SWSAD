@@ -76,6 +76,13 @@ Page({
       url: '../groupdetail/groupdetail',
     })
   },
+
+  create_tap:function(e){
+    wx.navigateTo({
+      url: '../creategroup/creategroup',
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
