@@ -4,97 +4,93 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tasklist: [{
-        tid: 1,
-        name: '帮忙取个快递哈哈哈哈哈',
-        coin: 50,
-        people: 100,
-        type: 0, //两个url在请求时分别根据type和state获得，type对应见文档，state：0：yellow，1：green，2：gray，3：red
-        state: 0,
-        description: '蜂巢5号柜，取件码11111，送到xxx谢谢！！',
-      },
-      {
-        tid: 2,
-        name: '帮忙买个麦当劳',
-        coin: 60,
-        people: 200,
-        type: 1, //两个url在请求时分别根据type和state获得，type对应见文档，state：0：yellow，1：green，2：gray，3：red
-        state: 2,
-        description: '买个xxx套餐送到xxx谢谢！',
-      },
-      {
-        tid: 3,
-        name: '帮忙找下资料',
-        coin: 70,
-        people: 300,
-        type: 2, //两个url在请求时分别根据type和state获得，type对应见文档，state：0：yellow，1：green，2：gray，3：red
-        state: 1,
-        description: '各位帮忙找下微信小程序的学习视频！！！挺急的，感谢！！',
-      },
-      {
-        tid: 4,
-        name: '帮忙填个问卷',
-        coin: 80,
-        people: 400,
-        type: 3, //两个url在请求时分别根据type和state获得，type对应见文档，state：0：yellow，1：green，2：gray，3：red
-        state: 0,
-        description: '链接在此：http://xxxxxxx.com',
-      },
-      {
-        tid: 5,
-        name: '简历征集',
-        coin: 90,
-        people: 100,
-        type: 4,//两个url在请求时分别根据type和state获得，type对应见文档，state：0：yellow，1：green，2：gray，3：red
-        state: 3,
-        description: '现收集应届毕业生简历50份，模板见http://xxxxxxx.com',
-      },
-      {
-        tid: 6,
-        name: '组队跑步去~',
-        people: 10,
-        coin: 20,
-        type: 5, //两个url在请求时分别根据type和state获得，type对应见文档，state：0：yellow，1：green，2：gray，3：red
-        state: 0,
-        description: '找个人一块跑步挣章啦！！',
-      },
-      {
-        tid: 7,
-        name: '我是充数的changwenceshichangwenceshichangwenceshi',
-        coin: 100,
-        people: 1,
-        type: 6, //两个url在请求时分别根据type和state获得，type对应见文档，state：0：yellow，1：green，2：gray，3：red
-        state: 0,
-        description: '不知道写啥就谢谢在座的各位吧',
-      }
-    ],
-
     colors: ["yellow", "green", "grey", "red"],
-    pic_urls: ['../../images/快递.png', '../../images/外卖.png', '../../images/资料.png', '../../images/问卷.png', '../../images/投简历.png', '../../images/组队请求.png', '../../images/其他.png'],
+    pic_urls: ["../../images/general.png",'../../images/快递.png', '../../images/外卖.png', '../../images/资料.png', '../../images/问卷.png', '../../images/投简历.png', '../../images/组队请求.png', '../../images/其他.png'],
     state_urls: ['../../images/yellow_circle.png', '../../images/green_circle.png', '../../images/gray_circle.png', '../../images/red_circle.png'],
     state_texts: ['正在进行', '已完成', '尚未开始', '超过时限'],
     coin_url: "../../images/money_icon.png",
     people_url: "../../images/用户.png",
+    task_id: [], // 所有任务的id
     count: 20,
     hideHeader: true,
     hideBottom: true,
     refreshTime: '', // 刷新的时间 
     contentlist: [], // 列表显示的数据源
-    allPages: '', // 总页数
-    currentPage: 1, // 当前页数  默认是1
+    currentlist: [], // 当前的数据源
+    currentPage: 10, // 当前页数  默认是1
     loadMoreData: '加载更多……',
     theight: 1050,
     hidetop: true,
-    hidebottom: false
+    hidebottom: true,
+    first: true // 是否第一次加载
   },
 
-  tapfunc: function(e) {
-    wx.navigateTo({
-      url: '../detail/detail'
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.initial();
+  },
+
+  initial: function () {
+    var date = new Date();
+    this.setData({
+      refreshTime: date.toLocaleTimeString(),
+      hidebottom: true,
+    });
+    console.log(date.toLocaleTimeString());
+    var id = [];
+    var that = this;
+    var contents = [];
+    var current = [];
+      wx.request({
+        url: 'http://172.26.17.164:8080/task/getAllTask', //仅为示例，并非真实的接口地址
+        header: {
+          'content-type': "application/x-www-form-urlencoded" // 默认值
+        },
+        success(res) {
+          contents = res.data.data.list;
+          console.log(contents.length);
+          console.log(contents[2]);
+          that.setData({ contentlist: contents });
+          var size = contents.length;
+          if (size < 10)
+            current = contents.slice(0, size);
+          else
+            current = contents.slice(0,10)
+          that.setData({currentlist: current});
+          that.setData({first: false});
+          that.setData({currentPage: current.length});
+        }
+      });
+  },
+
+  getTaskById: function (tid) {
+    wx.request({
+      url: 'http://172.26.17.164:8080/task/getTaskById', //仅为示例，并非真实的接口地址
+      data: {
+        id: tid
+      },
+      async: true,
+      header: {
+        'content-type': "application/x-www-form-urlencoded" // 默认值
+      },
+      success(res) {
+        return res.data.data.task;
+      },
+      fail(err) {
+      }
     });
   },
 
-  mask: function(number) {
+  tapfunc: function (e) {
+    var taskid = e.target.dataset.tid;
+    wx.navigateTo({
+      url: '../detail/detail?tid='+ taskid
+    });
+  },
+
+  mask: function (number) {
     var arr = number.split('');
     if (arr.length == 11) {
       arr.splice(3, 4, '*', '*', '*', '*');
@@ -102,11 +98,11 @@ Page({
     return arr.join('');
   },
 
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     wx.showNavigationBarLoading(); //在标题栏中显示加载
     setTimeout(this.hidefunc, 1000);
   },
-  hidefunc: function() {
+  hidefunc: function () {
     var networkType;
     var that = this;
     wx.getNetworkType({
@@ -114,13 +110,13 @@ Page({
         networkType = res.networkType;
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh();
-        console.log(typeof networkType);
         console.log(networkType);
         if (networkType == "none") {
           that.setData({
             hidetop: false
           });
         } else {
+          that.initial();
           that.setData({
             hidetop: true
           });
@@ -131,70 +127,42 @@ Page({
       }
     });
   },
-  /*
+  
   onReachBottom: function() {
-    this.setData({
-      hideBottom: false
-    });
     setTimeout(this.loadMore, 500);
   },
-  */
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-    var content = [];
-    for (let i = 0; i < 20; i++) {
-      var title = "外卖" + i;
-      var name = "老张" + i;
-      var pho = "15106058800";
-      pho = this.mask(pho);
-      content.push({
-        id: 'task' + i,
-        task_title: title,
-        user_name: name,
-        phone: pho
-      });
-    }
-    this.setData({
-      contentlist: content
-    });
-    var date = new Date();
-    this.setData({
-      refreshTime: date.toLocaleTimeString()
-    });
-    console.log(date.toLocaleTimeString());
-  },
 
-  loadMore: function() {
+
+  loadMore: function () {
     var that = this;
+    
+    var current = that.data.currentlist;
     var content = that.data.contentlist;
-    for (let i = 0; i < 3; i++) {
-      var title = "外卖" + that.data.count;
-      var name = "老张" + that.data.count;
-      var pho = "15106058800";
-      that.data.count++;
-      content.push({
-        id: 'task' + i,
-        task_title: title,
-        user_name: name,
-        phone: pho
+    var newlist = [];
+    if (current.length == content.length) {
+      this.setData({
+        hidebottom: false
       });
+    } else {
+      var cur = that.data.currentPage;
+      var len = that.data.contentlist.length;
+      console.log(cur);
+      console.log(len);
+      if (len - cur < 5) {
+        current = current.concat(content.slice(cur, len));
+        that.setData({currentPage: len, currentlist: current});
+      } else {
+        current = current.concat(content.slice(cur, cur+5));
+        that.setData({ currentPage: cur+5, currentlist: current });
+      }
     }
-    that.setData({
-      contentlist: content
-    });
-    this.setData({
-      hideBottom: true
-    });
-    console.log(this.data.contentlist);
   },
 
-  refresh: function(e) {
+  refresh: function (e) {
 
   },
 
-  getData: function() {
+  getData: function () {
     var that = this;
     var pageIndex = that.data.currentPage;
     if (pageIndex == 1) { // 下拉刷新

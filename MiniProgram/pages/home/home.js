@@ -6,34 +6,57 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
+    defaultUserIcon:'../../images/avatar.png',
+    userInfo: null,
     projectSource: '',
-    isLogin: false,
     tagShow1: false,
     tagShow2: true,
     userListInfo: [{
       id: 0,
       icon: '../../images/footer-icon-04.png',
       text: '领取的任务',
+      tap:'acceptTaskTap'
     }, {
       id: 1,
       icon: '../../images/iconfont-dingdan.png',
       text: '发布的任务',
+      tap: 'releaseTaskTap'
     }, {
       id: 2,
       icon: '../../images/footer-icon-01.png',
       text: '我的闲钱币',
+      tap: 'coinTap'
     }, {
       id: 3,
+      icon: '../../images/修改资料.png',
+      text: '完善资料',
+      tap: 'modifyInfoTap'
+    },{
+      id: 4,
       icon: '../../images/iconfont-kefu.png',
       text: '联系客服'
     }]
   },
-
+  modifyInfoTap: function(){
+    if(app.globalData.userInfo.isLogin){
+      wx.navigateTo({
+        url: '../editUserInfo/editUserInfo'
+      })
+    }
+    else{
+      wx.showToast({
+        title: '请先登录',
+        icon:'none'
+      })
+    }
+   
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
+    console.log("onLoad")
+    /*
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -59,9 +82,12 @@ Page({
           })
         }
       })
-    }
+      
+    }*/
   },
+
   clickLogin:function(e) {
+    
     wx.navigateTo({
       url: '../loginPage/loginPage?id=1'
     })
@@ -87,6 +113,7 @@ Page({
   },
   contactCustomerService: function (e) {
     // console.log(e);
+
   }
   ,
   /**
@@ -100,7 +127,31 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this
+    console.log("onShow")
+    if (app.globalData.userInfo.isLogin) {
+      this.setData({
+        tagShow1: true,
+        tagShow2: false,
+      })
+      wx.request({
+        url: "http://172.26.17.164:8080/userinfo/getUserInfo",
+        header: {
+          "content-type": "application/x-www-form-urlencoded",
+          'cookie': wx.getStorageSync('cookieKey')
+        },
+        method: "POST",
+        complete: function (res) {
+          // {"money":null,"phone":null,"university":null,"sex":"0","grade":null,"nickname":"91d213c3bbd24787ba97c73bac785ac7","credit":null,"uuid":"91d213c3bbd24787ba97c73bac785ac7","email":null,"iconpath":null,"academy":null,"username":"q"}
+          app.globalData.userInfo.moreInfo = res.data
+          console.log(res.data)
+          console.log(app.globalData.userInfo.moreInfo.username)
+          that.setData({
+            userInfo: res.data
+          })
+        }
+      })
+    }
   },
 
   /**

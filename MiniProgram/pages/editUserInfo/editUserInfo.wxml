@@ -1,0 +1,21 @@
+<!--pages/editUserInfo/editUserInfo.wxml-->
+<view class='container'>
+  <view class='big_seperate'></view>
+  <view class="list-items" wx:for="{{selection_list}}" wx:key="index">
+    <view class='one-item' bindtap='{{item.tap}}'>
+      <view class='title_view'>{{item.title}}</view>
+      <view class='right_block'>
+        <view class='text_view' wx:if='{{index!=0}}'>{{item.text}}</view>
+        <image class='pic_view' wx:if='{{index==0}}' src='{{item.img_url}}'></image>
+        <image class='next_view' src='../../images/next.png'></image>
+      </view>
+    </view>
+    <view class='big_seperate' wx:if='{{index==2||index==4}}'></view>
+    <view class='table_line'/>
+  </view>
+  <modal hidden="{{hiddenmodalInput}}" title="请输入修改信息" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
+    <input class='inputText' type='text' placeholder="{{input_text}}" bindinput='inputChange' maxlength='20' auto-focus/>
+</modal> 
+
+
+</view>

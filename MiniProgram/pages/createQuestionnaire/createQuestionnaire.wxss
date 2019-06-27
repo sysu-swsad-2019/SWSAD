@@ -1,0 +1,53 @@
+/* pages/createQuestionnaire/createQuestionnaire.wxss */
+page{
+   background-color: #EEEEEE;
+}
+.container{
+ 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.QuestionnaireName{
+  border: solid;
+  height: 100rpx;
+  width: 750rpx;
+  background-color: white;
+  border-color: lightgray;
+  font-size: 32rpx;
+  text-align: center;
+}
+
+.QuestionnaireDescription{
+  border: solid;
+  height: 300rpx;
+  width: 750rpx;
+  background-color: white;
+  border-color: lightgray;
+  font-size: 32rpx;
+}
+
+.outside_text{
+  width: 750rpx;
+  text-align: left;
+  color: gray;
+  font-size: 32rpx;
+}
+
+.add_view{
+  border: solid;
+  height: 100rpx;
+  width: 750rpx;
+  background-color: white;
+  border-color: lightgray;
+  font-size: 32rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add_image{
+  width: 50rpx;
+  height: 50rpx;
+}

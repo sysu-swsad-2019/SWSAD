@@ -34,8 +34,13 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: {
+      isLogin:false,
+      moreInfo:null,
+    }
+
   },
+  /*
   getUserInfo: function (cb) {
     var _this = this;
     //获取微信用户信息
@@ -48,7 +53,7 @@ App({
         _this.g_status = '未授权';
       }
     });
-  },
+  },*/
   showErrorModal: function (content, title) {
     wx.showModal({
       title: title || '加载失败',
