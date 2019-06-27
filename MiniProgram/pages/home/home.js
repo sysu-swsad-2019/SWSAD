@@ -33,17 +33,35 @@ Page({
     }]
   },
 
-  getReceivedTasks: function (e) {
-    wx.navigateTo({
-      url: '../tasks/tasks?param=0',
-    })
+  acceptTaskTap: function (e) {
+    if (app.globalData.userInfo.isLogin) {
+      wx.navigateTo({
+        url: '../tasks/tasks?param=0',
+      })
+    }
+    else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+    }
+
     console.log(e);
   },
-  getReleasedTasks: function (e) {
-    wx.navigateTo({
-      url: '../tasks/tasks?param=1',
-    })
+  releaseTaskTap: function (e) {
+
+    if (app.globalData.userInfo.isLogin) {
+      wx.navigateTo({
+        url: '../tasks/tasks?param=1',
+      })
     // console.log(e);
+    }
+    else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+    }
   },
 
   modifyInfoTap: function(){
@@ -62,9 +80,18 @@ Page({
   },
 
   coinTap:function(){
-    wx.navigateTo({
-      url: '../getMoney/getMoney',
-    })
+
+    if (app.globalData.userInfo.isLogin) {
+      wx.navigateTo({
+        url: '../getMoney/getMoney',
+      })
+    }
+    else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+    }
   },
 
   /**

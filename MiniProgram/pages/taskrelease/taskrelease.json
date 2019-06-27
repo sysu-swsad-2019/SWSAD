@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "已发布任务",
+  "navigationBarBackgroundColor": "#33a3dc",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {},
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#EEEEEE"
+}

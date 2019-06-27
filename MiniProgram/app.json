@@ -1,7 +1,12 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/acTaskDetail/acTaskDetail",
+    "pages/reTaskDetail/reTaskDetail",
     "pages/task/task",
+    "pages/taskrelease/taskrelease",
+    "pages/taskaccept/taskaccept",
+    "pages/detail/detail",
     "pages/questionnaire/questionnaire",
     "pages/createQuestionnaire/createQuestionnaire",
     "pages/userdetail/userdetail",
@@ -10,7 +15,6 @@
     "pages/getMoney/getMoney",
     "pages/editUserInfo/editUserInfo",
     "pages/creategroup/creategroup",
-    "pages/detail/detail",
     "pages/groupdetail/groupdetail",
     "pages/registerPage/registerPage",
     "pages/release/release"
@@ -35,10 +39,10 @@
         "text": "任务列表"
       },
       {
-        "pagePath": "pages/group/group",
-        "iconPath": "images/小组.png",
-        "selectedIconPath": "images/小组.png",
-        "text": "兴趣小组"
+        "pagePath": "pages/release/release",
+        "iconPath": "images/release.png",
+        "selectedIconPath": "images/release.png",
+        "text": "发布任务"
       },
       {
         "pagePath": "pages/home/home",

@@ -1,0 +1,160 @@
+page {
+  background-color: #EEEEEE;
+  position: relative;
+}
+.task {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  height: 1140rpx;
+  margin: 8px 8px 8px 8px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 2px 1px #CCCCCC;
+}
+.task-title {
+  height: 60rpx;
+  border-bottom: solid 1px #CCCCCC;
+  padding: 5px;
+  text-align: center;
+}
+.task-message {
+  padding: 30rpx 40rpx;
+}
+.task-content {
+  height: 1060rpx;
+  border-bottom: solid 1px #CCCCCC;
+}
+.task-host {
+  padding: 10px;
+  height: 100rpx;
+  border-bottom: solid 1px #CCCCCC;
+  font-size: 15px;
+}
+.task-button {
+  height: 150rpx;
+  padding: 5px;
+  position: relative;
+  background: transparent;
+}
+.button-hover { 
+}
+.buttons {
+  color: #606060;
+  border: solid 1px #b7b7b7;
+  background:  linear-gradient(to bottom, #fff, #ededed);
+}
+
+::-webkit-scrollbar {
+width: 4px;
+height: 6px;
+background-color: #ffffff;
+}
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  display: none;
+}
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb
+{
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 10px rgba(0,0,0,.3);
+background-color: #EEEEEE;
+}
+/* pages/home/home.wxss */
+.container {
+  background-color: #F6f6f6;
+  width: 100%;
+  height: 100%;
+  min-height:100%;
+  padding: 0;
+  position: fixed;
+}
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  padding: 50rpx 0;
+  align-items: center;
+  background: #33a3dc;
+}
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+.userinfo-nickname {
+  color: #fff;
+}
+.weui_cell{
+    position: relative;
+    display: flex;
+    padding: 15px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-bottom: 1px solid #dadada;
+}
+.weui_cell_hd{
+  display: inline-block;
+  width: 20px;
+  margin-right: 5px;
+}
+.weui_cell_hd image{
+  width: 100%;
+  height: 20px;
+  vertical-align: -2px;
+}
+.weui_cell_bd{
+  display: inline-block;
+}
+.weui_cell_bd_p{
+  font-size: 14px;
+  color: #939393;
+}
+.badge{
+  position: absolute;
+  top: 18px;
+  right: 40px;
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  background: #ff0000;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 8px;
+}
+.with_arrow{
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  width: 15px;
+  height: 15px;
+  /* background-image: url(../../images/icon-arrowdown.png); */
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.info-img {
+
+}
+.info-text {
+  margin-top: 5px;
+}
+.transparent {
+  width: 100%;
+  height: 180rpx;
+  background: rgba(255, 255, 1, 0.0);
+  position: fixed;
+  bottom: 0px;
+  left:0px;
+}
+.submit {
+  margin-top: 10px;
+  width: 300rpx;
+  height: 100rpx;
+  background: #33a3dc !important;
+}
