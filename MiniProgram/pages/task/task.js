@@ -81,15 +81,8 @@ Page({
           'cookie': wx.getStorageSync('cookieKey')
         },
         success(res) {
-          var userInfo = getApp().globalData.userInfo;
-          console.log(res.data.data.list[0].username);
-          console.log(userInfo);
           var userlist = res.data.data.list;
           var curnumber = res.data.data.list.length;
-          var haveuser = userlist.findIndex(function(s){
-            s.username == userInfo.username;
-          });
-          if (haveuser == -1) {
             if (curnumber <= number) {
               wx.navigateTo({
                 url: '../detail/detail?tid=' + taskid
@@ -101,13 +94,6 @@ Page({
                 duration: 2000
               })
             }
-          } else {
-            wx.showToast({
-              title: '已领取',
-              icon: 'none',
-              duration: 2000
-            })
-          }
         },
         fail(err) {
         }

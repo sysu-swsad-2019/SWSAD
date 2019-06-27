@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/task/task",
     "pages/taskaccept/taskaccept",
     "pages/acTaskDetail/acTaskDetail",
     "pages/reTaskDetail/reTaskDetail",
-    "pages/task/task",
     "pages/taskrelease/taskrelease",
     "pages/home/home",
     "pages/detail/detail",
