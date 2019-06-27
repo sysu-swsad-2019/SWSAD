@@ -105,7 +105,7 @@ Page({
     //console.log(userInfo);
     console.log(itemlist);
       wx.request({
-        url: 'http://172.26.17.164:8080/task/finishTasj', //仅为示例，并非真实的接口地址
+        url: 'http://172.26.17.164:8080/task/finishTask', //仅为示例，并非真实的接口地址
         data: {
           taskId: that.data.task_id,
           userId: that.data.user_id

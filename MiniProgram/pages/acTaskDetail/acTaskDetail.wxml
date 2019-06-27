@@ -24,9 +24,6 @@
       </block>
     </view>
     <view style="height: 150rpx;"></view>
-    <view wx:if="{{contents.state==0}}" class="transparent">
-      <button class="submit" type="primary" catchtap="tapfunc">任务结束</button>
-    </view>
   </scroll-view>
   <!--
   <view class='task-button'>
