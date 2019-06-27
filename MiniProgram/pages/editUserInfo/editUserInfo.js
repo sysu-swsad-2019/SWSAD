@@ -7,10 +7,28 @@ Page({
    */
   data: {
     // {"money":null,"phone":null,"university":null,"sex":"0","grade":null,"credit":null,"email":null,"iconpath":null,"academy":null,"username":"q"}
+    hiddenmodal:true,
+    hiddenmodalPicker:true,
     hiddenmodalInput: true,
     input:'',
     input_text:'',
     index:0,
+    sexArr: [
+      '女',
+      '男'
+    ],
+    gradeArr: [
+      '大一',
+      '大二',
+      '大三',
+      '大四',
+      '研一',
+      '研二',
+    ],
+    grade:'',
+    sex:'',
+    sexIndex:-1,
+    gradeIndex:-1,
     selection_list:[
       {
         title:'头像',
@@ -55,11 +73,43 @@ Page({
     ]
   },
 
+  iconTap:function(){
+    var that = this;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],  //可选择原图或压缩后的图片
+      sourceType: ['album', 'camera'], //可选择性开放访问相册、相机
+      success: res => {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
+        var tempFilePaths = res.tempFilePaths;
+        upload(that, tempFilePaths);
+      }
+    })
+  },
+
+  bindChange:function(e){
+    const val = e.detail.value;
+    console.log(val)
+    if(this.data.index == 2){
+      this.setData({
+        sex:this.data.sexArr[val[0]],
+        sexIndex:val[0]
+      })
+      
+    }
+    else if(this.data.index == 7){
+      this.setData({
+        grade:this.data.gradeArr[val[0]],
+        gradeIndex:val[0]+1
+      })
+    }
+  },
   nicknameTap: function(){
 
     this.setData({
       input: '',
       hiddenmodalInput: false,
+      hiddenmodal:false,
       input_text: '请输入昵称',
       index: 1
     })
@@ -70,6 +120,7 @@ Page({
     this.setData({
       input: '',
       hiddenmodalInput: false,
+      hiddenmodal: false,
       input_text: '请输入邮箱地址',
       index: 3
     })
@@ -79,6 +130,7 @@ Page({
     this.setData({
       input: '',
       hiddenmodalInput: false,
+      hiddenmodal: false,
       input_text: '请输入电话',
       index: 4
     })
@@ -88,6 +140,7 @@ Page({
     this.setData({
       input:'',
       hiddenmodalInput: false,
+      hiddenmodal: false,
       input_text: '请输入大学名',
       index: 5
     })
@@ -97,8 +150,25 @@ Page({
     this.setData({
       input: '',
       hiddenmodalInput: false,
+      hiddenmodal: false,
       input_text: '请输入学院名',
       index: 6
+    })
+  },
+
+  sexTap:function(){
+    this.setData({
+      hiddenmodalPicker: false,
+      hiddenmodal: false,
+      index: 2
+    })
+  },
+
+  gradeTap: function () {
+    this.setData({
+      hiddenmodalPicker: false,
+      hiddenmodal: false,
+      index: 7
     })
   },
 
@@ -134,6 +204,7 @@ Page({
               })
             }
             that.setData({
+              hiddenmodal: true,
               hiddenmodalInput: true,
             })
           }
@@ -166,6 +237,7 @@ Page({
               })
             }
             that.setData({
+              hiddenmodal: true,
               hiddenmodalInput: true,
             })
           }
@@ -198,6 +270,7 @@ Page({
               })
             }
             that.setData({
+              hiddenmodal: true,
               hiddenmodalInput: true,
             })
           }
@@ -230,6 +303,7 @@ Page({
               })
             }
             that.setData({
+              hiddenmodal: true,
               hiddenmodalInput: true,
             })
           }
@@ -264,19 +338,94 @@ Page({
               })
             }
             that.setData({
+              hiddenmodal: true,
               hiddenmodalInput: true,
             })
           }
         })
       }
     }
- 
+    else{
+      if(this.data.index==2){
+
+        wx.request({
+          url: "http://172.26.17.164:8080/userinfo/setUserInfo",
+          header: {
+            "content-type": "application/json",
+            'cookie': wx.getStorageSync('cookieKey')
+          },
+          method: "POST",
+          data: {
+            sex: that.data.sexIndex
+          },
+          complete: function (res) {
+            if (res.data.code == 200) {
+              app.globalData.userInfo.moreInfo.sex = that.data.sexIndex
+              that.setListData()
+              wx.showToast({
+                title: '修改成功',
+                icon: 'none'
+              })
+            }
+            else {
+              wx.showToast({
+                title: '修改失败',
+                icon: 'none'
+              })
+            }
+            that.setData({
+              hiddenmodal: true,
+              hiddenmodalInput: true,
+              hiddenmodalPicker: true,
+            })
+          }
+          
+        })
+      }else 
+      if(this.data.index==7){
+        wx.request({
+          url: "http://172.26.17.164:8080/userinfo/setUserInfo",
+          header: {
+            "content-type": "application/json",
+            'cookie': wx.getStorageSync('cookieKey')
+          },
+          method: "POST",
+          data: {
+            grade: that.data.gradeIndex
+          },
+          complete: function (res) {
+            if (res.data.code == 200) {
+              app.globalData.userInfo.moreInfo.grade = that.data.gradeIndex
+              that.setListData()
+              wx.showToast({
+                title: '修改成功',
+                icon: 'none'
+              })
+            }
+            else {
+              wx.showToast({
+                title: '修改失败',
+                icon: 'none'
+              })
+            }
+            that.setData({
+              hiddenmodal: true,
+              hiddenmodalInput: true,
+              hiddenmodalPicker: true,
+            })
+          }
+
+        })
+      }
+    }
   },
 
   cancel:function(){
     console.log('cancel')
     this.setData({
+      hiddenmodal: true,
       hiddenmodalInput: true,
+      hiddenmodalPicker:true,
     })
   },
 
@@ -288,28 +437,56 @@ Page({
 
   setListData:function(){
     var user = app.globalData.userInfo.moreInfo
-    var grade
     if (user.grade == '-1') {
-      grade = '未填'
+      this.setData({
+        grade : '未填'
+      })
+      
     } else
       if (user.grade == '1') {
-        grade = '大一'
+        this.setData({
+          grade : '大一'
+        })
       } else
         if (user.grade == '2') {
-          grade = '大二'
+          this.setData({
+            grade : '大二'
+          })
         } else
           if (user.grade == '3') {
-            grade = '大三'
+            this.setData({
+              grade : '大三'
+            })
           } else
             if (user.grade == '4') {
-              grade = '大四'
+              this.setData({
+                grade : '大四'
+              })
             } else
               if (user.grade == '5') {
-                grade = '研一'
+                this.setData({
+                  grade : '研一'
+                })
               } else
                 if (user.grade == '6') {
-                  grade = '研二'
+                  this.setData({
+                    grade : '研二'
+                  })
                 }
+    if(user.sex == '0'){
+      this.setData({
+        sex:'女'
+      })
+    }else 
+    if (user.sex == '1'){
+      this.setData({
+        sex:'男'
+      })
+    }else if(user.sex=='-1'){
+      this.setData({
+        sex: '未填'
+      })
+    }
 
     this.setData({
       selection_list: [
@@ -325,7 +502,7 @@ Page({
         },
         {
           title: '性别',
-          text: user.sex == '0' ? '女' : '男',
+          text: this.data.sex,
           tap: 'sexTap'
         },
         {
@@ -350,10 +527,10 @@ Page({
         },
         {
           title: '年级',
-          text: grade,
+          text: this.data.grade,
           tap: 'gradeTap'
         }
-      ]
+      ],
     })
   },
   /**
@@ -412,3 +589,42 @@ Page({
 
   }
 })
+
+function upload(page, path) {
+  wx.showToast({
+    icon: "loading",
+    title: "正在上传"
+  }),
+    wx.uploadFile({
+      url: "http://172.26.17.164:8080/userinfo/setUserIcon",
+      filePath: path[0],
+      name: 'file',
+      header: { "Content-Type": "multipart/form-data" },
+      formData: {
+        'cookie': wx.getStorageSync('cookieKey')
+      },
+      success: function (res) {
+        console.log(res);
+        if (res.statusCode != 200) {
+          wx.showModal({
+            title: '提示',
+            content: '上传失败',
+            showCancel: false
+          })
+          return;
+        }
+        
+      },
+      fail: function (e) {
+        console.log(e);
+        wx.showModal({
+          title: '提示',
+          content: '上传失败',
+          showCancel: false
+        })
+      },
+      complete: function () {
+        wx.hideToast();  //隐藏Toast
+      }
+    })
+}

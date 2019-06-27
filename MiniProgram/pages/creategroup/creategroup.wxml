@@ -1,0 +1,6 @@
+<!--pages/creategroup/creategroup.wxml-->
+<view class='container'>
+  <input class='GroupName' placeholder='小组名字（最多20个字）' minlength='1' maxlength='20' bindinput='GroupNameInput'></input>
+  <textarea class='GroupDescription' placeholder='小组描述（最多100个字）' minlength='1' maxlength='100' bindinput='GroupDescriptionInput'></textarea>
+<view class='create_btn' bindtap='createGroupTap'>创建小组</view>
+</view>

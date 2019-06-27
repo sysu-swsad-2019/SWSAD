@@ -1,0 +1,39 @@
+/* pages/creategroup/creategroup.wxss */
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+page{
+   background-color: #EEEEEE;
+}
+.GroupName{
+  border: solid;
+  height: 100rpx;
+  width: 750rpx;
+  background-color: white;
+  border-color: lightgray;
+  font-size: 32rpx;
+  text-align: center;
+}
+
+.GroupDescription{
+  border: solid;
+  height: 300rpx;
+  width: 750rpx;
+  background-color: white;
+  border-color: lightgray;
+  font-size: 32rpx;
+  text-align: center
+}
+.create_btn{
+  width: 500rpx;
+  padding: 30rpx;
+  background-color: #33a3dc;
+  color: white;
+  text-align: center;
+  border-radius: 10rpx;
+  margin-top: 50rpx;
+  font-size: 40rpx
+}

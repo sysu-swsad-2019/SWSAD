@@ -106,23 +106,30 @@ Page({
         tagShow1: true,
         tagShow2: false,
       })
-      wx.request({
-        url: "http://172.26.17.164:8080/userinfo/getUserInfo",
-        header: {
-          "content-type": "application/x-www-form-urlencoded",
-          'cookie': wx.getStorageSync('cookieKey')
-        },
-        method: "POST",
-        complete: function (res) {
-          // {"money":null,"phone":null,"university":null,"sex":"0","grade":null,"nickname":"91d213c3bbd24787ba97c73bac785ac7","credit":null,"uuid":"91d213c3bbd24787ba97c73bac785ac7","email":null,"iconpath":null,"academy":null,"username":"q"}
-          app.globalData.userInfo.moreInfo = res.data
-          console.log(res.data)
-          console.log(app.globalData.userInfo.moreInfo.username)
-          that.setData({
-            userInfo: res.data
-          })
-        }
-      })
+      if (app.globalData.userInfo.moreInfo==null){
+        wx.request({
+          url: "http://172.26.17.164:8080/userinfo/getUserInfo",
+          header: {
+            "content-type": "application/x-www-form-urlencoded",
+            'cookie': wx.getStorageSync('cookieKey')
+          },
+          method: "POST",
+          complete: function (res) {
+            // {"money":null,"phone":null,"university":null,"sex":"0","grade":null,"nickname":"91d213c3bbd24787ba97c73bac785ac7","credit":null,"uuid":"91d213c3bbd24787ba97c73bac785ac7","email":null,"iconpath":null,"academy":null,"username":"q"}
+            app.globalData.userInfo.moreInfo = res.data
+            console.log(res.data)
+            console.log(app.globalData.userInfo.moreInfo.username)
+            that.setData({
+              userInfo: res.data
+            })
+          }
+        })
+      }else{
+        that.setData({
+          userInfo: app.globalData.userInfo.moreInfo
+        })
+      }
+
     }
   },
 
