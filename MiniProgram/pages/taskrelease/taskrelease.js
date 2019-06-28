@@ -53,7 +53,8 @@ Page({
       success(res) {
         contents = res.data.data.list;
         //console.log(contents.length);
-        //console.log(contents[2]);
+        console.log("haha!!!");
+        console.log(contents[0]);
         that.setData({
           contentlist: contents
         });

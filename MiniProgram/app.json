@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/task/task",
     "pages/home/home",
+    "pages/task/task",
     "pages/acTaskDetail/acTaskDetail",
     "pages/reTaskDetail/reTaskDetail",
     "pages/taskrelease/taskrelease",
