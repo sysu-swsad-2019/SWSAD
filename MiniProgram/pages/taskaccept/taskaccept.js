@@ -45,7 +45,7 @@ Page({
     var contents = [];
     var current = [];
     wx.request({
-      url: 'http://172.26.17.164:8080/task/getTaskByUsername', //仅为示例，并非真实的接口地址
+      url: getApp().globalData.server + 'task/getTaskByUsername', //仅为示例，并非真实的接口地址
       header: {
         'content-type': "application/x-www-form-urlencoded", // 默认值
         'cookie': wx.getStorageSync('cookieKey')

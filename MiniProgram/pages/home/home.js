@@ -156,7 +156,7 @@ Page({
       })
       if (app.globalData.userInfo.moreInfo==null){
         wx.request({
-          url: "http://172.26.17.164:8080/userinfo/getUserInfo",
+          url: getApp().globalData.server + 'userinfo/getUserInfo',
           header: {
             "content-type": "application/x-www-form-urlencoded",
             'cookie': wx.getStorageSync('cookieKey')

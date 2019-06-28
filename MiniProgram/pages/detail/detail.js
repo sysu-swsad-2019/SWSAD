@@ -66,7 +66,7 @@ Page({
     this.setData({ task_id: taskid });
     var that = this;
     wx.request({
-      url: 'http://172.26.17.164:8080/task/getTaskById', //仅为示例，并非真实的接口地址
+      url: getApp().globalData.server + 'task/getTaskById', //仅为示例，并非真实的接口地址
       data: {
         id: taskid
       },
@@ -124,7 +124,7 @@ Page({
       });
     } else {*/
     wx.request({
-      url: 'http://172.26.17.164:8080/task/addUserInTask', //仅为示例，并非真实的接口地址
+      url: getApp().globalData.server + 'task/addUserInTask', //仅为示例，并非真实的接口地址
       data: {
         taskId: that.data.task_id
       },
