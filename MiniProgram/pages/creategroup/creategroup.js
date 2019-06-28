@@ -23,7 +23,7 @@ Page({
 
   createGroupTap:function(){
     wx.request({
-      url: "http://172.26.17.164:8080/group/insertGroup",
+      url: getApp().globalData.server + 'group/insertGroup',
       header: {
         "content-type": "application/json",
         'cookie': wx.getStorageSync('cookieKey')

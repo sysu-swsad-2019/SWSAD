@@ -179,7 +179,7 @@ Page({
     if(this.data.input!=''){
       if (this.data.index == 1) {
         wx.request({
-          url: "http://172.26.17.164:8080/userinfo/setUserInfo",
+          url: getApp().globalData.server + 'userinfo/setUserInfo',
           header: {
             "content-type": "application/json",
             'cookie': wx.getStorageSync('cookieKey')
@@ -212,7 +212,7 @@ Page({
       }else
       if (this.data.index == 3) {
         wx.request({
-          url: "http://172.26.17.164:8080/userinfo/setUserInfo",
+          url: getApp().globalData.server + 'userinfo/setUserInfo',
           header: {
             "content-type": "application/json",
             'cookie': wx.getStorageSync('cookieKey')
@@ -245,7 +245,7 @@ Page({
       }else
       if (this.data.index == 4) {
         wx.request({
-          url: "http://172.26.17.164:8080/userinfo/setUserInfo",
+          url: getApp().globalData.server + 'userinfo/setUserInfo',
           header: {
             "content-type": "application/json",
             'cookie': wx.getStorageSync('cookieKey')
@@ -278,7 +278,7 @@ Page({
       }else
       if (this.data.index == 5) {
         wx.request({
-          url: "http://172.26.17.164:8080/userinfo/setUserInfo",
+          url: getApp().globalData.server + 'userinfo/setUserInfo',
           header: {
             "content-type": "application/json",
             'cookie': wx.getStorageSync('cookieKey')
@@ -311,7 +311,7 @@ Page({
       }else
       if (this.data.index == 6) {
         wx.request({
-          url: "http://172.26.17.164:8080/userinfo/setUserInfo",
+          url: getApp().globalData.server + 'userinfo/setUserInfo',
           header: {
             "content-type": "application/json",
             'cookie': wx.getStorageSync('cookieKey')
@@ -349,7 +349,7 @@ Page({
       if(this.data.index==2){
 
         wx.request({
-          url: "http://172.26.17.164:8080/userinfo/setUserInfo",
+          url: getApp().globalData.server + 'userinfo/setUserInfo',
           header: {
             "content-type": "application/json",
             'cookie': wx.getStorageSync('cookieKey')
@@ -384,7 +384,7 @@ Page({
       }else 
       if(this.data.index==7){
         wx.request({
-          url: "http://172.26.17.164:8080/userinfo/setUserInfo",
+          url: getApp().globalData.server + 'userinfo/setUserInfo',
           header: {
             "content-type": "application/json",
             'cookie': wx.getStorageSync('cookieKey')
@@ -596,7 +596,7 @@ function upload(page, path) {
     title: "正在上传"
   }),
     wx.uploadFile({
-      url: "http://172.26.17.164:8080/userinfo/setUserIcon",
+    url: getApp().globalData.server + 'userinfo/setUserIcon',
       filePath: path[0],
       name: 'file',
       header: { 
@@ -608,7 +608,7 @@ function upload(page, path) {
         var data = JSON.parse(res.data);
         console.log(data)
         if(res.statusCode == 200){
-          app.globalData.userInfo.moreInfo.iconpath = "http://172.26.17.164:8080/"+data.data.iconURL
+          app.globalData.userInfo.moreInfo.iconpath = getApp().globalData.server +data.data.iconURL
           page.setListData()
           console.log(app.globalData.userInfo.moreInfo.iconpath)
           wx.showToast({
