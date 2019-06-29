@@ -2,7 +2,7 @@
 <view class='container'>
   <view class='main-info'>
     <view class='row_view'>
-      <image class='userimg' src="{{pic_url}}" bindtap='user_img_preview'/>
+      <image class='userimg' src="{{userInfo.pic_url==null?'../../images/avatar.png':userInfo.pic_url}}" bindtap='user_img_preview'/>
       <view class='col_view'>
         <view class='name_view'>
           <view class='username'>{{userInfo.nickname}}</view>
@@ -38,13 +38,13 @@
 
   </view>
   <view class='personal_info' hidden='{{tag==1?false:true}}'>
-    <view class='info_text'>电话： {{userInfo.phone}}</view>
+    <view class='info_text'>电话： {{userInfo.phone==null?'未填':userInfo.phone}}</view>
     <view class='small_seperate'></view>
-    <view class='info_text'>邮箱 {{userInfo.emaily}}</view>
+    <view class='info_text'>邮箱： {{userInfo.email==null?'未填':userInfo.email}}</view>
     <view class='small_seperate'></view>
-    <view class='info_text'>大学： {{userInfo.university}}</view>
+    <view class='info_text'>大学： {{userInfo.university==null?'未填':userInfo.university}}</view>
     <view class='small_seperate'></view>
-    <view class='info_text'>学院： {{userInfo.academy}}</view>
+    <view class='info_text'>学院： {{userInfo.academy==null?'未填':userInfo.academy}}</view>
     <view class='small_seperate'></view>
     <view class='info_text'>年级： {{grade}}</view>
     <view class='small_seperate'></view>
@@ -60,7 +60,7 @@
         </view>
         <view class='task_description'>{{item.description}}</view>
       </view>
-      <view class='applyTask_button'>申请</view>
+      <view class='applyTask_button'>查看</view>
     </view>
     <view class='table_line'/>
   </view>

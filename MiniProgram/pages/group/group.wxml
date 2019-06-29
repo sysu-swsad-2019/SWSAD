@@ -1,6 +1,8 @@
 <!--pages/group/group.wxml-->
   <view class="container">
     <view class='create_btn' bindtap='create_tap'>创建兴趣小组</view>
+    <view class='seperate_line'></view>
+    <view class='empty' hidden='{{contentlist.length==0?false:true}}'>还没有任何兴趣小组哦~</view>
     <view class="group-items" wx:for="{{contentlist}}" wx:key="index" bindtap="listItemTap">
         <view class='one-item'>
           <image class="group_img" src="{{item.imgurl}}"/>

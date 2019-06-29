@@ -34,8 +34,8 @@ App({
     })
   },
   globalData: {
-    //server: "http://172.26.17.164:8080/",
-    server: "http://192.144.210.174:8080/",
+    server: "http://172.26.17.164:8080/",
+    //server: "http://192.144.210.174:8080/",
     userInfo: {
       isLogin:false,
       moreInfo:null,

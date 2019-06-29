@@ -24,8 +24,12 @@ Page({
       text: '我的闲钱币',
       tap: 'coinTap'
     }, {
+      icon: '../../images/个人资料.png',
+      text: '个人资料',
+      tap: 'personalInfoTap'
+    },{
       icon: '../../images/修改资料.png',
-      text: '完善资料',
+      text: '用户设置',
       tap: 'modifyInfoTap'
     },{
       icon: '../../images/iconfont-kefu.png',
@@ -84,6 +88,20 @@ Page({
     if (app.globalData.userInfo.isLogin) {
       wx.navigateTo({
         url: '../getMoney/getMoney',
+      })
+    }
+    else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+    }
+  },
+
+  personalInfoTap:function(){
+    if (app.globalData.userInfo.isLogin) {
+      wx.navigateTo({
+        url: '../userdetail/userdetail',
       })
     }
     else {

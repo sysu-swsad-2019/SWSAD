@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    groupId:[],
     contentlist:[
+      /*
       {
         name:'小程序学习小组ceshichangwenceshichangwenceshichangwencesh',
         description:'欢迎大家的加入！changwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshi',
@@ -68,7 +70,7 @@ Page({
         imgurl: '../../images/defaultGroupImg.jpg',
         memberNum: 100,
         taskNum: 50
-      }
+      }*/
     ]
   },
   listItemTap:function(e){
@@ -87,7 +89,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -101,7 +103,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.request({
+      url: getApp().globalData.server + 'group/findAllGroup',
+      header: {
+        "content-type": "application/json",
+        'cookie': wx.getStorageSync('cookieKey')
+      },
+      method: "POST",
+      complete: function (res) {
+        console.log(JSON.parse(res.data))
+      }
+    })
   },
 
   /**

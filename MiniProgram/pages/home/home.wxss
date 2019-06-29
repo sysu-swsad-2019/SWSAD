@@ -22,6 +22,11 @@
 }
 .userinfo-nickname {
   color: #fff;
+  width: 300rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 .weui_cell{
     position: relative;
