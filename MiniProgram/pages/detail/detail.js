@@ -35,11 +35,8 @@ Page({
         title: '../../images/credit.png',
         content: '信誉要求：',
         text: ""
-      }, {
-        title: '../../images/group.png',
-        content: '兴趣小组：',
-        text: ""
-      }],
+      }
+    ],
     contents: {
     },
     typeInfo: ["不限制", "取快递", "拿外卖", "找资料", "填问卷", "征集简历", "找人组队", "其他"],
@@ -71,10 +68,11 @@ Page({
         id: taskid
       },
       header: {
-        'content-type': "application/x-www-form-urlencoded" // 默认值
+        'content-type': "application/x-www-form-urlencoded", // 默认值
+        'cookie': wx.getStorageSync('cookieKey')
       },
       success(res) {
-        //console.log(res.data.data.task);
+        console.log(res.data.data.task);
         var taskcontent = res.data.data.task;
         var datenum = taskcontent.endtime;
         var date = new Date(datenum);
@@ -88,7 +86,7 @@ Page({
         task_info[4].text = that.data.sexInfo[taskcontent.sex];
         task_info[5].text = that.data.gradeInfo[taskcontent.grade];
         task_info[6].text = that.data.creditInfo[taskcontent.creditMin];
-        task_info[7].text = that.data.groupInfo[taskcontent.groupId];
+        //task_info[7].text = that.data.groupInfo[taskcontent.groupId];
         that.setData({ taskInfo: task_info });
         that.setData({ contents: taskcontent });
       }
@@ -97,13 +95,10 @@ Page({
 
   tapfunc: function () {
     var that = this;
-    console.log(getApp().globalData.userInfo);
-    var userInfo = getApp().globalData.userInfo.moreInfo;
+    var userInfo = wx.getStorageSync('userInfo');
     var itemlist = this.data.contents;
-    //console.log("haha");
     //console.log(userInfo);
-    console.log(itemlist);
-    /*
+    //console.log(itemlist);
     if (userInfo.sex != itemlist.sex && itemlist.sex != 0) {
       wx.showToast({
         title: '性别不符合要求',
@@ -122,7 +117,7 @@ Page({
         icon: 'none',
         duration: 2000
       });
-    } else {*/
+    } else {
     wx.request({
       url: 'http://172.26.17.164:8080/task/addUserInTask', //仅为示例，并非真实的接口地址
       data: {
@@ -134,6 +129,7 @@ Page({
       },
       success(res) {
         console.log(res.data);
+        /*
         if (res.data.message = "成功加入") {
           wx.showToast({
             title: "已领取任务",
@@ -149,7 +145,7 @@ Page({
           wx.navigateBack({
             url: "../task/task"
           });
-        }
+        }*/
       },
       fail(err) {
         console.log(err.data);
@@ -160,7 +156,7 @@ Page({
         })
       }
     });
-    //}
+    }
   },
 
   /**

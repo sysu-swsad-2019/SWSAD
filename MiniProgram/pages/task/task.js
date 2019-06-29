@@ -50,6 +50,7 @@ Page({
           'content-type': "application/x-www-form-urlencoded", // 默认值
         },
         success(res) {
+          console.log(res.data);
           contents = res.data.data.list;
           //console.log(contents.length);
           //console.log(contents[2]);
@@ -69,6 +70,7 @@ Page({
   tapfunc: function (e) {
     var taskid = e.target.dataset.tid;
     var number = e.target.dataset.num;
+    var userInfo = wx.getStorageSync('userInfo');
     //console.log(getApp().globalData.userInfo.isLogin);
     if (getApp().globalData.userInfo.isLogin == true) {
       wx.request({
@@ -81,18 +83,47 @@ Page({
           'cookie': wx.getStorageSync('cookieKey')
         },
         success(res) {
+          console.log(res.data.data.list);
           var userlist = res.data.data.list;
+          
           var curnumber = res.data.data.list.length;
             if (curnumber <= number) {
-              wx.navigateTo({
-                url: '../detail/detail?tid=' + taskid
-              });
+              let isExist = false;
+              for (let i = 0; i < userlist.length; i++) {
+                if (userlist[i].username == userInfo.username)
+                  isExist = true;
+              }
+              if (isExist == true) {
+                wx.showModal({
+                  title: '提示',
+                  content: '已领取任务',
+                  showCancel: false,
+                  success(res) {
+                    if (res.confirm) {
+                      console.log('用户点击确定')
+                    } else if (res.cancel) {
+                      console.log('用户点击取消')
+                    }
+                  }
+                });
+              } else {
+                wx.navigateTo({
+                  url: '../detail/detail?tid=' + taskid
+                });
+              }
             } else {
-              wx.showToast({
-                title: '人数已满',
-                icon: 'none',
-                duration: 2000
-              })
+              wx.showModal({
+                title: '提示',
+                content: '任务人数已满',
+                showCancel: false,
+                success(res) {
+                  if (res.confirm) {
+                    console.log('用户点击确定')
+                  } else if (res.cancel) {
+                    console.log('用户点击取消')
+                  }
+                }
+              });
             }
         },
         fail(err) {

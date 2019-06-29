@@ -4,42 +4,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    taskInfo: [
-      {
-        title: "../../images/footer-icon-04.png",
-        content: "发布者：",
-        text: "",
-      },
-
-      {
-        title: '../../images/ios-shijian.png',
-        content: '结束时间：',
-        text: "",
-      }, {
-        title: '../../images/bianhao.png',
-        content: '发布数量：',
-        text: "",
-      }, {
-        title: '../../images/type.png',
-        content: '任务类型：',
-        text: "",
-      }, {
-        title: '../../images/gender.png',
-        content: '性别要求：',
-        text: ""
-      }, {
-        title: '../../images/647.png',
-        content: '年级要求：',
-        text: ""
-      }, {
-        title: '../../images/credit.png',
-        content: '信誉要求：',
-        text: ""
-      }, {
-        title: '../../images/group.png',
-        content: '兴趣小组：',
-        text: ""
-      }],
     contents: {
     },
     typeInfo: ["不限制", "取快递", "拿外卖", "找资料", "填问卷", "征集简历", "找人组队", "其他"],
@@ -93,6 +57,36 @@ Page({
         that.setData({ taskInfo: task_info });
         that.setData({ contents: taskcontent });
         that.setData({ user_id: taskcontent.releaseUser });
+      }
+    });
+  },
+
+  tapfunc: function () {
+    var that = this;
+    var userInfo = getApp().globalData.userInfo.moreInfo;
+    var itemlist = this.data.contents;
+    //console.log("haha");
+    //console.log(userInfo);
+    console.log(itemlist);
+    wx.request({
+      url: 'http://172.26.17.164:8080/task/deleteUserInTask ', //仅为示例，并非真实的接口地址
+      data: {
+        taskId: that.data.task_id,
+        userId: that.data.user_id
+      },
+      header: {
+        'content-type': "application/x-www-form-urlencoded", // 默认值
+        'cookie': wx.getStorageSync('cookieKey')
+      },
+      success(res) {
+        wx.showToast({
+          title: '放弃任务',
+          icon: 'success',
+          duration: 2000
+        });
+        wx.navigateBack({
+          url: "../taskrelease/taskrelease"
+        })
       }
     });
   },

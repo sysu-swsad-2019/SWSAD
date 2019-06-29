@@ -58,11 +58,25 @@ Page({
               title: '登录成功',
               icon: 'success',
               duration: 2000
-            })
+            });
+            
+            wx.request({
+              url: "http://172.26.17.164:8080/userinfo/getUserInfo",
+              header: {
+                "content-type": "application/x-www-form-urlencoded",
+                'cookie': wx.getStorageSync('cookieKey')
+              },
+              method: "POST",
+              complete: function (res) {
+                //console.log(res.data);
+                app.globalData.userInfo.moreInfo = res.data;
+                wx.setStorageSync('userInfo', res.data);
+              }
+            });
 
             wx.navigateBack({//返回
               delta: 1
-            })
+            });
 
 /*
             //测试cookie

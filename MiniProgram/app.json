@@ -1,12 +1,12 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/detail/detail",
     "pages/task/task",
     "pages/acTaskDetail/acTaskDetail",
     "pages/reTaskDetail/reTaskDetail",
     "pages/taskrelease/taskrelease",
     "pages/taskaccept/taskaccept",
-    "pages/detail/detail",
     "pages/questionnaire/questionnaire",
     "pages/createQuestionnaire/createQuestionnaire",
     "pages/userdetail/userdetail",
