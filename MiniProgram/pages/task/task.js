@@ -4,6 +4,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    imageUrls:[
+      '../../images/slider3.jpg',
+      '../../images/slider1.jpg',
+      '../../images/slider4.jpg',
+      '../../images/slider2.jpg',
+    ],
     colors: ["yellow", "green", "grey", "red"],
     pic_urls: ["../../images/general.png",'../../images/快递.png', '../../images/外卖.png', '../../images/资料.png', '../../images/问卷.png', '../../images/投简历.png', '../../images/组队请求.png', '../../images/其他.png'],
     state_urls: ['../../images/yellow_circle.png', '../../images/green_circle.png', '../../images/gray_circle.png', '../../images/red_circle.png'],
@@ -26,6 +32,19 @@ Page({
     haveTask: false
   },
 
+  create_tap:function(){
+    if (getApp().globalData.userInfo.isLogin) {
+      wx.navigateTo({
+        url: '../release/release',
+      })
+    }
+    else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */

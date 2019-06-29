@@ -1,5 +1,5 @@
 // pages/userdetail/userdetail.js
-
+var Util = require('../../utils/util.js');
 Page({
 
   /**
@@ -194,6 +194,41 @@ Page({
       user = getApp().globalData.userInfo.moreInfo
       this.setData({
         userInfo: user
+      })
+
+      var that = this
+      wx.request({
+        url: getApp().globalData.server + 'group/findAllGroupByUser',
+        header: {
+          "content-type": "application/x-www-form-urlencoded",
+          'cookie': wx.getStorageSync('cookieKey')
+        },
+        data: Util.json2Form({
+          userId: getApp().globalData.userInfo.moreInfo.id
+        }),
+        method: "POST",
+        complete: function (res) {
+          that.setData({
+            contentlist: res.data.data.list
+          })
+        }
+      })
+
+      wx.request({
+        url: getApp().globalData.server + 'task/getTaskByUsername',
+        header: {
+          "content-type": "application/x-www-form-urlencoded",
+          'cookie': wx.getStorageSync('cookieKey')
+        },
+        data: Util.json2Form({
+          userId: getApp().globalData.userInfo.moreInfo.id
+        }),
+        method: "POST",
+        complete: function (res) {
+          that.setData({
+            contentlist: res.data.data.list
+          })
+        }
       })
     }
     

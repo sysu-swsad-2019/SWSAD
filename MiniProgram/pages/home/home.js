@@ -6,11 +6,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    defaultUserIcon:'../../images/avatar.png',
     userInfo: null,
     projectSource: '',
     tagShow1: false,
     tagShow2: true,
+    iconpath: '',
     userListInfo: [{
       icon: '../../images/footer-icon-04.png',
       text: '领取的任务',
@@ -172,7 +172,9 @@ Page({
         tagShow1: true,
         tagShow2: false,
       })
+      console.log(app.globalData.userInfo.moreInfo)
       if (app.globalData.userInfo.moreInfo==null){
+        
         wx.request({
           url: getApp().globalData.server + 'userinfo/getUserInfo',
           header: {
@@ -183,17 +185,39 @@ Page({
           complete: function (res) {
             // {"money":null,"phone":null,"university":null,"sex":"0","grade":null,"nickname":"91d213c3bbd24787ba97c73bac785ac7","credit":null,"uuid":"91d213c3bbd24787ba97c73bac785ac7","email":null,"iconpath":null,"academy":null,"username":"q"}
             app.globalData.userInfo.moreInfo = res.data
-            console.log(res.data)
+            console.log(JSON.parse(res.data))
             console.log(app.globalData.userInfo.moreInfo.username)
             that.setData({
               userInfo: res.data
             })
+            if(that.data.userInfo.iconpath!=null){
+              that.setData({
+                iconpath: getApp().globalData.server + that.data.userInfo.iconpath
+              })
+              console.log(that.data.iconpath)
+            }
+            else{
+              that.setData({
+                iconpath: '../../images/avatar.png'
+              })
+            }
           }
         })
       }else{
-        that.setData({
+        this.setData({
           userInfo: app.globalData.userInfo.moreInfo
         })
+        if (this.data.userInfo.iconpath != null) {
+          this.setData({
+            iconpath: getApp().globalData.server + this.data.userInfo.iconpath
+          })
+          console.log(this.data.iconpath)
+        }
+        else {
+          this.setData({
+            iconpath: '../../images/avatar.png'
+          })
+        }
       }
 
     }
