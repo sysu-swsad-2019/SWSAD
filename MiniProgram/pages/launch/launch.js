@@ -19,7 +19,7 @@ Page({
   },
 
   direct() {
-    let url = '../home/home'
+    let url = '../task/task'
     wx.switchTab({
       url,
     })

@@ -7,6 +7,17 @@
   </view>
   -->
 
+  <swiper autoplay="true" indicator-dots='true' class='myswiper'>
+  <block wx:for="{{imageUrls}}">
+    <swiper-item>
+      <image src="{{item}}"/>
+    </swiper-item>
+  </block>
+  </swiper>
+
+  
+  <view class='create_btn' bindtap='create_tap'>发布任务</view>
+
   <view class="header" hidden="{{hidetop}}">
     <view style="text-align: center;">网络异常</view>
   </view>
