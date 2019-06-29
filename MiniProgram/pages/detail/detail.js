@@ -129,7 +129,6 @@ Page({
       },
       success(res) {
         console.log(res.data);
-        /*
         if (res.data.message = "成功加入") {
           wx.showToast({
             title: "已领取任务",
@@ -145,7 +144,7 @@ Page({
           wx.navigateBack({
             url: "../task/task"
           });
-        }*/
+        }
       },
       fail(err) {
         console.log(err.data);
