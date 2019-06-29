@@ -34,11 +34,14 @@ Page({
         description:this.data.description
       },
       complete: function (res) {
+        console.log(res)
         if(res.data.code == 200){
           wx.showToast({
             title: '创建成功',
             icon:'none'
           })
+
+
         }
         else{
           wx.showToast({
