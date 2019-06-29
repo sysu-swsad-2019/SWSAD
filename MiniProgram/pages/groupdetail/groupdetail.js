@@ -1,10 +1,12 @@
 // pages/groupdetail/groupdetail.js
+var Util = require('../../utils/util.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    gid:0,
     name: '小程序学习小组',
     description: '欢迎大家的加入！changwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshi',
     imgurls: ['../../images/defaultGroupImg.jpg'],
@@ -12,6 +14,7 @@ Page({
     taskNum: 50,
     tag:1,
     tasklist:[
+      /*
       {
         tid: 1,
         name: '帮忙取个快递',
@@ -82,8 +85,10 @@ Page({
         state_text: '正在进行',
         description: '不知道写啥就谢谢在座的各位吧',
       }
+      */
     ],
     userList:[
+      /*
       {
         uid:1,
         name: '刘备',
@@ -144,6 +149,7 @@ Page({
         role: 2,
         role_text: '成员'
       },
+      */
     ]
 
   },
@@ -186,6 +192,11 @@ Page({
    */
   onLoad: function (options) {
 
+    console.log(options.gid)
+    this.setData({
+      gid: options.gid
+    })
+
   },
 
   /**
@@ -199,6 +210,51 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this
+    wx.request({
+      url: getApp().globalData.server + 'group/findById',
+      header: {
+        "content-type": "application/x-www-form-urlencoded",
+        'cookie': wx.getStorageSync('cookieKey')
+      },
+      data: Util.json2Form({
+        groupId: that.data.gid
+      }),
+      method: "POST",
+      complete: function (res) {
+        console.log(res.data.data)
+      }
+    })
+
+    wx.request({
+      url: getApp().globalData.server + 'group/findAllUserInGroup',
+      header: {
+        "content-type": "application/x-www-form-urlencoded",
+        'cookie': wx.getStorageSync('cookieKey')
+      },
+      data: Util.json2Form({
+        groupId: that.data.gid
+      }),
+      method: "POST",
+      complete: function (res) {
+        console.log(res.data.data)
+      }
+    })
+
+    wx.request({
+      url: getApp().globalData.server + 'group/findAllTaskInGroup',
+      header: {
+        "content-type": "application/x-www-form-urlencoded",
+        'cookie': wx.getStorageSync('cookieKey')
+      },
+      data: Util.json2Form({
+        groupId: that.data.gid
+      }),
+      method: "POST",
+      complete: function (res) {
+        console.log(res.data.data)
+      }
+    })
 
   },
 

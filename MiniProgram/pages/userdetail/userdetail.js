@@ -189,10 +189,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var user = getApp().globalData.userInfo.moreInfo
-    this.setData({
-      userInfo:user
-    })
+    var user
+    if(options.fromPage == 1){
+      user = getApp().globalData.userInfo.moreInfo
+      this.setData({
+        userInfo: user
+      })
+    }
+    
     if(user.sex == '0'){
       this.setData({
         gender_url: '../../images/性别女.png'

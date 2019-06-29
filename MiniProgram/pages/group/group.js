@@ -5,7 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    groupId:[],
     contentlist:[
       /*
       {
@@ -74,15 +73,35 @@ Page({
     ]
   },
   listItemTap:function(e){
-    wx.navigateTo({
-      url: '../groupdetail/groupdetail',
-    })
+    var gid = e.currentTarget.dataset.gid
+    console.log(gid)
+
+    if (getApp().globalData.userInfo.isLogin) {
+      wx.navigateTo({
+        url: '../groupdetail/groupdetail?gid='+gid,
+      })
+    }
+    else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+    }
   },
 
   create_tap:function(e){
-    wx.navigateTo({
-      url: '../creategroup/creategroup',
-    })
+    if (getApp().globalData.userInfo.isLogin) {
+      wx.navigateTo({
+        url: '../creategroup/creategroup',
+      })
+    }
+    else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+    }
+
   },
 
   /**
@@ -103,15 +122,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this
     wx.request({
       url: getApp().globalData.server + 'group/findAllGroup',
       header: {
-        "content-type": "application/json",
-        'cookie': wx.getStorageSync('cookieKey')
+        "content-type": "application/x-www-form-urlencoded",
       },
       method: "POST",
       complete: function (res) {
-        console.log(JSON.parse(res.data))
+        that.setData({
+          contentlist :res.data.data.list
+        })
       }
     })
   },
