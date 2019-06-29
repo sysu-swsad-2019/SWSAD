@@ -1,0 +1,5 @@
+/* pages/launch/launch.wxss */
+.image{
+  width:760rpx;
+  height: 1340rpx;
+}
