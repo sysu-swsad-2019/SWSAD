@@ -101,7 +101,7 @@ Page({
   personalInfoTap:function(){
     if (app.globalData.userInfo.isLogin) {
       wx.navigateTo({
-        url: '../userdetail/userdetail',
+        url: '../userdetail/userdetail?fromPage=1',
       })
     }
     else {
