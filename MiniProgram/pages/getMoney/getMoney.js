@@ -27,7 +27,7 @@ Page({
     app.globalData.userInfo.moreInfo.money = this.data.money
     var that = this
     wx.request({
-      url: "http://172.26.17.164:8080/userinfo/setUserInfo",
+      url: getApp().globalData.server + 'userinfo/setUserInfo',
       header: {
         "content-type": "application/json",
         'cookie': wx.getStorageSync('cookieKey')

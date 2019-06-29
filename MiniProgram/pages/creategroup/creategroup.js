@@ -23,7 +23,7 @@ Page({
 
   createGroupTap:function(){
     wx.request({
-      url: "http://172.26.17.164:8080/group/insertGroup",
+      url: getApp().globalData.server + 'group/insertGroup',
       header: {
         "content-type": "application/json",
         'cookie': wx.getStorageSync('cookieKey')
@@ -46,10 +46,12 @@ Page({
             icon:'none'
           })
         }
-        wx.navigateBack({
-          delta:1
-        })
-
+        let timer = setTimeout(() => {
+          clearTimeout(timer)
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1000)
       }
     })
   },

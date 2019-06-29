@@ -33,7 +33,7 @@ Page({
     }
     else{
       wx.request({
-        url: "http://172.26.17.164:8080/login",
+        url: getApp().globalData.server + 'login',
         header: {
           "content-type": "application/x-www-form-urlencoded"
         },
@@ -74,14 +74,17 @@ Page({
               }
             });
 
-            wx.navigateBack({//返回
-              delta: 1
-            });
 
+            let timer = setTimeout(() => {
+              clearTimeout(timer)
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1000)
 /*
             //测试cookie
             wx.request({
-              url: "http://172.26.17.164:8080/userinfo/getUserInfo",
+              url: getApp().globalData.server + 'userinfo/getUserInfo',
               header: {
                 "content-type": "application/x-www-form-urlencoded",
                 'cookie': wx.getStorageSync('cookieKey')

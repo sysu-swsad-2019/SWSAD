@@ -6,6 +6,7 @@ Page({
    */
   data: {
     contentlist:[
+      /*
       {
         name:'小程序学习小组ceshichangwenceshichangwenceshichangwencesh',
         description:'欢迎大家的加入！changwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshi',
@@ -68,26 +69,46 @@ Page({
         imgurl: '../../images/defaultGroupImg.jpg',
         memberNum: 100,
         taskNum: 50
-      }
+      }*/
     ]
   },
   listItemTap:function(e){
-    wx.navigateTo({
-      url: '../groupdetail/groupdetail',
-    })
+    var gid = e.currentTarget.dataset.gid
+    console.log(gid)
+
+    if (getApp().globalData.userInfo.isLogin) {
+      wx.navigateTo({
+        url: '../groupdetail/groupdetail?gid='+gid,
+      })
+    }
+    else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+    }
   },
 
   create_tap:function(e){
-    wx.navigateTo({
-      url: '../creategroup/creategroup',
-    })
+    if (getApp().globalData.userInfo.isLogin) {
+      wx.navigateTo({
+        url: '../creategroup/creategroup',
+      })
+    }
+    else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+    }
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -101,7 +122,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this
+    wx.request({
+      url: getApp().globalData.server + 'group/findAllGroup',
+      header: {
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      method: "POST",
+      complete: function (res) {
+        that.setData({
+          contentlist :res.data.data.list
+        })
+      }
+    })
   },
 
   /**

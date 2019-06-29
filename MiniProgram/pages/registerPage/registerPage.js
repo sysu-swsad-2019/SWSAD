@@ -57,7 +57,7 @@ Page({
     }
     else{
       wx.request({
-        url: "http://172.26.17.164:8080/regist",
+        url: getApp().globalData.server + 'regist',
         header: {
           "content-type": "application/x-www-form-urlencoded"
         },
@@ -71,9 +71,12 @@ Page({
               icon: 'success',
               duration: 2000
             })
-            wx.navigateBack({//返回
-              delta: 1
-            })
+            let timer = setTimeout(() => {
+              clearTimeout(timer)
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1000)
           }
           else {
             console.log(res.data.message)
@@ -146,46 +149,3 @@ Page({
 
   }
 })
-
-function upload(page, path) {
-  wx.showToast({
-    icon: "loading",
-    title: "正在上传"
-  }),
-    wx.uploadFile({
-      url: constant.SERVER_URL + "/FileUploadServlet",
-      filePath: path[0],
-      name: 'file',
-      header: { "Content-Type": "multipart/form-data" },
-      formData: {
-        //和服务器约定的token, 一般也可以放在header中
-        'session_token': wx.getStorageSync('session_token')
-      },
-      success: function (res) {
-        console.log(res);
-        if (res.statusCode != 200) {
-          wx.showModal({
-            title: '提示',
-            content: '上传失败',
-            showCancel: false
-          })
-          return;
-        }
-        var data = res.data
-        page.setData({  //上传成功修改显示头像
-          src: path[0]
-        })
-      },
-      fail: function (e) {
-        console.log(e);
-        wx.showModal({
-          title: '提示',
-          content: '上传失败',
-          showCancel: false
-        })
-      },
-      complete: function () {
-        wx.hideToast();  //隐藏Toast
-      }
-    })
-}

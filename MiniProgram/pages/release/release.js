@@ -344,7 +344,7 @@ Page({
           // app.showLoadToast();
           // console.log(_this.data.endTime);
           wx.request({
-            url: "http://172.26.17.164:8080/task/insertTask",
+            url: getApp().globalData.server + 'task/insertTask',
             data: {
               taskname: _this.data.title,
               starttime: _this.data.startTime,
