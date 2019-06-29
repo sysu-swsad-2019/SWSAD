@@ -46,10 +46,12 @@ Page({
             icon:'none'
           })
         }
-        wx.navigateBack({
-          delta:1
-        })
-
+        let timer = setTimeout(() => {
+          clearTimeout(timer)
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1000)
       }
     })
   },

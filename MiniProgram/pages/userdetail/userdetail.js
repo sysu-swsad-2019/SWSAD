@@ -1,4 +1,5 @@
 // pages/userdetail/userdetail.js
+
 Page({
 
   /**
@@ -188,8 +189,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var user = app.globalData.userInfo.moreInfo
-
+    var user = getApp().globalData.userInfo.moreInfo
+    this.setData({
+      userInfo:user
+    })
     if(user.sex == '0'){
       this.setData({
         gender_url: '../../images/性别女.png'

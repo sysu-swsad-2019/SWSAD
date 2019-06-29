@@ -71,9 +71,12 @@ Page({
               icon: 'success',
               duration: 2000
             })
-            wx.navigateBack({//返回
-              delta: 1
-            })
+            let timer = setTimeout(() => {
+              clearTimeout(timer)
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1000)
           }
           else {
             console.log(res.data.message)
