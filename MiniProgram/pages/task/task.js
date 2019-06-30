@@ -70,7 +70,7 @@ Page({
         },
         success(res) {
           //console.log(res.data);
-          //contents = res.data.data.list;
+          contents = res.data.data.list;
           //console.log(contents.length);
           //console.log(contents[2]);
           that.setData({ contentlist: contents });

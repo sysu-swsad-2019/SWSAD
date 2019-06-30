@@ -33,6 +33,10 @@ Page({
     this.initial();
   },
 
+  onShow: function () {
+    this.initial();
+  },
+
   initial: function () {
     var date = new Date();
     this.setData({

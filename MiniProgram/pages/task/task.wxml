@@ -42,7 +42,7 @@
           <image class="task-people-img" src="{{people_url}}"></image>
           <view class="task-people-number">{{item.acceptNumLimit}}人</view>
         </view>
-        <view wx:if="{{item.state == 0 || 1 || haveTask == false}}" class="task-button" style="background-color:  #33a3dc;" catchtap="tapfunc" data-tid="{{item.id}}" data-num="{{item.acceptNumLimit}}">领取</view>
+        <view wx:if="{{item.state == 0}}" class="task-button" style="background-color:  #33a3dc;" catchtap="tapfunc" data-tid="{{item.id}}" data-num="{{item.acceptNumLimit}}">领取</view>
         <view wx:else class="task-button" style="background-color:grey;">领取</view>
       </view>
     </view>

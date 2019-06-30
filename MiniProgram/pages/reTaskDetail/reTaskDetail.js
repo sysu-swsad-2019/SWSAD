@@ -48,7 +48,11 @@ Page({
     sub_btn: {
       color: "#3b750b",
       text: "任务结束"
-    }
+    },
+    students: [],
+    currentIndex: 0,
+    hideModal: true,
+    nocancel: false
   },
 
   numtostr: function (num) {
@@ -94,93 +98,72 @@ Page({
         //task_info[7].text = that.data.groupInfo[taskcontent.groupId];
         that.setData({ taskInfo: task_info });
         that.setData({ contents: taskcontent });
-        that.setData({ user_id: taskcontent.releaseUser});
+        //that.setData({ user_id: taskcontent.releaseUser});
       }
     });
   },
 
   tapfunc: function () {
     var that = this;
-    var userInfo = getApp().globalData.userInfo.moreInfo;
-    var itemlist = this.data.contents;
-    //console.log("haha");
-    //console.log(userInfo);
-    console.log(itemlist);
-      wx.request({
-        url: getApp().globalData.server + 'task/finishTask', //仅为示例，并非真实的接口地址
-        data: {
-          taskId: that.data.task_id,
-          userId: that.data.user_id
-        },
-        header: {
-          'content-type': "application/x-www-form-urlencoded", // 默认值
-          'cookie': wx.getStorageSync('cookieKey')
-        },
-        success(res) {
-          console.log(res);
-          wx.showModal({
-            title: '提示',
-            content: '任务结束',
-            showCancel: false,
-            success(res) {
-              if (res.confirm) {
-                console.log('用户点击确定');
-                wx.navigateBack({
-                  url: "../taskrelease/taskrelease"
-                })
-              }
-            }
-          })
-        }
-      });
+    wx.request({
+      url: getApp().globalData.server + 'task/findAllUserInTask', 
+      data: {
+        taskId: that.data.task_id,
+      },
+      header: {
+        'content-type': "application/x-www-form-urlencoded", // 默认值
+        'cookie': wx.getStorageSync('cookieKey')
+      },
+      success(res) {
+        console.log(res.data.data.list);
+        that.setData({students: res.data.data.list});
+        that.setData({hideModal: false});
+      }
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+  confirm: function() {
+    var that = this;
+    var index = this.data.currentIndex;
+    var user_id = this.data.students[index].id;
+    console.log(user_id);
     
+    wx.request({
+      url: getApp().globalData.server + 'task/finishTask', //仅为示例，并非真实的接口地址
+      data: {
+        taskId: that.data.task_id,
+        userId: user_id
+      },
+      header: {
+        'content-type': "application/x-www-form-urlencoded", // 默认值
+        'cookie': wx.getStorageSync('cookieKey')
+      },
+      success(res) {
+        console.log(res);
+        that.setData({ hideModal: true });
+        wx.showModal({
+          title: '提示',
+          content: '任务结束',
+          showCancel: false,
+          success(res) {
+            if (res.confirm) {
+              console.log('用户点击确定');
+              wx.navigateBack({
+                url: "../taskrelease/taskrelease"
+              })
+            }
+          }
+        })
+      }
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  cancel: function() {
+    this.setData({hideModal: true});
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  bindPickerChange: function(e) {
+    //console.log(e.detail.value["0"]);
+    this.setData({ currentIndex: e.detail.value["0"]});
   }
 })
