@@ -40,8 +40,6 @@ Page({
             title: '创建成功',
             icon:'none'
           })
-
-
         }
         else{
           wx.showToast({

@@ -175,6 +175,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  width: 300rpx;
 }
 .role_text{
   background-color: gray;
@@ -182,6 +183,8 @@
   padding: 5rpx;
   margin: 10rpx;
   font-size: 30rpx;
+  width: 70rpx;
+  text-align: center
 }
 
 .user_main_info{

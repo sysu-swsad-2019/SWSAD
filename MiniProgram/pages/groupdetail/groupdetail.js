@@ -7,11 +7,7 @@ Page({
    */
   data: {
     gid:0,
-    name: '小程序学习小组',
-    description: '欢迎大家的加入！changwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshi',
-    imgurls: ['../../images/defaultGroupImg.jpg'],
-    memberNum: 100,
-    taskNum: 50,
+    groupInfo:null,
     tag:1,
     tasklist:[
       /*
@@ -222,25 +218,39 @@ Page({
       }),
       method: "POST",
       complete: function (res) {
-        console.log(res.data.data)
+        that.setData({
+          groupInfo: res.data.data.group,
+        })
+        wx.request({
+          url: getApp().globalData.server + 'group/findAllUserInGroup',
+          header: {
+            "content-type": "application/x-www-form-urlencoded",
+            'cookie': wx.getStorageSync('cookieKey')
+          },
+          data: Util.json2Form({
+            groupId: that.data.gid
+          }),
+          method: "POST",
+          complete: function (res) {
+            that.setData({
+              userList: res.data.data.list,
+            })
+            for(var i = 0; i < that.data.userList.length; i ++){
+              var key1 = "userList[" + i + "].iconpath"
+              var key2 = "userList[" + i + "].role_text"
+              var key3 = "userList[" + i + "].gender_url"
+              that.setData({
+                [key1]: that.data.userList[i].iconpath == null ? '../../images/avatar.png' : getApp().globalData.server + that.data.userList[i].iconpath,
+                [key2]: that.data.userList[i].id == that.data.groupInfo.creator?'组长':'成员',
+                [key3]: that.data.userList[i].sex == 1 ? '../../images/性别男.png' : that.data.userList[i].sex == 0 ? '../../images/性别女.png' : '../../images/white.png'
+              })
+            }
+
+          }
+        })
+
       }
     })
-
-    wx.request({
-      url: getApp().globalData.server + 'group/findAllUserInGroup',
-      header: {
-        "content-type": "application/x-www-form-urlencoded",
-        'cookie': wx.getStorageSync('cookieKey')
-      },
-      data: Util.json2Form({
-        groupId: that.data.gid
-      }),
-      method: "POST",
-      complete: function (res) {
-        console.log(res.data.data)
-      }
-    })
-
     wx.request({
       url: getApp().globalData.server + 'group/findAllTaskInGroup',
       header: {
@@ -252,7 +262,9 @@ Page({
       }),
       method: "POST",
       complete: function (res) {
-        console.log(res.data.data)
+        that.setData({
+          tasklist: res.data.data.list,
+        })
       }
     })
 
