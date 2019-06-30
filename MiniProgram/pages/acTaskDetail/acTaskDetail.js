@@ -45,10 +45,6 @@ Page({
     groupInfo: ["不限制", "运动健将", "快乐肥宅", "高分学霸", "社交达人"],
     task_id: 0,
     user_id: 0,
-    sub_btn: {
-      color: "red",
-      text: "放弃任务"
-    }
   },
 
   numtostr: function (num) {
@@ -86,6 +82,7 @@ Page({
         str = date.getFullYear() + "." + (date.getMonth() + 1) + "." + date.getDate() + " " + that.numtostr(date.getHours()) + ":" + that.numtostr(date.getMinutes()) + ":" + that.numtostr(date.getSeconds());
         //console.log(str);
         var task_info = that.data.taskInfo;
+        task_info[0].text = taskcontent.releaseUser + " (用户id)";
         task_info[1].text = str;
         task_info[2].text = taskcontent.acceptNumLimit;
         task_info[3].text = that.data.typeInfo[taskcontent.type];
@@ -118,9 +115,14 @@ Page({
         'cookie': wx.getStorageSync('cookieKey')
       },
       success(res) {
+        var msg;
+        if (that.data.contents.state == 0)
+          msg = "已放弃任务";
+        if (that.data,contents.state == 1)
+          msg = "已删除任务";
         wx.showModal({
           title: '提示',
-          content: '已放弃任务',
+          content: msg,
           showCancel: false,
           success(res) {
             if (res.confirm) {

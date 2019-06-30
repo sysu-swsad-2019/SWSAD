@@ -83,7 +83,7 @@ Page({
         str = endDate.getFullYear() + "." + (endDate.getMonth() + 1) + "." + endDate.getDate() + " " + that.numtostr(endDate.getHours()) + ":" + that.numtostr(endDate.getMinutes()) + ":" + that.numtostr(endDate.getSeconds());
         //console.log(str);
         var task_info = that.data.taskInfo;
-        task_info[0].text = taskcontent.releaseUser;
+        task_info[0].text = taskcontent.releaseUser + " (用户id)";
         task_info[1].text = str;
         task_info[2].text = taskcontent.acceptNumLimit;
         task_info[3].text = that.data.typeInfo[taskcontent.type];

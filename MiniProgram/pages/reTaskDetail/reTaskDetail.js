@@ -6,12 +6,6 @@ Page({
   data: {
     taskInfo: [
       {
-        title: "../../images/footer-icon-04.png",
-        content: "发布者：",
-        text: "",
-      },
-
-      {
         title: '../../images/ios-shijian.png',
         content: '结束时间：',
         text: "",
