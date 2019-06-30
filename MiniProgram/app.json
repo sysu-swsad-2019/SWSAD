@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/reTaskDetail/reTaskDetail",
+    "pages/acTaskDetail/acTaskDetail",
     "pages/launch/launch",
     "pages/home/home",
     "pages/task/task",
-    "pages/acTaskDetail/acTaskDetail",
-    "pages/reTaskDetail/reTaskDetail",
     "pages/detail/detail",
     "pages/taskrelease/taskrelease",
     "pages/taskaccept/taskaccept",

@@ -21,7 +21,7 @@ page {
   padding: 30rpx 40rpx;
 }
 .task-content {
-  height: 1060rpx;
+  height: 100%;
   border-bottom: solid 1px #CCCCCC;
 }
 .task-host {
@@ -156,5 +156,5 @@ background-color: #EEEEEE;
   margin-top: 10px;
   width: 300rpx;
   height: 100rpx;
-  background: red !important;
+  background: red;
 }

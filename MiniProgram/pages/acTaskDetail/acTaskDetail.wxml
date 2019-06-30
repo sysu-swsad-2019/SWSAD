@@ -1,16 +1,26 @@
 <view class="task">
-  <text class="task-title">{{content.taskname}}</text>
 
   <scroll-view scroll-y class="task-content">
     <view class="info_list">
+
+      <view class="info_detail" style="padding: 15px;display: flex;flex-wrap: wrap; flex-direction: column;border-bottom: 1px solid #dadada;">
+        <view style="display: flex;">
+          <image style="width:20px; height: 20px; margin-right: 5px;" src="../../images/标题.png"></image>
+          <view style="font-size: 14px;color: #939393;">任务标题：</view>
+        </view>
+        <view class="info-img"></view>
+        <view class="info-text">{{contents.taskname}}</view>
+      </view>
+
       <view class="info_detail" style="padding: 15px;display: flex;flex-wrap: wrap; flex-direction: column;border-bottom: 1px solid #dadada;">
         <view style="display: flex;">
           <image style="width:20px; height: 20px; margin-right: 5px;" src="../../images/iconfont-dingdan.png"></image>
           <view style="font-size: 14px;color: #939393;">任务描述：</view>
         </view>
         <view class="info-img"></view>
-        <view class="info-text">{{content.description}}</view>
+        <view class="info-text">{{contents.description}}</view>
       </view>
+
       <block wx:for="{{taskInfo}}">
         <view class="weui_cell">
           <view class="weui_cell_hd">
@@ -23,9 +33,9 @@
         </view>
       </block>
     </view>
-    <view style="height: 150rpx;"></view>
-    <view wx:if="{{1}}" class="transparent">
-      <button class="submit" type="primary" catchtap="tapfunc">放弃任务</button>
+    <view style="height: 150rpx"></view>
+    <view class="transparent">
+      <button class="submit" style="background:{{sub_btn.color}}" type="primary" catchtap="tapfunc">{{sub_btn.text}}</button>
     </view>
   </scroll-view>
   <!--
