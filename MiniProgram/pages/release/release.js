@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    groupId:1,
+    groupId:-1,
+    hidden:true,
     userInfo: {},
     titleCount: 0, //标题字数
     contentCount: 0, //正文字数
@@ -78,7 +79,7 @@ Page({
    */
   onLoad: function (options) {
     if(options.fromPage == 1){
-      
+      this.data.groupId = options.gid
     }
     this.data.reward.toFixed(1);
     // 获取完整的年月日 时分秒，以及默认显示的数组

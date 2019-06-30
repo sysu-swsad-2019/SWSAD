@@ -49,7 +49,7 @@ Page({
   },
   addTaskTap:function(){
     wx.navigateTo({
-      url: '../release/release?fromPage=1'
+      url: '../release/release?fromPage=1&gid=' + this.data.gid
     })
   },
 

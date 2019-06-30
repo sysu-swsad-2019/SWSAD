@@ -79,8 +79,8 @@
     </block>
 
     <block>
-      <text class="release-label">兴趣小组</text>
-      <view id='type-select'>
+      <text class="release-label" hidden='{{hidden}}'>兴趣小组</text>
+      <view id='type-select' hidden='{{hidden}}'>
         <Select prop-array='{{selectArray5}}' bind:myget='getGroup'></Select>
       </view>
     </block>
