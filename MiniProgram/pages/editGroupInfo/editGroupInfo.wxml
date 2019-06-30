@@ -10,7 +10,7 @@
         <image class='next_view' src='../../images/next.png'></image>
       </view>
     </view>
-    <view class='big_seperate' wx:if='{{index==2||index==4}}'></view>
+    <view class='big_seperate' wx:if='{{index==2}}'></view>
     <view class='table_line'/>
   </view>
 

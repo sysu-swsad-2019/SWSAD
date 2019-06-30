@@ -12,6 +12,9 @@ Page({
     grade:'',
     userInfo:null,
     tag:1,
+    pic_urls: ["../../images/general.png", '../../images/快递.png', '../../images/外卖.png', '../../images/资料.png', '../../images/问卷.png', '../../images/投简历.png', '../../images/组队请求.png', '../../images/其他.png'],
+    state_urls: ['../../images/yellow_circle.png', '../../images/green_circle.png', '../../images/gray_circle.png', '../../images/red_circle.png'],
+    state_texts: ['正在进行', '已完成', '尚未开始', '超过时限'],
 
     // 参加的小组
     grouplist:[
@@ -255,7 +258,11 @@ Page({
           tasklist: res.data.data.list
         })
         for (var i = 0; i < that.data.tasklist.length; i++) {
-          
+          that.setData({
+            ['tasklist[' + i + '].pic_url']: that.data.pic_urls[that.data.tasklist[i].type],
+            ['tasklist[' + i + '].state_url']: that.data.state_urls[that.data.tasklist[i].state],
+            ['tasklist[' + i + '].state_text']: that.data.state_texts[that.data.tasklist[i].state]
+          })
         }
       }
     })

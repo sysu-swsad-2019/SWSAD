@@ -33,7 +33,7 @@
     <view class='one_task'>
       <image class='task_img' src='{{item.pic_url}}'/>
       <view class='task_info'>
-        <view class='task_name'>{{item.name}}</view>
+        <view class='task_name'>{{item.taskname}}</view>
         <view class='task_state'>
           <image class='state_img' src='{{item.state_url}}'/>
           <view class='state_text'>{{item.state_text}}</view>

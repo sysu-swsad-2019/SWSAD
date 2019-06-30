@@ -9,6 +9,9 @@ Page({
     gid:0,
     groupInfo:null,
     tag:1,
+    pic_urls: ["../../images/general.png", '../../images/快递.png', '../../images/外卖.png', '../../images/资料.png', '../../images/问卷.png', '../../images/投简历.png', '../../images/组队请求.png', '../../images/其他.png'],
+    state_urls: ['../../images/yellow_circle.png', '../../images/green_circle.png', '../../images/gray_circle.png', '../../images/red_circle.png'],
+    state_texts: ['正在进行', '已完成', '尚未开始', '超过时限'],
     button_text:'',
     tasklist:[
       /*
@@ -238,6 +241,49 @@ Page({
         url: '../editGroupInfo/editGroupInfo?gid='+this.data.gid
       })
     }
+    else if(this.data.button_text == '离开小组'){
+      var that = this
+      wx.request({
+        url: getApp().globalData.server + 'group/deleteUserInGroup',
+        header: {
+          "content-type": "application/x-www-form-urlencoded",
+          'cookie': wx.getStorageSync('cookieKey')
+        },
+        data: Util.json2Form({
+          groupId: that.data.gid
+        }),
+        method: "POST",
+        complete: function (res) {
+          if (res.data.code == 200) {
+            wx.request({
+              url: getApp().globalData.server + 'group/updateGroupById',
+              header: {
+                "content-type": "application/json",
+                'cookie': wx.getStorageSync('cookieKey')
+              },
+              method: "POST",
+              data: {
+                memberNum: Number(that.data.groupInfo.memberNum) - 1,
+                id: that.data.gid
+              },
+              complete: function (res) {
+                wx.showToast({
+                  title: '离开成功',
+                  icon: 'none'
+                })
+                that.updateInfo()
+              }
+            })
+          }
+          else {
+            wx.showToast({
+              title: '离开失败，' + res.data.message,
+              icon: 'none'
+            })
+          }
+        }
+      })
+    }
   },
 
   /**
@@ -289,6 +335,7 @@ Page({
               var key2 = "userList[" + i + "].role_text"
               var key3 = "userList[" + i + "].gender_url"
               that.setData({
+                button_text: getApp().globalData.userInfo.moreInfo.id == that.data.userList[i].id && that.data.button_text != '管理小组' ? '离开小组' : that.data.button_text,
                 [key1]: that.data.userList[i].iconpath == null ? '../../images/avatar.png' : that.data.userList[i].iconpath.indexOf('http://') != -1 ? that.data.userList[i].iconpath : getApp().globalData.server + that.data.userList[i].iconpath,
                 [key2]: that.data.userList[i].id == that.data.groupInfo.creator ? '组长' : '成员',
                 [key3]: that.data.userList[i].sex == 1 ? '../../images/性别男.png' : that.data.userList[i].sex == 0 ? '../../images/性别女.png' : '../../images/white.png'
@@ -315,6 +362,13 @@ Page({
           tasklist: res.data.data.list,
 
         })
+        for (var i = 0; i < that.data.tasklist.length; i++){
+          that.setData({
+            ['tasklist[' + i + '].pic_url']: that.data.pic_urls[that.data.tasklist[i].type],
+            ['tasklist[' + i + '].state_url']: that.data.state_urls[that.data.tasklist[i].state],
+            ['tasklist[' + i + '].state_text']: that.data.state_texts[that.data.tasklist[i].state]
+          })
+        }
       }
     })
   },
