@@ -179,8 +179,13 @@ Page({
     console.log(this.data.tag)
   },
 
-  taskItemTap: function(e){
+  taskItemTap: function (e) {
+    var tid = e.currentTarget.dataset.tid
+    console.log(tid)
 
+    wx.navigateTo({
+      url: '../detail/detail?tid=' + tid,
+    })
   },
   
   userItemTap: function(e){

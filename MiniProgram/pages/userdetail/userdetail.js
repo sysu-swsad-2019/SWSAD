@@ -163,10 +163,6 @@ Page({
   },
   //任务列表点击事件
 
-  taskItemTap:function(e){
-    
-  },
-
   labelTap1: function (e) {
     this.setData({
       tag: 1
@@ -194,6 +190,15 @@ Page({
 
     wx.navigateTo({
       url: '../groupdetail/groupdetail?gid=' + gid,
+    })
+  },
+
+  taskItemTap: function (e) {
+    var tid = e.currentTarget.dataset.tid
+    console.log(tid)
+
+    wx.navigateTo({
+      url: '../detail/detail?tid=' + tid,
     })
   },
 

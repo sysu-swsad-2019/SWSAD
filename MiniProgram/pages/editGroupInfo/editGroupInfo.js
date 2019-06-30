@@ -42,7 +42,11 @@ Page({
       }
     ]
   },
-
+  memberTap:function(){
+    wx.navigateTo({
+      url: '../managerUser/managerUser?gid='+this.data.gid,
+    })
+  },
   addTaskTap:function(){
     wx.navigateTo({
       url: '../release/release?fromPage=1'

@@ -1,0 +1,70 @@
+/* pages/managerUser/managerUser.wxss */
+
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.one_user{
+  width: 700rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 15rpx;
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+}
+
+.user_img{
+  width: 100rpx;
+  height: 100rpx;
+  margin: 10rpx;
+  border-radius: 75rpx;
+}
+.username{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 350rpx
+}
+.role_text{
+  background-color: gray;
+  color: white;
+  padding: 5rpx;
+  margin: 10rpx;
+  font-size: 30rpx;
+  width: 70rpx;
+  text-align: center
+}
+
+.user_main_info{
+  width: 550rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.gender_img{
+  width: 32rpx;
+  height: 32rpx;
+  margin-left: 10rpx;
+}
+
+.kick_out{
+  width: 80rpx;
+  background-color: red;
+  color: white;
+  text-align: center;
+  font-size: 32rpx;
+  border-radius: 10rpx;
+  padding: 10rpx;
+}
+
+.table_line{
+  width: 725rpx;
+  height: 3rpx;
+  background-color:lightgray 
+}
