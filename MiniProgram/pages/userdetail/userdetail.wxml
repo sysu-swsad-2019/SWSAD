@@ -49,8 +49,8 @@
     <view class='info_text'>年级： {{grade}}</view>
     <view class='small_seperate'></view>
   </view>
-  <view class="task_items" wx:for="{{tasklist}}" wx:key="index" bindtap="taskItemTap" hidden='{{tag==2?false:true}}'>
-    <view class='one_task'>
+  <view class="task_items" wx:for="{{tasklist}}" wx:key="index" hidden='{{tag==2?false:true}}'>
+    <view class='one_task'  data-tid="{{item.id}}" bindtap="taskItemTap">
       <image class='task_img' src='{{item.pic_url}}'/>
       <view class='task_info'>
         <view class='task_name'>{{item.taskname}}</view>
@@ -65,7 +65,7 @@
     <view class='table_line'/>
   </view>
 
-  <view class="group-items" wx:for="{{grouplist}}" wx:key="index" bindtap="groupItemTap" hidden='{{tag==3?false:true}}'>
+  <view class="group-items" wx:for="{{grouplist}}" wx:key="index" hidden='{{tag==3?false:true}}'>
     <view class='one-item' data-gid="{{item.id}}" bindtap="groupItemTap">
       <image class="group_img" src="{{item.iconpath}}"/>
        <view class='text-view'>

@@ -8,6 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    groupId:-1,
+    hidden:true,
     userInfo: {},
     titleCount: 0, //标题字数
     contentCount: 0, //正文字数
@@ -76,6 +78,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(options.fromPage == 1){
+      this.data.groupId = options.gid
+    }
     this.data.reward.toFixed(1);
     // 获取完整的年月日 时分秒，以及默认显示的数组
     var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
@@ -372,7 +377,7 @@ Page({
                 sex: _this.data.gender,
                 grade: _this.data.grade,
                 creditMin: _this.data.score,
-                groupId: 1,
+                groupId: _this.data.groupId,
                 reward: _this.data.reward,
                 state: 0
               },

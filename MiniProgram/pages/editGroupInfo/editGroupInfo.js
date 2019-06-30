@@ -31,11 +31,26 @@ Page({
         tap: 'descriptionTap'
       },
       {
-        title: '小组成员',
+        title: '管理成员',
         text: '',
         tap: 'memberTap'
+      },
+      {
+        title: '添加任务',
+        text: '',
+        tap: 'addTaskTap'
       }
     ]
+  },
+  memberTap:function(){
+    wx.navigateTo({
+      url: '../managerUser/managerUser?gid='+this.data.gid,
+    })
+  },
+  addTaskTap:function(){
+    wx.navigateTo({
+      url: '../release/release?fromPage=1&gid=' + this.data.gid
+    })
   },
 
   setListData:function(){

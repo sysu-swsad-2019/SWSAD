@@ -34,6 +34,11 @@
 .text_view{
   color: gray;
   font-size: 32rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 400rpx;
+  text-align: right
 }
 
 .next_view{
