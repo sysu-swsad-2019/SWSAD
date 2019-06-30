@@ -1,16 +1,26 @@
 <view class="task">
-  <text class="task-title">{{content.taskname}}</text>
 
   <scroll-view scroll-y class="task-content">
     <view class="info_list">
+
+      <view class="info_detail" style="padding: 15px;display: flex;flex-wrap: wrap; flex-direction: column;border-bottom: 1px solid #dadada;">
+        <view style="display: flex;">
+          <image style="width:20px; height: 20px; margin-right: 5px;" src="../../images/标题.png"></image>
+          <view style="font-size: 14px;color: #939393;">任务标题：</view>
+        </view>
+        <view class="info-img"></view>
+        <view class="info-text">{{contents.taskname}}</view>
+      </view>
+
       <view class="info_detail" style="padding: 15px;display: flex;flex-wrap: wrap; flex-direction: column;border-bottom: 1px solid #dadada;">
         <view style="display: flex;">
           <image style="width:20px; height: 20px; margin-right: 5px;" src="../../images/iconfont-dingdan.png"></image>
           <view style="font-size: 14px;color: #939393;">任务描述：</view>
         </view>
         <view class="info-img"></view>
-        <view class="info-text">{{content.description}}</view>
+        <view class="info-text">{{contents.description}}</view>
       </view>
+
       <block wx:for="{{taskInfo}}">
         <view class="weui_cell">
           <view class="weui_cell_hd">
@@ -23,10 +33,17 @@
         </view>
       </block>
     </view>
-    <view style="height: 150rpx;"></view>
+    <view style="height: 150rpx"></view>
     <view wx:if="{{contents.state==0}}" class="transparent">
-      <button class="submit" type="primary" catchtap="tapfunc">任务结束</button>
+      <button class="submit" style="background: {{sub_btn.color}}" type="primary" catchtap="tapfunc">任务结束</button>
     </view>
+    <modal hidden="{{hideModal}}" title="请选择完成任务的用户" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm" no-cancel="{{nocancel}}">
+      <picker-view indicator-style="height: 50px;color:black;" style="width: 100%; height: 150px;" bindchange="bindPickerChange">
+        <picker-view-column>
+          <view wx:for="{{students}}" style="line-height: 50px">{{item.username}}</view>
+        </picker-view-column>
+      </picker-view>
+    </modal>
   </scroll-view>
   <!--
   <view class='task-button'>

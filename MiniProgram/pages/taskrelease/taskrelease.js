@@ -30,6 +30,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+
+    //this.initial();
+  },
+
+  onShow: function() {
     this.initial();
   },
 
@@ -53,8 +58,8 @@ Page({
       success(res) {
         contents = res.data.data.list;
         //console.log(contents.length);
-        console.log("haha!!!");
-        console.log(contents[0]);
+        //console.log("haha!!!");
+        console.log(res.data.data.list);
         that.setData({
           contentlist: contents
         });

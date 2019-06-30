@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/launch/launch",
     "pages/home/home",
-    "pages/detail/detail",
-    "pages/task/task",
-    "pages/acTaskDetail/acTaskDetail",
     "pages/reTaskDetail/reTaskDetail",
+    "pages/acTaskDetail/acTaskDetail",
+    "pages/launch/launch",
+    "pages/task/task",
+    "pages/detail/detail",
     "pages/taskrelease/taskrelease",
     "pages/taskaccept/taskaccept",
     "pages/questionnaire/questionnaire",

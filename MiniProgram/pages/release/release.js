@@ -270,7 +270,7 @@ Page({
     var _this = this;
     const idx = e.target.dataset.idx
     var _imgs = _this.data.imgs;
-    _imgs.splice(idx,1);
+    _imgs.splice(idx, 1);
     _this.setData({
       imgs: _imgs
     });
@@ -283,7 +283,7 @@ Page({
       urls: _this.data.imgs  // 所有要预览的图片
     });
   },
-  getType:function(e) {
+  getType: function (e) {
     this.setData({
       type: e.detail.id
     });
@@ -310,88 +310,104 @@ Page({
     });
   },
   submit: function () {
-    if (!app.globalData.userInfo.isLogin){
-      wx.showToast({
-        title: '请先登录',
-        icon: 'none'
-      })
-    }
-    var _this = this, title = '', content = '', imgs = '';
-    if (app.g_status) {
-      app.showErrorModal(app.g_status, '提交失败');
-      return;
-    }
-    _this.setData({
-      showError: true
-    });
-    if (!_this.data.title || !_this.data.content) {
-      // 标题，内容不能为空
-      return false;
-    }
-    wx.showModal({
-      title: '提示',
-      content: '是否确认提交任务？',
-      success: function (res) {
-        if (res.confirm) {
-          // title = '【' + app._user.wx.nickName + '】' + _this.data.title;
-          // content = _this.data.content + '\r\n\r\n' + _this.data.content;
-          // if (_this.data.imgs.length) {
-          //   _this.data.imgs.forEach(function (e) {
-          //     imgs += '\r\n\r\n' + '![img](' + e + '?imageView2/2/w/750/interlace/0/q/88|watermark/2/text/V2Xph43pgq4=/font/5b6u6L2v6ZuF6buR/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10)';
-          //   });
-          //   content += imgs;
-          // }
-          // app.showLoadToast();
-          // console.log(_this.data.endTime);
-          wx.request({
-            url: getApp().globalData.server + 'task/insertTask',
-            data: {
-              taskname: _this.data.title,
-              starttime: _this.data.startTime,
-              endtime: _this.data.endTime,
-              type: _this.data.type,
-              releaseUser: 1233456,
-              acceptNumLimit: _this.data.number,
-              hasTargetLimit: 1,
-              description: _this.data.content,
-              sex: _this.data.gender,
-              grade: _this.data.grade,
-              creditMin: _this.data.score,
-              groupId: 1,
-              reward: _this.data.reward,
-              state: 0
-            },
-            method: 'POST',
-            header: { 
-              'content-type': 'application/json',
-              'cookie': wx.getStorageSync('cookieKey')
-            },
-            success: function (res) {
-              // if (res.data.status === 200) {
-              //   var text = '提交成功';
-              //   wx.showModal({
-              //     title: '提交成功',
-              //     content: text,
-              //     showCancel: false,
-              //     success: function (res) {
-              //       wx.navigateBack();
-              //     }
-              //   });
-              // } else {
-              //   app.showErrorModal(res.data.message, '提交失败');
-              // }
-              app.showErrorModal(res.data.message, '提交成功');
-              wx.navigateBack();
-            },
-            fail: function (res) {
-              app.showErrorModal(res.errMsg, '提交失败');
-            },
-            complete: function () {
-              wx.hideToast();
-            }
-          });
+    var userInfo = getApp().globalData.userInfo.moreInfo;
+    var umoney = userInfo.money;
+    if (umoney < this.data.reward) {
+      wx.showModal({
+        title: '提示',
+        content: '金钱不足',
+        showCancel: false,
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          }
         }
+      })
+    } else {
+
+      if (!app.globalData.userInfo.isLogin) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
       }
-    });
+      var _this = this, title = '', content = '', imgs = '';
+      if (app.g_status) {
+        app.showErrorModal(app.g_status, '提交失败');
+        return;
+      }
+      _this.setData({
+        showError: true
+      });
+      if (!_this.data.title || !_this.data.content) {
+        // 标题，内容不能为空
+        return false;
+      }
+      wx.showModal({
+        title: '提示',
+        content: '是否确认提交任务？',
+        success: function (res) {
+          if (res.confirm) {
+            // title = '【' + app._user.wx.nickName + '】' + _this.data.title;
+            // content = _this.data.content + '\r\n\r\n' + _this.data.content;
+            // if (_this.data.imgs.length) {
+            //   _this.data.imgs.forEach(function (e) {
+            //     imgs += '\r\n\r\n' + '![img](' + e + '?imageView2/2/w/750/interlace/0/q/88|watermark/2/text/V2Xph43pgq4=/font/5b6u6L2v6ZuF6buR/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/10/dy/10)';
+            //   });
+            //   content += imgs;
+            // }
+            // app.showLoadToast();
+            // console.log(_this.data.endTime);
+            wx.request({
+              url: getApp().globalData.server + 'task/insertTask',
+              data: {
+                taskname: _this.data.title,
+                starttime: _this.data.startTime,
+                endtime: _this.data.endTime,
+                type: _this.data.type,
+                releaseUser: 1233456,
+                acceptNumLimit: _this.data.number,
+                hasTargetLimit: 1,
+                description: _this.data.content,
+                sex: _this.data.gender,
+                grade: _this.data.grade,
+                creditMin: _this.data.score,
+                groupId: 1,
+                reward: _this.data.reward,
+                state: 0
+              },
+              method: 'POST',
+              header: {
+                'content-type': 'application/json',
+                'cookie': wx.getStorageSync('cookieKey')
+              },
+              success: function (res) {
+                // if (res.data.status === 200) {
+                //   var text = '提交成功';
+                //   wx.showModal({
+                //     title: '提交成功',
+                //     content: text,
+                //     showCancel: false,
+                //     success: function (res) {
+                //       wx.navigateBack();
+                //     }
+                //   });
+                // } else {
+                //   app.showErrorModal(res.data.message, '提交失败');
+                // }
+                app.showErrorModal(res.data.message, '提交成功');
+                wx.navigateBack();
+              },
+              fail: function (res) {
+                app.showErrorModal(res.errMsg, '提交失败');
+              },
+              complete: function () {
+                wx.hideToast();
+              }
+            });
+          }
+        }
+      });
+    }
   }
 })
