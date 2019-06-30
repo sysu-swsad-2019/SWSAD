@@ -12,7 +12,11 @@ Page({
     creditInfo: ["不限制", "100分", "95分及以上", "90分及以上"],
     groupInfo: ["不限制", "运动健将", "快乐肥宅", "高分学霸", "社交达人"],
     task_id: 0,
-    user_id: 0
+    user_id: 0,
+    sub_btn: {
+      color: "red",
+      text: "放弃任务"
+    }
   },
 
   numtostr: function (num) {
