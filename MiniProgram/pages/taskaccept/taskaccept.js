@@ -50,7 +50,12 @@ Page({
         'content-type': "application/x-www-form-urlencoded", // 默认值
         'cookie': wx.getStorageSync('cookieKey')
       },
+      data: {
+        userId: getApp().globalData.userInfo.moreInfo.id
+      },
+      method: "POST",
       success(res) {
+        console.log(res);
         contents = res.data.data.list;
         //console.log(contents.length);
         //console.log(contents[2]);

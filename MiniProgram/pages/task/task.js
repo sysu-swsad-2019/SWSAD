@@ -69,8 +69,8 @@ Page({
           'content-type': "application/x-www-form-urlencoded", // 默认值
         },
         success(res) {
-          console.log(res.data);
-          contents = res.data.data.list;
+          //console.log(res.data);
+          //contents = res.data.data.list;
           //console.log(contents.length);
           //console.log(contents[2]);
           that.setData({ contentlist: contents });
@@ -102,7 +102,7 @@ Page({
           'cookie': wx.getStorageSync('cookieKey')
         },
         success(res) {
-          console.log(res.data.data.list);
+          //console.log(res.data.data.list);
           var userlist = res.data.data.list;
           
           var curnumber = res.data.data.list.length;
@@ -222,8 +222,8 @@ Page({
     } else {
       var cur = that.data.currentPage;
       var len = that.data.contentlist.length;
-      console.log(cur);
-      console.log(len);
+      //console.log(cur);
+      //console.log(len);
       if (len - cur < 5) {
         current = current.concat(content.slice(cur, len));
         that.setData({currentPage: len, currentlist: current});

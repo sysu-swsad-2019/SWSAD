@@ -4,6 +4,38 @@ Page({
    * 页面的初始数据
    */
   data: {
+    taskInfo: [
+      {
+        title: "../../images/footer-icon-04.png",
+        content: "发布者：",
+        text: "",
+      },
+
+      {
+        title: '../../images/ios-shijian.png',
+        content: '结束时间：',
+        text: "",
+      }, {
+        title: '../../images/bianhao.png',
+        content: '发布数量：',
+        text: "",
+      }, {
+        title: '../../images/type.png',
+        content: '任务类型：',
+        text: "",
+      }, {
+        title: '../../images/gender.png',
+        content: '性别要求：',
+        text: ""
+      }, {
+        title: '../../images/647.png',
+        content: '年级要求：',
+        text: ""
+      }, {
+        title: '../../images/credit.png',
+        content: '信誉要求：',
+        text: ""
+      }],
     contents: {
     },
     typeInfo: ["不限制", "取快递", "拿外卖", "找资料", "填问卷", "征集简历", "找人组队", "其他"],
@@ -40,9 +72,12 @@ Page({
         id: taskid
       },
       header: {
-        'content-type': "application/x-www-form-urlencoded" // 默认值
+        'content-type': "application/x-www-form-urlencoded", // 默认值
+        'cookie': wx.getStorageSync('cookieKey')
       },
       success(res) {
+        console.log(res);
+        
         console.log(res.data.data.task);
         var taskcontent = res.data.data.task;
         var datenum = taskcontent.endtime;
@@ -57,7 +92,7 @@ Page({
         task_info[4].text = that.data.sexInfo[taskcontent.sex];
         task_info[5].text = that.data.gradeInfo[taskcontent.grade];
         task_info[6].text = that.data.creditInfo[taskcontent.creditMin];
-        task_info[7].text = that.data.groupInfo[taskcontent.groupId];
+        //task_info[7].text = that.data.groupInfo[taskcontent.groupId];
         that.setData({ taskInfo: task_info });
         that.setData({ contents: taskcontent });
         that.setData({ user_id: taskcontent.releaseUser });
@@ -73,7 +108,7 @@ Page({
     //console.log(userInfo);
     console.log(itemlist);
     wx.request({
-      url: 'http://172.26.17.164:8080/task/deleteUserInTask ', //仅为示例，并非真实的接口地址
+      url: getApp().globalData.server + 'task/deleteUserInTask ', //仅为示例，并非真实的接口地址
       data: {
         taskId: that.data.task_id,
         userId: that.data.user_id

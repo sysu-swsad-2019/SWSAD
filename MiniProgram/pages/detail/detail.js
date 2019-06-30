@@ -93,7 +93,7 @@ Page({
         //task_info[7].text = that.data.groupInfo[taskcontent.groupId];
         that.setData({ taskInfo: task_info });
         that.setData({ contents: taskcontent });
-
+        /*
         var nowDate = new Date();
 
         if (nowDate > endDate) {
@@ -101,7 +101,7 @@ Page({
             "sub_btn.color": "#3b750b",
             "sub_btn.text": "已结束"
           });
-        }
+        }*/
       }
     });
   },
@@ -131,43 +131,57 @@ Page({
         duration: 2000
       });
     } else {
-    wx.request({
-      url: getApp().globalData.server + 'task/addUserInTask', //仅为示例，并非真实的接口地址
-      data: {
-        taskId: that.data.task_id
-      },
-      header: {
-        'content-type': "application/x-www-form-urlencoded", // 默认值
-        'cookie': wx.getStorageSync('cookieKey')
-      },
-      success(res) {
-        console.log(res.data);
-        if (res.data.message = "成功加入") {
+      wx.request({
+        url: getApp().globalData.server + 'task/addUserInTask',
+        data: {
+          taskId: that.data.task_id
+        },
+        header: {
+          'content-type': "application/x-www-form-urlencoded", // 默认值
+          'cookie': wx.getStorageSync('cookieKey')
+        },
+        success(res) {
+          console.log(res.data);
+          let message = res.data.message;
+          if (message == "不能接收自己发布的任务") {
+            wx.showModal({
+              title: '提示',
+              content: message,
+              showCancel: false,
+              success(res) {
+                if (res.confirm) {
+                  console.log('用户点击确定');
+                  wx.navigateBack({
+                    url: "../task/task"
+                  });
+                }
+              }
+            });
+          } else {
+            wx.showModal({
+              title: '提示',
+              content: '任务领取成功',
+              showCancel: false,
+              success(res) {
+                if (res.confirm) {
+                  console.log('用户点击确定');
+                  wx.navigateBack({
+                    url: "../task/task"
+                  });
+                }
+              }
+            });
+          }
+        },
+        fail(err) {
+          console.log(err.data);
           wx.showToast({
-            title: "已领取任务",
+            title: err.data.message,
             icon: 'none',
-            duration: 4000
-          });
-        } else {
-          wx.showToast({
-            title: res.data.message,
-            icon: 'success',
-            duration: 4000
-          });
-          wx.navigateBack({
-            url: "../task/task"
-          });
+            duration: 2000
+          })
         }
-      },
-      fail(err) {
-        console.log(err.data);
-        wx.showToast({
-          title: err.data.message,
-          icon: 'none',
-          duration: 2000
-        })
-      }
-    });
+      });
     }
   },
 

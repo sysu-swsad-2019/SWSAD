@@ -35,10 +35,6 @@ Page({
         title: '../../images/credit.png',
         content: '信誉要求：',
         text: ""
-      }, {
-        title: '../../images/group.png',
-        content: '兴趣小组：',
-        text: ""
       }],
     contents: {
     },
@@ -76,10 +72,12 @@ Page({
         id: taskid
       },
       header: {
-        'content-type': "application/x-www-form-urlencoded" // 默认值
+        'content-type': "application/x-www-form-urlencoded", // 默认值
+        'cookie': wx.getStorageSync('cookieKey')
       },
       success(res) {
-        console.log(res.data.data.task);
+        //console.log(res);
+        //console.log(res.data.data.task);
         var taskcontent = res.data.data.task;
         var datenum = taskcontent.endtime;
         var date = new Date(datenum);
@@ -93,7 +91,7 @@ Page({
         task_info[4].text = that.data.sexInfo[taskcontent.sex];
         task_info[5].text = that.data.gradeInfo[taskcontent.grade];
         task_info[6].text = that.data.creditInfo[taskcontent.creditMin];
-        task_info[7].text = that.data.groupInfo[taskcontent.groupId];
+        //task_info[7].text = that.data.groupInfo[taskcontent.groupId];
         that.setData({ taskInfo: task_info });
         that.setData({ contents: taskcontent });
         that.setData({ user_id: taskcontent.releaseUser});
@@ -119,13 +117,19 @@ Page({
           'cookie': wx.getStorageSync('cookieKey')
         },
         success(res) {
-          wx.showToast({
-            title: '任务完成',
-            icon: 'success',
-            duration: 2000
-          });
-          wx.navigateBack({
-            url: "../taskrelease/taskrelease"
+          console.log(res);
+          wx.showModal({
+            title: '提示',
+            content: '任务结束',
+            showCancel: false,
+            success(res) {
+              if (res.confirm) {
+                console.log('用户点击确定');
+                wx.navigateBack({
+                  url: "../taskrelease/taskrelease"
+                })
+              }
+            }
           })
         }
       });

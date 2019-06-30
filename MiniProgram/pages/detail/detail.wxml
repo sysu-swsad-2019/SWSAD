@@ -35,7 +35,7 @@
     </view>
     <view style="height: 150rpx"></view>
     <view class="transparent">
-      <button class="submit" style="background:{{sub_btn.color}}" type="primary" catchtap="tapfunc">{{sub_btn.text}}</button>
+      <button class="submit" style="background:{{sub_btn.color}}" type="primary" catchtap="tapfunc">领取任务</button>
     </view>
   </scroll-view>
   <!--
