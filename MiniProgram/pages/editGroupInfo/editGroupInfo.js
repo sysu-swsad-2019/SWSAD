@@ -49,7 +49,7 @@ Page({
   },
   addTaskTap:function(){
     wx.navigateTo({
-      url: '../release/release?fromPage=1&gid=' + this.data.gid
+      url: '../release/release?fromPage=1&gid=' + this.data.gid + '&taskNum=' + this.data.groupInfo.taskNum
     })
   },
 
@@ -73,7 +73,7 @@ Page({
           ['selection_list[1].text']: that.data.groupInfo.name,
           ['selection_list[2].text']: that.data.groupInfo.description
         })
-        
+        console.log(that.data.selection_list[0].img_url)
       }
     })
   },
@@ -264,7 +264,7 @@ function upload(page, path) {
         "Content-Type": "multipart/form-data",
         'cookie': wx.getStorageSync('cookieKey')
       },
-      data: {
+      formData: {
         groupId: page.data.gid
       },
       complete: function (res) {

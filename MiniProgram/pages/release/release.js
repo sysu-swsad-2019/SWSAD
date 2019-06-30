@@ -8,8 +8,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    fromPage:-1,
     groupId:-1,
     hidden:true,
+    taskNum:0,
     userInfo: {},
     titleCount: 0, //标题字数
     contentCount: 0, //正文字数
@@ -79,7 +81,9 @@ Page({
    */
   onLoad: function (options) {
     if(options.fromPage == 1){
+      this.data.fromPage=1
       this.data.groupId = options.gid
+      this.data.taskNum = options.taskNum
     }
     this.data.reward.toFixed(1);
     // 获取完整的年月日 时分秒，以及默认显示的数组
@@ -363,6 +367,7 @@ Page({
             // }
             // app.showLoadToast();
             // console.log(_this.data.endTime);
+
             wx.request({
               url: getApp().globalData.server + 'task/insertTask',
               data: {
@@ -400,8 +405,27 @@ Page({
                 // } else {
                 //   app.showErrorModal(res.data.message, '提交失败');
                 // }
+                if(_this.data.fromPage==1){
+                  wx.request({
+                    url: getApp().globalData.server + 'group/updateGroupById',
+                    header: {
+                      "content-type": "application/json",
+                      'cookie': wx.getStorageSync('cookieKey')
+                    },
+                    method: "POST",
+                    data: {
+                      taskNum: Number(_this.data.taskNum) + 1,
+                      id: _this.data.groupId
+                    },
+                    complete: function (res) {
+                    }
+                  })
+               }
+
                 app.showErrorModal(res.data.message, '提交成功');
                 wx.navigateBack();
+
+
               },
               fail: function (res) {
                 app.showErrorModal(res.errMsg, '提交失败');
