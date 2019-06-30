@@ -30,10 +30,10 @@
   </view>
   <view class='group_description' hidden='{{tag==1?false:true}}'>{{groupInfo.description}}</view>
   <view class="task_items" wx:for="{{tasklist}}" wx:key="index" bindtap="taskItemTap" hidden='{{tag==2?false:true}}'>
-    <view class='one_task'>
+    <view class='one_task' data-tid="{{item.id}}" bindtap="taskItemTap">
       <image class='task_img' src='{{item.pic_url}}'/>
       <view class='task_info'>
-        <view class='task_name'>{{item.name}}</view>
+        <view class='task_name'>{{item.taskname}}</view>
         <view class='task_state'>
           <image class='state_img' src='{{item.state_url}}'/>
           <view class='state_text'>{{item.state_text}}</view>
