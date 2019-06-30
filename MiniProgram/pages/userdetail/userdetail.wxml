@@ -2,7 +2,7 @@
 <view class='container'>
   <view class='main-info'>
     <view class='row_view'>
-      <image class='userimg' src="{{userInfo.pic_url==null?'../../images/avatar.png':userInfo.pic_url}}" bindtap='user_img_preview'/>
+      <image class='userimg' src="{{userInfo.iconpath}}" bindtap='user_img_preview'/>
       <view class='col_view'>
         <view class='name_view'>
           <view class='username'>{{userInfo.nickname}}</view>
@@ -66,8 +66,8 @@
   </view>
 
   <view class="group-items" wx:for="{{grouplist}}" wx:key="index" bindtap="groupItemTap" hidden='{{tag==3?false:true}}'>
-    <view class='one-item'>
-      <image class="group_img" src="{{item.imgurl}}"/>
+    <view class='one-item' data-gid="{{item.id}}" bindtap="groupItemTap">
+      <image class="group_img" src="{{item.iconpath}}"/>
        <view class='text-view'>
          <view class="group_name">{{item.name}}</view>
          <view class="group_description" style='color:gray'>{{item.description}}</view>

@@ -9,7 +9,7 @@
       <image class='small_icon' src='../../images/任务.png'/>
       <view class='small_text' style='color:gray'>{{groupInfo.taskNum}} 任务</view>
     </view>
-    <view class='applyGroup_button'>申请加入</view>
+    <view class='applyGroup_button'>{{button_text}}</view>
     <view class='small_seperate'></view>
     <view class='labels_view'>
       <view class='label' bindtap='labelTap1'>

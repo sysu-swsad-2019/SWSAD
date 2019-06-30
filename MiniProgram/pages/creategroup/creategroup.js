@@ -36,9 +36,30 @@ Page({
       complete: function (res) {
         console.log(res)
         if(res.data.code == 200){
-          wx.showToast({
-            title: '创建成功',
-            icon:'none'
+          
+          wx.request({
+            url: getApp().globalData.server + 'group/updateGroupById',
+            header: {
+              "content-type": "application/json",
+              'cookie': wx.getStorageSync('cookieKey')
+            },
+            method: "POST",
+            data: {
+              memberNum: 1,
+              id: res.data.data.groupId
+            },
+            complete: function (res) {
+              wx.showToast({
+                title: '创建成功',
+                icon: 'none'
+              })
+              let timer = setTimeout(() => {
+                clearTimeout(timer)
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 1000)
+            }
           })
         }
         else{
@@ -47,12 +68,7 @@ Page({
             icon:'none'
           })
         }
-        let timer = setTimeout(() => {
-          clearTimeout(timer)
-          wx.navigateBack({
-            delta: 1
-          })
-        }, 1000)
+
       }
     })
   },

@@ -9,6 +9,7 @@ Page({
     gid:0,
     groupInfo:null,
     tag:1,
+    button_text:'',
     tasklist:[
       /*
       {
@@ -220,6 +221,7 @@ Page({
       complete: function (res) {
         that.setData({
           groupInfo: res.data.data.group,
+          button_text: res.data.data.group.creator ==getApp().globalData.userInfo.moreInfo.id?'管理小组':'申请加入'
         })
         wx.request({
           url: getApp().globalData.server + 'group/findAllUserInGroup',
@@ -264,6 +266,7 @@ Page({
       complete: function (res) {
         that.setData({
           tasklist: res.data.data.list,
+
         })
       }
     })

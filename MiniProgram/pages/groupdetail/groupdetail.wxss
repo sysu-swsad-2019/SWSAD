@@ -175,7 +175,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  width: 300rpx;
+  width: 250rpx;
 }
 .role_text{
   background-color: gray;

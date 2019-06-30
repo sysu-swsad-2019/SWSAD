@@ -13,6 +13,7 @@ Page({
 
     // 参加的小组
     grouplist:[
+      /*
       {
         name: '小程序学习小组ceshichangwenceshichangwenceshichangwencesh',
         description: '欢迎大家的加入！changwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshi',
@@ -76,10 +77,12 @@ Page({
         memberNum: 100,
         taskNum: 50
       }
+      */
     ],
 
     //参与的任务
     tasklist: [
+      /*
       {
         tid: 1,
         name: '帮忙取个快递',
@@ -149,7 +152,7 @@ Page({
         state_url: '../../images/yellow_circle.png',
         state_text: '正在进行',
         description: '不知道写啥就谢谢在座的各位吧',
-      }
+      }*/
     ],
 
   },
@@ -185,6 +188,15 @@ Page({
     console.log(this.data.tag)
   },
 
+  groupItemTap: function (e) {
+    var gid = e.currentTarget.dataset.gid
+    console.log(gid)
+
+    wx.navigateTo({
+      url: '../groupdetail/groupdetail?gid=' + gid,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -193,7 +205,8 @@ Page({
     if(options.fromPage == 1){
       user = getApp().globalData.userInfo.moreInfo
       this.setData({
-        userInfo: user
+        userInfo: user,
+        ['userInfo.iconpath']: user.iconpath == null ? '../../images/avatar.png' : user.iconpath.indexOf('http://') != -1 ? user.iconpath: getApp().globalData.server+ user.iconpath
       })
 
       var that = this
@@ -209,8 +222,14 @@ Page({
         method: "POST",
         complete: function (res) {
           that.setData({
-            contentlist: res.data.data.list
+            grouplist: res.data.data.list
           })
+          for (var i = 0; i < that.data.grouplist.length; i++) {
+            var key = 'grouplist['+i +'].iconpath'
+            that.setData({
+              [key]: that.data.grouplist[i].iconpath == null ? '../../images/小组.png' : that.data.grouplist[i].iconpath.indexOf('http://') != -1 ? that.data.grouplist[i].iconpath:getApp().globalData.server + that.data.grouplist[i].iconpath,
+            })
+          }
         }
       })
 
@@ -226,8 +245,11 @@ Page({
         method: "POST",
         complete: function (res) {
           that.setData({
-            contentlist: res.data.data.list
+            tasklist: res.data.data.list
           })
+          for(var i = 0; i < that.data.tasklist.length; i++){
+
+          }
         }
       })
     }
