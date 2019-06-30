@@ -132,7 +132,14 @@ Page({
       complete: function (res) {
         that.setData({
           contentlist :res.data.data.list
+
         })
+        for(var i = 0; i < that.data.contentlist.length; i ++){
+          var key = 'contentlist['+i+'].iconpath'
+          that.setData({
+            [key]: that.data.contentlist[i].iconpath == null ? '../../images/小组.png' : that.data.contentlist[i].iconpath.indexOf('http://') != -1 ? that.data.contentlist[i].iconpath : getApp().globalData.server+that.data.contentlist[i].iconpath
+          })
+        }
       }
     })
   },

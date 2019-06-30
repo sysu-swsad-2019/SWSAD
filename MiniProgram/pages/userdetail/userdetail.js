@@ -6,6 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    fromPage:0,
+    uid:0,
     gender_url: '../../images/性别男.png',  //用户未填写就设为'../../images/white.png'
     grade:'',
     userInfo:null,
@@ -13,6 +15,7 @@ Page({
 
     // 参加的小组
     grouplist:[
+      /*
       {
         name: '小程序学习小组ceshichangwenceshichangwenceshichangwencesh',
         description: '欢迎大家的加入！changwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshichangwenceshi',
@@ -76,10 +79,12 @@ Page({
         memberNum: 100,
         taskNum: 50
       }
+      */
     ],
 
     //参与的任务
     tasklist: [
+      /*
       {
         tid: 1,
         name: '帮忙取个快递',
@@ -149,18 +154,13 @@ Page({
         state_url: '../../images/yellow_circle.png',
         state_text: '正在进行',
         description: '不知道写啥就谢谢在座的各位吧',
-      }
+      }*/
     ],
 
   },
   //任务列表点击事件
 
   taskItemTap:function(e){
-    
-  },
-  //小组列表点击事件
-
-  groupItemTap:function(e){
     
   },
 
@@ -185,64 +185,93 @@ Page({
     console.log(this.data.tag)
   },
 
+  groupItemTap: function (e) {
+    var gid = e.currentTarget.dataset.gid
+    console.log(gid)
+
+    wx.navigateTo({
+      url: '../groupdetail/groupdetail?gid=' + gid,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var user
-    if(options.fromPage == 1){
-      user = getApp().globalData.userInfo.moreInfo
-      this.setData({
-        userInfo: user
-      })
-
-      var that = this
-      wx.request({
-        url: getApp().globalData.server + 'group/findAllGroupByUser',
-        header: {
-          "content-type": "application/x-www-form-urlencoded",
-          'cookie': wx.getStorageSync('cookieKey')
-        },
-        data: Util.json2Form({
-          userId: getApp().globalData.userInfo.moreInfo.id
-        }),
-        method: "POST",
-        complete: function (res) {
-          that.setData({
-            contentlist: res.data.data.list
-          })
-        }
-      })
-
-      wx.request({
-        url: getApp().globalData.server + 'task/getTaskByUsername',
-        header: {
-          "content-type": "application/x-www-form-urlencoded",
-          'cookie': wx.getStorageSync('cookieKey')
-        },
-        data: Util.json2Form({
-          userId: getApp().globalData.userInfo.moreInfo.id
-        }),
-        method: "POST",
-        complete: function (res) {
-          that.setData({
-            contentlist: res.data.data.list
-          })
-        }
-      })
-    }
     
-    if(user.sex == '0'){
+    if(options.fromPage == 1){
+      this.data.fromPage = 1
+    }
+    else if (options.fromPage == 2){
+      this.data.fromPage = 2
+      this.data.uid = options.uid
+      console.log(this.data.uid, this.data.fromPage)
+    }
+
+  },
+  getmoreInfo:function(user){
+    var that = this
+    this.setData({
+      userInfo: user,
+      ['userInfo.iconpath']: user.iconpath == null ? '../../images/avatar.png' : user.iconpath.indexOf('http://') != -1 ? user.iconpath : getApp().globalData.server + user.iconpath
+    })
+
+
+    wx.request({
+      url: getApp().globalData.server + 'group/findAllGroupByUser',
+      header: {
+        "content-type": "application/x-www-form-urlencoded",
+        'cookie': wx.getStorageSync('cookieKey')
+      },
+      data: Util.json2Form({
+        userId: user.id
+      }),
+      method: "POST",
+      complete: function (res) {
+        that.setData({
+          grouplist: res.data.data.list
+        })
+        for (var i = 0; i < that.data.grouplist.length; i++) {
+          var key = 'grouplist[' + i + '].iconpath'
+          that.setData({
+            [key]: that.data.grouplist[i].iconpath == null ? '../../images/小组.png' : that.data.grouplist[i].iconpath.indexOf('http://') != -1 ? that.data.grouplist[i].iconpath : getApp().globalData.server + that.data.grouplist[i].iconpath,
+          })
+        }
+      }
+    })
+
+    wx.request({
+      url: getApp().globalData.server + 'task/getTaskByUsername',
+      header: {
+        "content-type": "application/x-www-form-urlencoded",
+        'cookie': wx.getStorageSync('cookieKey')
+      },
+      data: Util.json2Form({
+        userId: user.id
+      }),
+      method: "POST",
+      complete: function (res) {
+        that.setData({
+          tasklist: res.data.data.list
+        })
+        for (var i = 0; i < that.data.tasklist.length; i++) {
+          
+        }
+      }
+    })
+
+
+    if (user.sex == '0') {
       this.setData({
         gender_url: '../../images/性别女.png'
       })
     }
-    else if(user.sex == '1'){
+    else if (user.sex == '1') {
       this.setData({
         gender_url: '../../images/性别男.png'
       })
     }
-    else if(user.sex == '-1'){
+    else if (user.sex == '-1') {
       this.setData({
         gender_url: '../../images/white.png'
       })
@@ -252,38 +281,63 @@ Page({
         grade: '未填'
       })
     } else
-    if (user.grade == '1') {
-      this.setData({
-        grade: '大一'
-      })
-    } else
-      if (user.grade == '2') {
+      if (user.grade == '1') {
         this.setData({
-          grade: '大二'
+          grade: '大一'
         })
       } else
-        if (user.grade == '3') {
+        if (user.grade == '2') {
           this.setData({
-            grade: '大三'
+            grade: '大二'
           })
         } else
-          if (user.grade == '4') {
+          if (user.grade == '3') {
             this.setData({
-              grade: '大四'
+              grade: '大三'
             })
           } else
-            if (user.grade == '5') {
+            if (user.grade == '4') {
               this.setData({
-                grade: '研一'
+                grade: '大四'
               })
             } else
-              if (user.grade == '6') {
+              if (user.grade == '5') {
                 this.setData({
-                  grade: '研二'
+                  grade: '研一'
                 })
-              }
+              } else
+                if (user.grade == '6') {
+                  this.setData({
+                    grade: '研二'
+                  })
+                }
   },
-
+  updateInfo:function(){
+    var user
+    var that = this
+    if(this.data.fromPage == 1){
+      user = getApp().globalData.userInfo.moreInfo
+      this.getmoreInfo(user)
+    }else
+    if(this.data.fromPage == 2){
+      wx.request({
+        url: getApp().globalData.server + 'userinfo/getUserInfoById',
+        header: {
+          "content-type": "application/x-www-form-urlencoded",
+          'cookie': wx.getStorageSync('cookieKey')
+        },
+        data: Util.json2Form({
+          userId: that.data.uid
+        }),
+        method: "POST",
+        complete: function (res) {
+          that.getmoreInfo(res.data)
+        }
+      })
+    }
+    
+ 
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -295,7 +349,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.updateInfo()
   },
 
   /**

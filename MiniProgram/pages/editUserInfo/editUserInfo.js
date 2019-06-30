@@ -492,7 +492,7 @@ Page({
       selection_list: [
         {
           title: '头像',
-          img_url: user.iconpath == null ? '../../images/avatar.png' : getApp().globalData.server+user.iconpath,
+          img_url: user.iconpath == null ? '../../images/avatar.png' : user.iconpath.indexOf('http://') != -1 ? user.iconpath : getApp().globalData.server + user.iconpath,
           tap: 'iconTap'
         },
         {

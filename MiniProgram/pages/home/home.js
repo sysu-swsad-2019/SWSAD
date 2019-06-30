@@ -192,7 +192,7 @@ Page({
             })
             if(that.data.userInfo.iconpath!=null){
               that.setData({
-                iconpath: getApp().globalData.server + that.data.userInfo.iconpath
+                iconpath: that.data.userInfo.iconpath.indexOf('http://') != -1 ? that.data.userInfo.iconpath:getApp().globalData.server + that.data.userInfo.iconpath
               })
               console.log(that.data.iconpath)
             }
@@ -209,7 +209,7 @@ Page({
         })
         if (this.data.userInfo.iconpath != null) {
           this.setData({
-            iconpath: getApp().globalData.server + this.data.userInfo.iconpath
+            iconpath: that.data.userInfo.iconpath.indexOf('http://') != -1 ? that.data.userInfo.iconpath : getApp().globalData.server + that.data.userInfo.iconpath
           })
           console.log(this.data.iconpath)
         }

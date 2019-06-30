@@ -1,15 +1,15 @@
 <!--pages/groupdetail/groupdetail.wxml-->
 <view class='container'>
   <view class='main-info'>
-    <image class='group_img' src="{{imgurls[0]}}" bindtap='group_img_preview'/>
-    <view class='group_name'>{{name}}</view>
+    <image class='group_img' src="{{groupInfo.iconpath}}" bindtap='group_img_preview'/>
+    <view class='group_name'>{{groupInfo.name}}</view>
     <view class='small_info'>
       <image class="small_icon" src='../../images/群组.png'/>
-      <view class='small_text' style='color:gray'>{{memberNum}}人</view>
+      <view class='small_text' style='color:gray'>{{groupInfo.memberNum}} 人</view>
       <image class='small_icon' src='../../images/任务.png'/>
-      <view class='small_text' style='color:gray'>{{taskNum}}任务</view>
+      <view class='small_text' style='color:gray'>{{groupInfo.taskNum}} 任务</view>
     </view>
-    <view class='applyGroup_button'>申请加入</view>
+    <view class='applyGroup_button' bindtap='btnTap'>{{button_text}}</view>
     <view class='small_seperate'></view>
     <view class='labels_view'>
       <view class='label' bindtap='labelTap1'>
@@ -28,7 +28,7 @@
     <view class='small_seperate'></view>
     <view class='big_seperate'></view>
   </view>
-  <view class='group_description' hidden='{{tag==1?false:true}}'>{{description}}</view>
+  <view class='group_description' hidden='{{tag==1?false:true}}'>{{groupInfo.description}}</view>
   <view class="task_items" wx:for="{{tasklist}}" wx:key="index" bindtap="taskItemTap" hidden='{{tag==2?false:true}}'>
     <view class='one_task'>
       <image class='task_img' src='{{item.pic_url}}'/>
@@ -40,18 +40,18 @@
         </view>
         <view class='task_description'>{{item.description}}</view>
       </view>
-      <view class='applyTask_button'>申请</view>
+      <view class='applyTask_button'>查看</view>
     </view>
     <view class='table_line'/>
   </view>
 
-  <view class='user_items' wx:for='{{userList}}' wx:key="index" bindtap="userItemTap" hidden='{{tag==3?false:true}}'>
+  <view class='user_items' wx:for='{{userList}}' wx:key="index" hidden='{{tag==3?false:true}}'>
   
-    <view class='one_user'>
-      <image class='user_img' src='{{item.pic_url}}'></image>
+    <view class='one_user' data-uid="{{item.id}}" bindtap="userItemTap">
+      <image class='user_img' src='{{item.iconpath}}'></image>
         <view class='user_main_info'>
           <view class='role_text'>{{item.role_text}}</view>
-          <view class='username'>{{item.name}}</view>
+          <view class='username'>{{item.nickname}}</view>
           <image class='gender_img' src='{{item.gender_url}}'></image>
         </view>
 
