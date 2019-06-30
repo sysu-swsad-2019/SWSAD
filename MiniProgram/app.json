@@ -2,10 +2,10 @@
   "pages": [
     "pages/launch/launch",
     "pages/home/home",
-    "pages/detail/detail",
     "pages/task/task",
     "pages/acTaskDetail/acTaskDetail",
     "pages/reTaskDetail/reTaskDetail",
+    "pages/detail/detail",
     "pages/taskrelease/taskrelease",
     "pages/taskaccept/taskaccept",
     "pages/questionnaire/questionnaire",

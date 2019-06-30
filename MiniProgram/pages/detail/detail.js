@@ -10,7 +10,6 @@ Page({
         content: "发布者：",
         text: "",
       },
-
       {
         title: '../../images/ios-shijian.png',
         content: '结束时间：',
@@ -44,7 +43,11 @@ Page({
     gradeInfo: ["不限制", "大一", "大二", "大三", "大四", "研一", "研二", "研三"],
     creditInfo: ["不限制", "100分", "95分及以上", "90分及以上"],
     groupInfo: ["不限制", "运动健将", "快乐肥宅", "高分学霸", "社交达人"],
-    task_id: 0
+    task_id: 0,
+    sub_btn: {
+      color: "#33a3dc",
+      text: "领取任务"
+    }
   },
 
   numtostr: function (num) {
@@ -75,11 +78,12 @@ Page({
         console.log(res.data.data.task);
         var taskcontent = res.data.data.task;
         var datenum = taskcontent.endtime;
-        var date = new Date(datenum);
+        var endDate = new Date(datenum);
         var str = "";
-        str = date.getFullYear() + "." + (date.getMonth() + 1) + "." + date.getDate() + " " + that.numtostr(date.getHours()) + ":" + that.numtostr(date.getMinutes()) + ":" + that.numtostr(date.getSeconds());
+        str = endDate.getFullYear() + "." + (endDate.getMonth() + 1) + "." + endDate.getDate() + " " + that.numtostr(endDate.getHours()) + ":" + that.numtostr(endDate.getMinutes()) + ":" + that.numtostr(endDate.getSeconds());
         //console.log(str);
         var task_info = that.data.taskInfo;
+        task_info[0].text = taskcontent.releaseUser;
         task_info[1].text = str;
         task_info[2].text = taskcontent.acceptNumLimit;
         task_info[3].text = that.data.typeInfo[taskcontent.type];
@@ -89,6 +93,15 @@ Page({
         //task_info[7].text = that.data.groupInfo[taskcontent.groupId];
         that.setData({ taskInfo: task_info });
         that.setData({ contents: taskcontent });
+
+        var nowDate = new Date();
+
+        if (nowDate > endDate) {
+          that.setData({
+            "sub_btn.color": "#3b750b",
+            "sub_btn.text": "已结束"
+          });
+        }
       }
     });
   },
