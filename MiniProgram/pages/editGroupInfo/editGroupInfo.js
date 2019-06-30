@@ -153,7 +153,11 @@ Page({
                 title: '修改成功',
                 icon: 'none'
               })
+
             }
+            that.setData({
+              hiddenmodal: true
+            })
           }
         })
       }
@@ -178,14 +182,16 @@ Page({
                 title: '修改成功',
                 icon: 'none'
               })
+
             }
+            that.setData({
+              hiddenmodal: true
+            })
           }
         })
       }
     }
-    this.setData({
-      hiddenmodal: true
-    })
+
   },
 
   
