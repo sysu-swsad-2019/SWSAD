@@ -45,9 +45,9 @@
     <view class='table_line'/>
   </view>
 
-  <view class='user_items' wx:for='{{userList}}' wx:key="index" bindtap="userItemTap" hidden='{{tag==3?false:true}}'>
+  <view class='user_items' wx:for='{{userList}}' wx:key="index" hidden='{{tag==3?false:true}}'>
   
-    <view class='one_user'>
+    <view class='one_user' data-uid="{{item.id}}" bindtap="userItemTap">
       <image class='user_img' src='{{item.iconpath}}'></image>
         <view class='user_main_info'>
           <view class='role_text'>{{item.role_text}}</view>

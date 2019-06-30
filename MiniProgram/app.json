@@ -13,6 +13,7 @@
     "pages/userdetail/userdetail",
     "pages/loginPage/loginPage",
     "pages/group/group",
+    "pages/editGroupInfo/editGroupInfo",
     "pages/getMoney/getMoney",
     "pages/editUserInfo/editUserInfo",
     "pages/creategroup/creategroup",

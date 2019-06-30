@@ -7,7 +7,7 @@
 }
 
 .username{
-  width: 150rpx;
+  width: 200rpx;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

@@ -181,7 +181,12 @@ Page({
   },
   
   userItemTap: function(e){
+    var uid = e.currentTarget.dataset.uid
+    console.log(uid)
 
+    wx.navigateTo({
+      url: '../userdetail/userdetail?fromPage=2&uid=' + uid,
+    })
   },
 
   btnTap: function(){
@@ -226,6 +231,11 @@ Page({
             })
           }
         }
+      })
+    }
+    else if (this.data.button_text == '管理小组'){
+      wx.navigateTo({
+        url: '../editGroupInfo/editGroupInfo?gid='+this.data.gid
       })
     }
   },
@@ -287,7 +297,7 @@ Page({
 
           }
         })
-
+      
       }
     })
     wx.request({
