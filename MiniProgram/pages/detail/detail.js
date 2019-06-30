@@ -130,7 +130,90 @@ Page({
         icon: 'none',
         duration: 2000
       });
-    } else {
+    } else if (itemlist.groupId != -1) {
+      var gid = itemlist.groupId;
+      wx.request({
+        url: getApp().globalData.server + 'group/findAllUserInGroup',
+        data: {
+          groupId: gid
+        },
+        header: {
+          'content-type': "application/x-www-form-urlencoded", // 默认值
+          'cookie': wx.getStorageSync('cookieKey')
+        },
+        success(res) {
+          console.log(res);
+          var userlist = res.data.data.list;
+          var name = getApp().globalData.userInfo.moreInfo.username;
+          var isExist = false;
+          for (let i = 0; i < userlist.length; i++) {
+            if (userlist[i].username == name) {
+              isExist = true;
+            }
+          }
+          if (isExist == true) {
+            wx.showToast({
+              title: '不在该兴趣小组',
+              icon: 'none',
+              duration: 2000
+            });
+          } else {
+            wx.request({
+              url: getApp().globalData.server + 'task/addUserInTask',
+              data: {
+                taskId: that.data.task_id
+              },
+              header: {
+                'content-type': "application/x-www-form-urlencoded", // 默认值
+                'cookie': wx.getStorageSync('cookieKey')
+              },
+              success(res) {
+                console.log(res.data);
+                let message = res.data.message;
+                if (message == "不能接收自己发布的任务") {
+                  wx.showModal({
+                    title: '提示',
+                    content: message,
+                    showCancel: false,
+                    success(res) {
+                      if (res.confirm) {
+                        console.log('用户点击确定');
+                        wx.navigateBack({
+                          url: "../task/task"
+                        });
+                      }
+                    }
+                  });
+                } else {
+                  wx.showModal({
+                    title: '提示',
+                    content: '任务领取成功',
+                    showCancel: false,
+                    success(res) {
+                      if (res.confirm) {
+                        console.log('用户点击确定');
+                        wx.navigateBack({
+                          url: "../task/task"
+                        });
+                      }
+                    }
+                  });
+                }
+              },
+              fail(err) {
+                console.log(err.data);
+                wx.showToast({
+                  title: err.data.message,
+                  icon: 'none',
+                  duration: 2000
+                })
+              }
+            });
+          }
+        }
+      })
+    }
+    else {
       wx.request({
         url: getApp().globalData.server + 'task/addUserInTask',
         data: {
@@ -182,6 +265,7 @@ Page({
           })
         }
       });
+      
     }
   },
 
