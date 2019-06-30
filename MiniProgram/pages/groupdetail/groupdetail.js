@@ -184,6 +184,52 @@ Page({
 
   },
 
+  btnTap: function(){
+    if(this.data.button_text == '申请加入'){
+      var that = this
+      wx.request({
+        url: getApp().globalData.server + 'group/addUserInGroup',
+        header: {
+          "content-type": "application/x-www-form-urlencoded",
+          'cookie': wx.getStorageSync('cookieKey')
+        },
+        data: Util.json2Form({
+          groupId: that.data.gid
+        }),
+        method: "POST",
+        complete: function (res) {
+          if(res.data.code == 200){
+            wx.request({
+              url: getApp().globalData.server + 'group/updateGroupById',
+              header: {
+                "content-type": "application/json",
+                'cookie': wx.getStorageSync('cookieKey')
+              },
+              method: "POST",
+              data: {
+                memberNum: Number(that.data.groupInfo.memberNum) + 1,
+                id: that.data.gid
+              },
+              complete: function (res) {
+                wx.showToast({
+                  title: '加入成功',
+                  icon: 'none'
+                })
+                that.updateInfo()
+              }
+            })
+          }
+          else{
+            wx.showToast({
+              title: '加入失败，' + res.data.message,
+              icon: 'none'
+            })
+          }
+        }
+      })
+    }
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -196,17 +242,7 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+  updateInfo:function(){
     var that = this
     wx.request({
       url: getApp().globalData.server + 'group/findById',
@@ -221,7 +257,8 @@ Page({
       complete: function (res) {
         that.setData({
           groupInfo: res.data.data.group,
-          button_text: res.data.data.group.creator ==getApp().globalData.userInfo.moreInfo.id?'管理小组':'申请加入'
+          button_text: res.data.data.group.creator == getApp().globalData.userInfo.moreInfo.id ? '管理小组' : '申请加入',
+          ['groupInfo.iconpath']: res.data.data.group.iconpath == null ? '../../images/小组.png' : res.data.data.group.iconpath.indexOf('http//') != -1 ? res.data.data.group.iconpath : getApp().globalData.server + res.data.data.group.iconpath
         })
         wx.request({
           url: getApp().globalData.server + 'group/findAllUserInGroup',
@@ -237,13 +274,13 @@ Page({
             that.setData({
               userList: res.data.data.list,
             })
-            for(var i = 0; i < that.data.userList.length; i ++){
+            for (var i = 0; i < that.data.userList.length; i++) {
               var key1 = "userList[" + i + "].iconpath"
               var key2 = "userList[" + i + "].role_text"
               var key3 = "userList[" + i + "].gender_url"
               that.setData({
-                [key1]: that.data.userList[i].iconpath == null ? '../../images/avatar.png' : getApp().globalData.server + that.data.userList[i].iconpath,
-                [key2]: that.data.userList[i].id == that.data.groupInfo.creator?'组长':'成员',
+                [key1]: that.data.userList[i].iconpath == null ? '../../images/avatar.png' : that.data.userList[i].iconpath.indexOf('http://') != -1 ? that.data.userList[i].iconpath : getApp().globalData.server + that.data.userList[i].iconpath,
+                [key2]: that.data.userList[i].id == that.data.groupInfo.creator ? '组长' : '成员',
                 [key3]: that.data.userList[i].sex == 1 ? '../../images/性别男.png' : that.data.userList[i].sex == 0 ? '../../images/性别女.png' : '../../images/white.png'
               })
             }
@@ -270,6 +307,20 @@ Page({
         })
       }
     })
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.updateInfo()
 
   },
 

@@ -1,7 +1,7 @@
 <!--pages/groupdetail/groupdetail.wxml-->
 <view class='container'>
   <view class='main-info'>
-    <image class='group_img' src="{{groupInfo.iconpath==null?'../../images/小组.png':groupInfo.iconpath}}" bindtap='group_img_preview'/>
+    <image class='group_img' src="{{groupInfo.iconpath}}" bindtap='group_img_preview'/>
     <view class='group_name'>{{groupInfo.name}}</view>
     <view class='small_info'>
       <image class="small_icon" src='../../images/群组.png'/>
@@ -9,7 +9,7 @@
       <image class='small_icon' src='../../images/任务.png'/>
       <view class='small_text' style='color:gray'>{{groupInfo.taskNum}} 任务</view>
     </view>
-    <view class='applyGroup_button'>{{button_text}}</view>
+    <view class='applyGroup_button' bindtap='btnTap'>{{button_text}}</view>
     <view class='small_seperate'></view>
     <view class='labels_view'>
       <view class='label' bindtap='labelTap1'>
@@ -40,7 +40,7 @@
         </view>
         <view class='task_description'>{{item.description}}</view>
       </view>
-      <view class='applyTask_button'>申请</view>
+      <view class='applyTask_button'>查看</view>
     </view>
     <view class='table_line'/>
   </view>
